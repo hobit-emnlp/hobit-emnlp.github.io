@@ -1,0 +1,101 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.navbar {
+  box-shadow: 0 1px 0 rgba(10, 10, 10, 0.06);
+}
+
+.footer .icon-link {
+  font-size: 25px;
+  color: #000;
+}
+
+.link-block a {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.dnerf {
+  font-variant: small-caps;
+  font-weight: 700;
+}
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.teaser {
+  font-family: 'Google Sans', sans-serif;
+}
+
+.publication-title {
+  font-family: 'Google Sans', sans-serif;
+  line-height: 1.12;
+}
+
+.publication-subtitle {
+  margin-top: 1rem;
+  color: #4a4a4a;
+}
+
+.publication-authors {
+  font-family: 'Google Sans', sans-serif;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.publication-links {
+  margin-top: 1rem;
+}
+
+.teaser-image,
+.paper-figure img {
+  width: 100%;
+  border: 1px solid #d8dce3;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(10, 25, 50, 0.08);
+  background: #fff;
+}
+
+.teaser-image {
+  max-height: 780px;
+  object-fit: contain;
+  object-position: top center;
+}
+
+.paper-figure {
+  margin-top: 1.5rem;
+}
+
+.metric-table td,
+.metric-table th {
+  text-align: center;
+}
+
+.metric-table td:first-child,
+.metric-table th:first-child {
+  text-align: left;
+}
+
+.metric-table .is-selected {
+  background: #1f4f8f;
+  color: #fff;
+}
+
+pre {
+  border-radius: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .publication-title {
+    font-size: 2rem !important;
+  }
+
+  .teaser-image {
+    max-height: 520px;
+  }
+}

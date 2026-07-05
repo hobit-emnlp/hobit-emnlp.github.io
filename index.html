@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="hoBIT: a profile-aware retrieval-augmented chatbot for university academic advising.">
+  <meta name="keywords" content="hoBIT, RAG, academic advising, profile-aware retrieval, chatbot, EMNLP">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>hoBIT: Profile-Aware RAG for Academic Advising</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="#">
+      <span class="icon"><i class="fas fa-home"></i></span>
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="#abstract">Abstract</a>
+      <a class="navbar-item" href="#system">System</a>
+      <a class="navbar-item" href="#results">Results</a>
+      <a class="navbar-item" href="#demo">Demo</a>
+      <a class="navbar-item" href="#bibtex">BibTeX</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero publication-header">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">hoBIT: A Profile-Aware Retrieval-Augmented Chatbot for University Academic Advising</h1>
+          <p class="subtitle is-4 publication-subtitle">Different students ask the same question, but need different curriculum evidence.</p>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Anonymous ACL submission</span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">EMNLP 2026 Demo Submission</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="./static/pdf/hobit-paper.pdf" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#demo" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-desktop"></i></span>
+                  <span>Demo Flow</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#bibtex" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-obp"></i></span>
+                  <span>BibTeX</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img class="teaser-image" src="./static/images/paper-page-1.png" alt="First page preview showing profile-dependent academic advising examples.">
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">hoBIT</span> treats a student's schema-typed profile as a first-class retrieval signal, so identical advising questions can produce profile-specific, source-grounded answers.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="abstract">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            University academic advising often depends on compact profile fields such as department, admission cohort, grade, and major type. A profile-blind RAG system can retrieve a semantically similar curriculum page while still returning the wrong answer for a specific student.
+          </p>
+          <p>
+            hoBIT is a deployed profile-aware RAG chatbot that enriches documents with profile metadata offline, acquires missing session profile fields through dual-asking, and injects the profile online as both a soft query prefix and a hard metadata filter. The system answers from source-tracked evidence while keeping the interaction session-based rather than login-based.
+          </p>
+          <p>
+            Across a 3,400-case, three-track evaluation, the paper finds that profile injection dominates other retrieval components, makes profile-blind reranking and HyDE redundant, works through a filter-prefix synergy, and remains viable with open-weight retrievers and generators for lower-cost on-premise deployment.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-light" id="system">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">System Overview</h2>
+        <div class="content has-text-justified">
+          <p>
+            hoBIT follows an offline-online design. Offline, curriculum PDFs, school regulations, notices, job posts, education data, and FAQ records are chunked, tagged with profile labels, and indexed into static and dynamic collections. Online, the system predicts which profile fields a query needs, asks only for missing fields, and injects the resulting session profile before retrieval.
+          </p>
+        </div>
+        <figure class="image paper-figure">
+          <img src="./static/images/system-page-3.png" alt="System diagram for hoBIT profile-based data preprocessing and profile-based RAG.">
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="results">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content">
+          <h2 class="title is-3">Key Findings</h2>
+          <ul>
+            <li><strong>Profile injection dominates.</strong> Source Match jumps from 0.070 with filtering alone to 0.585 with hoBIT, and Overall PASS rises from 6.8% to 47.4%.</li>
+            <li><strong>Profile-blind reranking and HyDE become redundant.</strong> They help weak no-profile baselines at best, but underperform or hurt once profile injection is present.</li>
+            <li><strong>Soft prefix and hard filter are complementary.</strong> The prefix improves recall by pulling the correct cohort into the candidate set, while the filter removes wrong-cohort distractors.</li>
+            <li><strong>Open models are deployable.</strong> BGE-M3 and Qwen3 embeddings match or exceed the proprietary retriever baseline, while Qwen3-8B and EXAONE-7.8B remain competitive as generators.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="column">
+        <div class="content">
+          <h2 class="title is-3">Headline Numbers</h2>
+          <table class="table is-fullwidth is-striped metric-table">
+            <thead>
+              <tr>
+                <th>System</th>
+                <th>Src.M</th>
+                <th>Kw.</th>
+                <th>PASS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Dense</td>
+                <td>0.030</td>
+                <td>0.599</td>
+                <td>2.1%</td>
+              </tr>
+              <tr>
+                <td>+Hybrid</td>
+                <td>0.068</td>
+                <td>0.587</td>
+                <td>6.2%</td>
+              </tr>
+              <tr>
+                <td>+Filtered</td>
+                <td>0.070</td>
+                <td>0.591</td>
+                <td>6.8%</td>
+              </tr>
+              <tr class="is-selected">
+                <td>hoBIT</td>
+                <td>0.585</td>
+                <td>0.701</td>
+                <td>47.4%</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="is-size-7">Profile-grounded QA ablation over 1,800 cases. Src.M = graded Source Match.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-light" id="demo">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Demonstration Flow</h2>
+        <div class="content has-text-justified">
+          <p>
+            The demo highlights two user sessions. In a cold start, hoBIT asks for department and admission year proactively, then asks for major type reactively when cited evidence requires it. In a warm session, the same profile is reused silently, so the next advising question is answered immediately with citations.
+          </p>
+        </div>
+        <figure class="image paper-figure">
+          <img src="./static/images/demo-page-6.png" alt="hoBIT web interface demonstration showing dual-asking, profile update, and profile reuse.">
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="bibtex">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{anonymous2026hobit,
+  title     = {hoBIT: A Profile-Aware Retrieval-Augmented Chatbot for University Academic Advising},
+  author    = {Anonymous ACL submission},
+  booktitle = {Proceedings of EMNLP 2026: System Demonstrations},
+  year      = {2026}
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="./static/pdf/hobit-paper.pdf" aria-label="Paper PDF">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered">
+          <p>
+            Website template adapted from the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies project page</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

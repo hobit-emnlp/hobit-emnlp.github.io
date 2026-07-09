@@ -266,6 +266,110 @@ body {
   font-weight: 700;
 }
 
+.intent-routing-figure {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid #dfe7f1;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(15, 35, 70, 0.05);
+}
+
+.intent-routing-figure figcaption,
+.figure-caption {
+  color: #526173;
+  font-size: 0.86rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.intent-routing-figure figcaption {
+  margin-bottom: 1rem;
+  color: #0a2c63;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.routing-query,
+.routing-classifier {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0.9rem 1rem;
+  border: 2px dashed #aab7c8;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.routing-query span,
+.routing-classifier > span {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: #6b7788;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.routing-query strong {
+  color: #172b4d;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.routing-arrow {
+  margin: 0.55rem 0;
+  color: #072b67;
+  text-align: center;
+}
+
+.routing-intents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.routing-intents b {
+  padding: 0.35rem 0.65rem;
+  border: 1px solid #d8e2ef;
+  border-radius: 8px;
+  background: #fff;
+  color: #172b4d;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.routing-intents .is-retrieval {
+  border-color: #7ab36f;
+  background: #eef8ec;
+  color: #2f7d32;
+}
+
+.routing-split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.routing-split article {
+  padding: 1rem;
+  border: 1px solid #dfe7f1;
+  border-radius: 8px;
+  background: #f5f7fb;
+}
+
+.routing-split article.is-rag {
+  border-top: 5px solid #072b67;
+  background: #fff;
+}
+
+.routing-split h4 {
+  margin-bottom: 0.45rem;
+  color: #0a2c63;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
 .tag-row,
 .profile-injection,
 .mini-pipeline {
@@ -593,6 +697,10 @@ body {
   max-width: 1180px;
 }
 
+.figure-caption {
+  margin-top: 0.55rem;
+}
+
 .result-list {
   display: grid;
   gap: 0.8rem;
@@ -731,6 +839,7 @@ pre {
   .capability-grid,
   .demo-showcase,
   .use-case-grid,
+  .routing-split,
   .walkthrough-steps,
   .eval-layout {
     grid-template-columns: 1fr;

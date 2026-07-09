@@ -11,11 +11,11 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20260710-capabilities">
+  <link rel="stylesheet" href="./static/css/index.css?v=20260710-figures">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/index.js?v=20260710-capabilities"></script>
+  <script src="./static/js/index.js?v=20260710-figures"></script>
 </head>
 <body>
 
@@ -88,7 +88,7 @@
       <div class="hero-figure-wrap">
         <img class="floating-icon icon-student-a" src="./static/images/icons/student_1.png" alt="">
         <img class="floating-icon icon-doc" src="./static/images/icons/docs_1.png" alt="">
-        <img class="teaser-image" src="./static/images/figures/hobit_intro.jpg" alt="Profile-dependent advising questions require different evidence for different students.">
+        <img class="teaser-image" src="./static/images/figures/hobit_intro.png" alt="Profile-dependent advising questions require different evidence for different students.">
         <img class="floating-icon icon-bot" src="./static/images/icons/chatbot.png" alt="">
       </div>
       <h2 class="subtitle has-text-centered">
@@ -112,14 +112,14 @@
         <div class="feature-card">
           <img src="./static/images/icons/intro_insufficient.png" alt="">
           <h3>Profile-blind RAG misses context</h3>
-          <p>Graduation, course, and major rules vary by department and cohort, so the same query can require different documents.</p>
+          <p>Graduation, course, and major rules vary by department, admission cohort, and major type, so the same query can require different documents.</p>
         </div>
       </div>
       <div class="column">
         <div class="feature-card">
           <img src="./static/images/icons/data_mining.png" alt="">
           <h3>Profile metadata is indexed offline</h3>
-          <p>Chunks are tagged with department, admission year, and required profile fields before retrieval.</p>
+          <p>Chunks are tagged with department, admission cohort, and required profile fields before retrieval.</p>
         </div>
       </div>
       <div class="column">
@@ -153,7 +153,7 @@
           <img src="./static/images/icons/docs_2.png" alt="">
           <span>Semantically similar document</span>
         </div>
-        <p class="panel-verdict">Wrong cohort, wrong answer, or insufficient user information.</p>
+        <p class="panel-verdict">Wrong cohort evidence, wrong answer, or insufficient user information.</p>
       </div>
 
       <div class="comparison-panel is-good">
@@ -161,12 +161,12 @@
           <img src="./static/images/icons/chatbot_good.png" alt="">
           <h3>hoBIT Profile-Aware RAG</h3>
         </div>
-        <p class="query">Dept: CS, Cohort: 20; graduation requirements?</p>
+        <p class="query">Dept: CS, Cohort: 2020; graduation requirements?</p>
         <div class="evidence-row">
           <img src="./static/images/icons/docs_1.png" alt="">
           <span>Profile-matched source evidence</span>
         </div>
-        <p class="panel-verdict">Correct cohort, source-tracked answer, reusable session profile.</p>
+        <p class="panel-verdict">Correct cohort evidence, source-tracked answer, reusable session profile.</p>
       </div>
     </div>
   </div>
@@ -225,11 +225,11 @@
         <span class="step-number">2</span>
         <div>
           <h3>Profile-Based Preprocessing</h3>
-          <p>Static and dynamic school documents are chunked, tagged with profile metadata, and indexed before deployment. The tags let retrieval distinguish near-identical curriculum documents from different departments or cohorts.</p>
+          <p>Static and dynamic school documents are chunked, tagged with profile metadata, and indexed before deployment. The tags let retrieval distinguish near-identical curriculum documents from different departments, admission cohorts, and major types.</p>
           <div class="mini-pipeline">
             <span>PDFs</span><i class="fas fa-arrow-right"></i><span>chunks</span><i class="fas fa-arrow-right"></i><span>profile tags</span><i class="fas fa-arrow-right"></i><span>Qdrant</span>
           </div>
-          <div class="method-note">Tags include department, admission year, and required_profile fields used by reactive dual-asking.</div>
+          <div class="method-note">Tags include department, admission_year, and required_profile fields used by reactive dual-asking.</div>
         </div>
       </article>
 
@@ -239,12 +239,36 @@
           <h3>Profile Injection at Retrieval Time</h3>
           <p>At runtime, hoBIT acquires missing profile fields through dual-asking and injects the session profile in two places: as a soft prefix that steers ranking, and as a hard payload filter that removes wrong-profile evidence.</p>
           <div class="profile-injection">
-            <span>Dept: CS</span><span>Cohort: 20</span><span>Major: Intensive</span>
+            <span>Dept: CS</span><span>Cohort: 2020</span><span>Major type: Intensive</span>
           </div>
           <div class="method-note">The soft prefix improves recall, while the hard filter controls eligibility.</div>
         </div>
       </article>
     </div>
+    <figure class="intent-routing-figure" aria-label="Intent routing figure">
+      <figcaption>Intent Routing</figcaption>
+      <div class="routing-query">
+        <span>User query</span>
+        <strong>"최근 공지사항 알려줘."</strong>
+      </div>
+      <div class="routing-arrow"><i class="fas fa-arrow-down"></i></div>
+      <div class="routing-classifier">
+        <span>Intent classifier</span>
+        <div class="routing-intents">
+          <b>greeting</b><b>FAQ</b><b>ability</b><b>small talk</b><b class="is-retrieval">retrieval</b>
+        </div>
+      </div>
+      <div class="routing-split">
+        <article>
+          <h4>Direct response</h4>
+          <p>Greeting, FAQ, ability, and small-talk turns are answered without unnecessary retrieval.</p>
+        </article>
+        <article class="is-rag">
+          <h4>Profile-aware RAG</h4>
+          <p>Retrieval turns enter filter extraction, profile validation, dual-asking, and source-tracked generation.</p>
+        </article>
+      </div>
+    </figure>
   </div>
 </section>
 
@@ -252,12 +276,17 @@
   <div class="container is-max-widescreen">
     <div class="columns is-centered has-text-centered">
       <div class="column is-two-thirds">
-        <h2 class="title is-3">Profile-Based Retrieval Pipeline</h2>
-        <p class="subtitle is-5 section-lead">Offline profile tagging meets online dual-asking, soft prefix injection, and hard payload filtering.</p>
+        <h2 class="title is-3">hoBIT System Overview</h2>
+        <p class="subtitle is-5 section-lead">Offline profile-based data preprocessing meets online profile-based RAG with dual-asking, soft prefix injection, and hard payload filtering.</p>
       </div>
     </div>
     <figure class="image paper-figure wide-figure">
-      <img src="./static/images/figures/hobit_overview.jpg" alt="hoBIT offline profile-based data preprocessing and online profile-based RAG overview.">
+      <img src="./static/images/figures/hobit_overview.png" alt="hoBIT offline profile-based data preprocessing and online profile-based RAG overview.">
+      <figcaption class="figure-caption">Paper Figure 2: offline profile-based preprocessing and online profile-based RAG around a schema-typed session profile.</figcaption>
+    </figure>
+    <figure class="image paper-figure wide-figure">
+      <img src="./static/images/figures/hobit_overview_v7.png" alt="Supplementary overview comparing conventional RAG with profile-indexed documents and adaptive profiling.">
+      <figcaption class="figure-caption">Supplementary website figure: profile-indexed documents and adaptive profiling, including query-driven and evidence-driven profile acquisition.</figcaption>
     </figure>
   </div>
 </section>
@@ -266,12 +295,13 @@
   <div class="container is-max-widescreen">
     <div class="columns is-centered has-text-centered">
       <div class="column is-two-thirds">
-        <h2 class="title is-3">Runtime: Four Stages</h2>
+        <h2 class="title is-3">Runtime Pipeline: Four Stages</h2>
         <p class="subtitle is-5 section-lead">Intent classification, filter extraction, profile validation, and source-tracked answer generation run around a session profile.</p>
       </div>
     </div>
     <figure class="image paper-figure wide-figure">
-      <img src="./static/images/figures/hobit_system.jpg" alt="hoBIT runtime pipeline with intent classification, filter extraction, profile validation, and answer generation.">
+      <img src="./static/images/figures/hobit_system.png" alt="hoBIT runtime pipeline with intent classification, filter extraction, profile validation, and answer generation.">
+      <figcaption class="figure-caption">Appendix Figure 5: four-stage runtime with intent classification, filter extraction, profile validation, and answer generation.</figcaption>
     </figure>
   </div>
 </section>
@@ -405,7 +435,7 @@
           <span class="step-number">1</span>
           <h4>User asks a profile-dependent question</h4>
           <div class="bubble user">졸업 요건 알려줘.</div>
-          <p>The query is ambiguous because the answer changes by department, admission year, and major track.</p>
+          <p>The query is ambiguous because the answer changes by department, cohort, and major track.</p>
         </article>
         <article>
           <span class="step-number">2</span>
@@ -416,12 +446,16 @@
         <article>
           <span class="step-number">3</span>
           <h4>Profile-aware RAG answers</h4>
-          <div class="profile-chips"><span>CS</span><span>2020</span><span>Intensive Major</span></div>
+          <div class="profile-chips"><span>CS</span><span>Cohort: 2020</span><span>Major type: Intensive</span></div>
           <div class="bubble bot">프로필에 맞는 졸업 요건 문서를 근거로 답변합니다.</div>
           <p>Retrieval uses both soft profile injection and hard metadata filtering.</p>
         </article>
       </div>
     </div>
+    <figure class="image paper-figure wide-figure">
+      <img src="./static/images/figures/hobit_user_interface.png" alt="hoBIT user interface walkthrough showing cold start, dual asking, profile update, and profile reuse.">
+      <figcaption class="figure-caption">Paper Figure 4: cold start, proactive/reactive dual-asking, profile update, and profile reuse across later questions.</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -452,18 +486,27 @@
             <p>Dual-asking plus profile-aware retrieval makes correct answers reachable.</p>
           </div>
           <div class="result-item">
-            <strong>Open deployment</strong>
-            <span>Competitive</span>
-            <p>Open retrievers and generators match or exceed the proprietary baseline on key metrics.</p>
+            <strong>Intent routing</strong>
+            <span>96.0% acc.</span>
+            <p>The retrieval-intent gate reaches 0.990 F1, so only retrieval queries enter the profile-aware pipeline.</p>
+          </div>
+          <div class="result-item">
+            <strong>Open-ended advising</strong>
+            <span>0.796 overall</span>
+            <p>The ground-truth-free track reaches 59.1% Overall PASS with the deployed pipeline.</p>
           </div>
         </div>
       </div>
       <div class="column">
         <figure class="image paper-figure">
-          <img src="./static/images/figures/appendix_ablation.jpg" alt="Ablation and dataset distribution figures for hoBIT.">
+          <img src="./static/images/figures/appendix_ablation.png" alt="Ablation and dataset distribution figures for hoBIT.">
         </figure>
       </div>
     </div>
+    <figure class="image paper-figure wide-figure">
+      <img src="./static/images/figures/appendix_tsne.png" alt="t-SNE visualization showing test set overlap with real user anchor regions.">
+      <figcaption class="figure-caption">Supplementary visualization: the synthetic/open-ended evaluation space overlaps with real user-log anchor regions.</figcaption>
+    </figure>
   </div>
 </section>
 

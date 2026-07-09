@@ -35,9 +35,12 @@
     <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
       <a class="navbar-item" href="#why">Why hoBIT?</a>
       <a class="navbar-item" href="#scenario">Scenario</a>
+      <a class="navbar-item" href="#method">Method</a>
+      <a class="navbar-item" href="#capabilities">Capabilities</a>
       <a class="navbar-item" href="#system">System</a>
       <a class="navbar-item" href="#demo">Demo</a>
       <a class="navbar-item" href="#results">Results</a>
+      <a class="navbar-item" href="#human-eval">Human Eval</a>
       <a class="navbar-item" href="#bibtex">BibTeX</a>
     </div>
   </div>
@@ -174,6 +177,114 @@
   </div>
 </section>
 
+<section class="section" id="method">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Methodology</h2>
+        <p class="subtitle is-5 section-lead">hoBIT combines intent routing and profile-aware RAG, with profile signals introduced before indexing and again at retrieval time.</p>
+      </div>
+    </div>
+
+    <div class="method-timeline">
+      <div class="method-step">
+        <span class="step-number">1</span>
+        <div>
+          <h3>Intent Classification</h3>
+          <p>Classify each user query into greeting, FAQ, ability, small talk, or retrieval. Only retrieval queries enter the profile-aware RAG pipeline.</p>
+          <div class="tag-row">
+            <span>greeting</span><span>FAQ</span><span>ability</span><span>small talk</span><span>retrieval</span>
+          </div>
+        </div>
+      </div>
+      <div class="method-step">
+        <span class="step-number">2</span>
+        <div>
+          <h3>Profile-Based Preprocessing</h3>
+          <p>Static and dynamic documents are chunked and tagged with department, admission year, and required profile fields.</p>
+          <div class="mini-pipeline">
+            <span>PDFs</span><i class="fas fa-arrow-right"></i><span>chunks</span><i class="fas fa-arrow-right"></i><span>profile tags</span><i class="fas fa-arrow-right"></i><span>Qdrant</span>
+          </div>
+        </div>
+      </div>
+      <div class="method-step">
+        <span class="step-number">3</span>
+        <div>
+          <h3>Profile Injection</h3>
+          <p>At runtime, hoBIT acquires missing fields through dual-asking and injects the profile as both a soft query prefix and a hard payload filter.</p>
+          <div class="profile-injection">
+            <span>Dept: CS</span><span>Cohort: 20</span><span>Major: Intensive</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-light" id="capabilities">
+  <div class="container is-max-widescreen">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h2 class="title is-3">What Can Students Ask?</h2>
+        <p class="subtitle is-5 section-lead">The deployed interface supports lightweight conversational intents, FAQ lookup, school-life questions, and profile-dependent academic advising.</p>
+      </div>
+    </div>
+
+    <div class="capability-grid">
+      <div class="chat-card">
+        <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>Greeting</span></div>
+        <div class="bubble user">안녕! 너는 뭐 하는 챗봇이야?</div>
+        <div class="bubble bot">안녕하세요. 저는 정보대학 학사 안내 챗봇 hoBIT입니다.</div>
+        <p class="intent-label">Intent: greeting</p>
+      </div>
+      <div class="chat-card">
+        <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>FAQ</span></div>
+        <div class="bubble user">정보대 행정실 위치 알려줘.</div>
+        <div class="bubble bot">행정실 위치와 운영시간을 FAQ에서 확인해 안내합니다.</div>
+        <p class="intent-label">Intent: faq</p>
+      </div>
+      <div class="chat-card">
+        <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>Ability</span></div>
+        <div class="bubble user">너는 어떤 질문에 답할 수 있어?</div>
+        <div class="bubble bot">공지사항, 장학금, 취업/진로, 학교생활, 전공/졸업 요건을 도와드릴 수 있어요.</div>
+        <p class="intent-label">Intent: ability</p>
+      </div>
+      <div class="chat-card">
+        <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>Small Talk</span></div>
+        <div class="bubble user">오늘 공부하기 너무 힘들다.</div>
+        <div class="bubble bot">조금 쉬어가도 괜찮아요. 필요한 학사 정보가 있으면 바로 도와드릴게요.</div>
+        <p class="intent-label">Intent: small talk</p>
+      </div>
+      <div class="chat-card">
+        <div class="chat-top"><img src="./static/images/icons/docs_2.png" alt=""><span>School Life</span></div>
+        <div class="bubble user">최근 공지사항 알려줘.</div>
+        <div class="bubble bot">최신 공지 문서를 시간 필터로 조회하고 관련 링크와 함께 요약합니다.</div>
+        <p class="intent-label">Dynamic retrieval: notices</p>
+      </div>
+      <div class="chat-card">
+        <div class="chat-top"><img src="./static/images/icons/docs_3.png" alt=""><span>Scholarship</span></div>
+        <div class="bubble user">장학금 신청 조건이 궁금해.</div>
+        <div class="bubble bot">장학금 카테고리 문서를 검색해 신청 조건, 제출 서류, 기간을 근거와 함께 답합니다.</div>
+        <p class="intent-label">Static retrieval: scholarship</p>
+      </div>
+      <div class="chat-card">
+        <div class="chat-top"><img src="./static/images/icons/person.png" alt=""><span>Career</span></div>
+        <div class="bubble user">취업 관련 프로그램 있어?</div>
+        <div class="bubble bot">취업/진로 공지와 교육 프로그램을 검색해 모집 대상과 신청 방법을 안내합니다.</div>
+        <p class="intent-label">Dynamic retrieval: jobs/career</p>
+      </div>
+      <div class="chat-card dual-card">
+        <div class="chat-top"><img src="./static/images/icons/student_1.png" alt=""><span>Academic Advising</span></div>
+        <div class="bubble user">내 전공 필수 과목 알려줘.</div>
+        <div class="bubble bot ask">정확한 답변을 위해 학과와 입학년도를 알려주세요.</div>
+        <div class="profile-chips"><span>CS</span><span>2020</span><span>Intensive Major</span></div>
+        <div class="bubble bot">프로필에 맞는 교육과정표를 근거로 전공 필수 과목을 답합니다.</div>
+        <p class="intent-label">Dual asking + profile-aware RAG</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="system">
   <div class="container is-max-widescreen">
     <div class="columns is-centered has-text-centered">
@@ -249,6 +360,74 @@
         <figure class="image paper-figure">
           <img src="./static/images/figures/appendix_ablation.jpg" alt="Ablation and dataset distribution figures for hoBIT.">
         </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="human-eval">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Human Evaluation Examples</h2>
+        <p class="subtitle is-5 section-lead">Human judges compared answers on profile-dependent advising pairs where a profile-blind baseline often retrieved plausible but wrong evidence.</p>
+      </div>
+    </div>
+
+    <div class="eval-layout">
+      <div class="eval-table-wrap">
+        <table class="table is-fullwidth eval-table">
+          <thead>
+            <tr>
+              <th>Question Type</th>
+              <th>Example Prompt</th>
+              <th>Profile Signal</th>
+              <th>Human Preference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Graduation</td>
+              <td>Can you tell me my graduation requirements?</td>
+              <td>CS, 2020 cohort</td>
+              <td>hoBIT preferred</td>
+            </tr>
+            <tr>
+              <td>Major courses</td>
+              <td>What are my required major courses?</td>
+              <td>Major type: intensive</td>
+              <td>hoBIT preferred</td>
+            </tr>
+            <tr>
+              <td>Course recommendation</td>
+              <td>What is the recommended course for me this year?</td>
+              <td>AI, 2026 cohort, grade 1</td>
+              <td>hoBIT preferred</td>
+            </tr>
+            <tr>
+              <td>Double major</td>
+              <td>How many credits do I need for a double major?</td>
+              <td>Department and cohort</td>
+              <td>Mixed / harder case</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="eval-chart">
+        <h3>Blind Pairwise Study</h3>
+        <p class="chart-note">n = 48 judgments, 10 profile-dependent pairs</p>
+        <div class="bar-row">
+          <span>hoBIT win</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 85.3%;">85.3%</div></div>
+        </div>
+        <div class="bar-row">
+          <span>Baseline win/tie</span>
+          <div class="bar-track"><div class="bar-fill muted" style="width: 14.7%;">14.7%</div></div>
+        </div>
+        <div class="eval-callout">
+          hoBIT won all 10 profile-dependent pairs, showing that explicit profile acquisition improves answer usefulness beyond surface semantic matching.
+        </div>
       </div>
     </div>
   </div>

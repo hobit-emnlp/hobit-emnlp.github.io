@@ -153,6 +153,161 @@ body {
   color: #536172;
 }
 
+.method-timeline {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.method-step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  padding: 1.2rem;
+  border: 1px solid #dfe7f1;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.step-number {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #072b67;
+  color: #fff;
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 800;
+}
+
+.method-step h3 {
+  color: #0a2c63;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.tag-row,
+.profile-injection,
+.mini-pipeline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.tag-row span,
+.profile-injection span,
+.mini-pipeline span {
+  padding: 0.35rem 0.65rem;
+  border: 1px solid #d8e2ef;
+  border-radius: 999px;
+  background: #f5f7fb;
+  color: #172b4d;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.mini-pipeline {
+  align-items: center;
+}
+
+.mini-pipeline i {
+  color: #7a8797;
+  font-size: 0.8rem;
+}
+
+.capability-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.chat-card {
+  display: flex;
+  min-height: 285px;
+  flex-direction: column;
+  padding: 1rem;
+  border: 1px solid #dfe7f1;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(15, 35, 70, 0.05);
+}
+
+.dual-card {
+  border-top: 5px solid #072b67;
+}
+
+.chat-top {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 0.8rem;
+  color: #0a2c63;
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 800;
+}
+
+.chat-top img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.bubble {
+  width: fit-content;
+  max-width: 92%;
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.bubble.user {
+  align-self: flex-end;
+  margin-bottom: 0.55rem;
+  background: #8b1030;
+  color: #fff;
+}
+
+.bubble.bot {
+  align-self: flex-start;
+  margin-bottom: 0.55rem;
+  background: #f1f4f8;
+  color: #253244;
+}
+
+.bubble.ask {
+  border: 1px solid #f0c36a;
+  background: #fff8e6;
+}
+
+.profile-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0.1rem 0 0.55rem;
+}
+
+.profile-chips span {
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  background: #eaf2ff;
+  color: #0a2c63;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.intent-label {
+  margin-top: auto;
+  color: #6b7788;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
 .comparison {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -249,6 +404,85 @@ body {
   margin: 0.15rem 0 0.25rem;
 }
 
+.eval-layout {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.eval-table-wrap,
+.eval-chart {
+  padding: 1rem;
+  border: 1px solid #dfe7f1;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.eval-table {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+.eval-table th {
+  color: #0a2c63;
+}
+
+.eval-chart h3 {
+  color: #0a2c63;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.chart-note {
+  color: #6b7788;
+  margin-bottom: 1rem;
+}
+
+.bar-row {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 0.9rem;
+}
+
+.bar-row > span {
+  color: #172b4d;
+  font-weight: 800;
+}
+
+.bar-track {
+  overflow: hidden;
+  height: 30px;
+  border-radius: 999px;
+  background: #eef2f7;
+}
+
+.bar-fill {
+  height: 100%;
+  padding-right: 0.7rem;
+  border-radius: 999px;
+  background: #2f7d32;
+  color: #fff;
+  font-weight: 800;
+  line-height: 30px;
+  text-align: right;
+}
+
+.bar-fill.muted {
+  min-width: 4.5rem;
+  background: #8b95a5;
+}
+
+.eval-callout {
+  margin-top: 1rem;
+  padding: 0.85rem;
+  border-radius: 8px;
+  background: #f5f7fb;
+  color: #253244;
+  font-weight: 700;
+}
+
 .paper-figure {
   margin-top: 1.5rem;
 }
@@ -263,6 +497,11 @@ pre {
   }
 
   .comparison {
+    grid-template-columns: 1fr;
+  }
+
+  .capability-grid,
+  .eval-layout {
     grid-template-columns: 1fr;
   }
 

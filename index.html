@@ -249,9 +249,9 @@
       <img src="./static/images/figures/hobit_system.png" alt="hoBIT runtime pipeline with Stage 1 intent classification and routing into profile-aware RAG.">
       <figcaption class="figure-caption">Actual runtime figure: Stage 1 classifies the user query into greeting, ability, FAQ, small talk, or retrieval before routing academic questions into profile-aware RAG.</figcaption>
       <div class="figure-note intent-note">
-        <h4>Intent routing as the front gate</h4>
-        <p>The paper focuses mainly on profile-aware retrieval, but the deployed chatbot first solves a more practical problem: deciding whether retrieval is needed at all. Short conversational turns such as greetings, FAQ, ability questions, and small talk are answered by lightweight rule or template paths, while only academic advising requests are sent to the RAG stack. This gate reduces unnecessary LLM calls, keeps simple interactions fast, and prevents non-evidence-seeking turns from polluting profile collection.</p>
-        <p>For academic queries, the same classifier also predicts required profile fields and query keywords. That output becomes the bridge into dual-asking: if department, admission year, major type, grade, or status is missing, hoBIT asks before generating an answer instead of guessing from ambiguous curriculum evidence.</p>
+        <h4>Intent routing in hoBIT</h4>
+        <p>hoBIT begins each turn by deciding which interaction path the user needs. Greetings, FAQ, ability questions, and small talk are handled by lightweight response paths, while academic advising questions are routed into the profile-aware RAG pipeline. This design keeps everyday chatbot interactions fast and reserves retrieval, profile validation, and source-grounded generation for questions that actually require evidence.</p>
+        <p>When a query is routed as academic advising, the classifier also extracts keywords and predicts which profile fields may be required. These signals connect intent routing to dual-asking: if department, admission year, major type, grade, or status is missing, hoBIT asks for the missing context before generating an answer from potentially ambiguous curriculum evidence.</p>
       </div>
     </figure>
     <figure class="intent-routing-figure" aria-label="Intent routing figure">

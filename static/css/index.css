@@ -728,6 +728,43 @@ body {
   margin-top: 0.55rem;
 }
 
+.figure-note {
+  margin: 0.9rem auto 0;
+  max-width: 980px;
+  padding: 1rem 1.1rem;
+  border: 1px solid #dfe7f1;
+  border-left: 5px solid #072b67;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.figure-note h4 {
+  margin-bottom: 0.45rem;
+  color: #0a2c63;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.figure-note p {
+  margin-bottom: 0.55rem;
+  color: #3f4b5d;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.figure-note p:last-child {
+  margin-bottom: 0;
+}
+
+.figure-note.compact {
+  padding: 0.9rem;
+}
+
+.intent-note {
+  background: #f5f8ff;
+}
+
 .result-list {
   display: grid;
   gap: 0.8rem;

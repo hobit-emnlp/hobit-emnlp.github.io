@@ -11,11 +11,11 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20260710-intent-routing">
+  <link rel="stylesheet" href="./static/css/index.css?v=20260710-figure-notes">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/index.js?v=20260710-intent-routing"></script>
+  <script src="./static/js/index.js?v=20260710-figure-notes"></script>
 </head>
 <body>
 
@@ -248,6 +248,11 @@
     <figure class="image paper-figure wide-figure method-routing-figure" aria-label="Runtime pipeline figure highlighting intent routing">
       <img src="./static/images/figures/hobit_system.png" alt="hoBIT runtime pipeline with Stage 1 intent classification and routing into profile-aware RAG.">
       <figcaption class="figure-caption">Actual runtime figure: Stage 1 classifies the user query into greeting, ability, FAQ, small talk, or retrieval before routing academic questions into profile-aware RAG.</figcaption>
+      <div class="figure-note intent-note">
+        <h4>Intent routing as the front gate</h4>
+        <p>The paper focuses mainly on profile-aware retrieval, but the deployed chatbot first solves a more practical problem: deciding whether retrieval is needed at all. Short conversational turns such as greetings, FAQ, ability questions, and small talk are answered by lightweight rule or template paths, while only academic advising requests are sent to the RAG stack. This gate reduces unnecessary LLM calls, keeps simple interactions fast, and prevents non-evidence-seeking turns from polluting profile collection.</p>
+        <p>For academic queries, the same classifier also predicts required profile fields and query keywords. That output becomes the bridge into dual-asking: if department, admission year, major type, grade, or status is missing, hoBIT asks before generating an answer instead of guessing from ambiguous curriculum evidence.</p>
+      </div>
     </figure>
     <figure class="intent-routing-figure" aria-label="Intent routing figure">
       <figcaption>Intent Routing</figcaption>
@@ -287,10 +292,18 @@
     <figure class="image paper-figure wide-figure">
       <img src="./static/images/figures/hobit_overview.png" alt="hoBIT offline profile-based data preprocessing and online profile-based RAG overview.">
       <figcaption class="figure-caption">Paper Figure 2: offline profile-based preprocessing and online profile-based RAG around a schema-typed session profile.</figcaption>
+      <div class="figure-note">
+        <h4>What this figure adds</h4>
+        <p>This overview shows the main contribution: profile information is not treated as prompt decoration. hoBIT attaches profile metadata to documents offline, stores the student's session profile online, and uses both signals during retrieval so near-identical curriculum documents can be separated by cohort, department, and major type.</p>
+      </div>
     </figure>
     <figure class="image paper-figure wide-figure">
       <img src="./static/images/figures/hobit_overview_v7.png" alt="Supplementary overview comparing conventional RAG with profile-indexed documents and adaptive profiling.">
       <figcaption class="figure-caption">Supplementary website figure: profile-indexed documents and adaptive profiling, including query-driven and evidence-driven profile acquisition.</figcaption>
+      <div class="figure-note">
+        <h4>Why the supplementary view matters</h4>
+        <p>The website version makes the contrast with ordinary RAG explicit. A profile-blind retriever can find semantically similar but policy-mismatched evidence; adaptive profiling turns missing student context into a recoverable interaction step before the final answer is produced.</p>
+      </div>
     </figure>
   </div>
 </section>
@@ -306,6 +319,10 @@
     <figure class="image paper-figure wide-figure">
       <img src="./static/images/figures/hobit_system.png" alt="hoBIT runtime pipeline with intent classification, filter extraction, profile validation, and answer generation.">
       <figcaption class="figure-caption">Appendix Figure 5: four-stage runtime with intent classification, filter extraction, profile validation, and answer generation.</figcaption>
+      <div class="figure-note">
+        <h4>How to read the runtime stages</h4>
+        <p>Stage 1 performs intent routing and proactive profile acquisition. Stage 2 extracts filters and retrieves from static and dynamic collections. Stage 3 validates whether the cited chunks require profile fields that are still missing. Stage 4 generates a source-tracked answer only after the evidence and profile state are aligned.</p>
+      </div>
     </figure>
   </div>
 </section>
@@ -459,6 +476,10 @@
     <figure class="image paper-figure wide-figure">
       <img src="./static/images/figures/hobit_user_interface.png" alt="hoBIT user interface walkthrough showing cold start, dual asking, profile update, and profile reuse.">
       <figcaption class="figure-caption">Paper Figure 4: cold start, proactive/reactive dual-asking, profile update, and profile reuse across later questions.</figcaption>
+      <div class="figure-note">
+        <h4>Interaction-level evidence</h4>
+        <p>This figure connects the system design to the student-facing experience. The chatbot does not expose retrieval internals; it asks targeted profile questions only when needed, stores the answer as session context, and reuses that profile in later advising turns.</p>
+      </div>
     </figure>
   </div>
 </section>
@@ -504,12 +525,21 @@
       <div class="column">
         <figure class="image paper-figure">
           <img src="./static/images/figures/appendix_ablation.png" alt="Ablation and dataset distribution figures for hoBIT.">
+          <figcaption class="figure-caption">Ablation summary: profile injection is the dominant component in source matching and pass-rate gains.</figcaption>
+          <div class="figure-note compact">
+            <h4>Reading the ablation</h4>
+            <p>The largest jump appears when profile information is actually injected into retrieval. This supports the page's central claim: schema-typed profile signals matter more than generic retrieval boosters for academic advising.</p>
+          </div>
         </figure>
       </div>
     </div>
     <figure class="image paper-figure wide-figure">
       <img src="./static/images/figures/appendix_tsne.png" alt="t-SNE visualization showing test set overlap with real user anchor regions.">
       <figcaption class="figure-caption">Supplementary visualization: the synthetic/open-ended evaluation space overlaps with real user-log anchor regions.</figcaption>
+      <div class="figure-note">
+        <h4>Evaluation coverage</h4>
+        <p>The t-SNE view checks whether evaluation queries live near realistic student questions. The overlap with real-user anchor regions suggests the benchmark is not only a synthetic stress test, but also probes areas students actually ask about.</p>
+      </div>
     </figure>
   </div>
 </section>

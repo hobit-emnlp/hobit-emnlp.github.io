@@ -11,11 +11,11 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20260708-main-tabs">
+  <link rel="stylesheet" href="./static/css/index.css?v=20260710-capabilities">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/index.js?v=20260708-main-tabs"></script>
+  <script src="./static/js/index.js?v=20260710-capabilities"></script>
 </head>
 <body>
 
@@ -284,8 +284,8 @@
   <div class="container is-max-widescreen">
     <div class="columns is-centered has-text-centered">
       <div class="column is-two-thirds">
-        <h2 class="title is-3">What Can Students Ask?</h2>
-        <p class="subtitle is-5 section-lead">The deployed interface supports lightweight conversational intents, FAQ lookup, school-life questions, and profile-dependent academic advising.</p>
+        <h2 class="title is-3">Supported Interaction Types</h2>
+        <p class="subtitle is-5 section-lead">hoBIT covers casual conversation, campus FAQ, school-life retrieval, and profile-adaptive academic advising in one student-facing interface.</p>
       </div>
     </div>
 
@@ -316,21 +316,27 @@
       </div>
       <div class="chat-card">
         <div class="chat-top"><img src="./static/images/icons/docs_2.png" alt=""><span>School Life</span></div>
+        <div class="bubble user">학교생활 관련해서 이용할 수 있는 공간 알려줘.</div>
+        <div class="bubble bot">캠퍼스 시설, 라운지, 열람실처럼 학생 생활에 필요한 정보를 안내합니다.</div>
+        <p class="intent-label">Retrieval: school life</p>
+      </div>
+      <div class="chat-card">
+        <div class="chat-top"><img src="./static/images/icons/docs_3.png" alt=""><span>Notice</span></div>
         <div class="bubble user">최근 공지사항 알려줘.</div>
         <div class="bubble bot">최신 공지 문서를 시간 필터로 조회하고 관련 링크와 함께 요약합니다.</div>
         <p class="intent-label">Dynamic retrieval: notices</p>
-      </div>
-      <div class="chat-card">
-        <div class="chat-top"><img src="./static/images/icons/docs_3.png" alt=""><span>Scholarship</span></div>
-        <div class="bubble user">장학금 신청 조건이 궁금해.</div>
-        <div class="bubble bot">장학금 카테고리 문서를 검색해 신청 조건, 제출 서류, 기간을 근거와 함께 답합니다.</div>
-        <p class="intent-label">Static retrieval: scholarship</p>
       </div>
       <div class="chat-card">
         <div class="chat-top"><img src="./static/images/icons/person.png" alt=""><span>Career</span></div>
         <div class="bubble user">취업 관련 프로그램 있어?</div>
         <div class="bubble bot">취업/진로 공지와 교육 프로그램을 검색해 모집 대상과 신청 방법을 안내합니다.</div>
         <p class="intent-label">Dynamic retrieval: jobs/career</p>
+      </div>
+      <div class="chat-card">
+        <div class="chat-top"><img src="./static/images/icons/docs_1.png" alt=""><span>Scholarship</span></div>
+        <div class="bubble user">장학금 신청 조건이 궁금해.</div>
+        <div class="bubble bot">장학금 문서를 검색해 신청 조건, 제출 서류, 기간을 근거와 함께 답합니다.</div>
+        <p class="intent-label">Retrieval: scholarship</p>
       </div>
       <div class="chat-card dual-card">
         <div class="chat-top"><img src="./static/images/icons/student_1.png" alt=""><span>Academic Advising</span></div>
@@ -341,6 +347,21 @@
         <p class="intent-label">Dual asking + profile-aware RAG</p>
       </div>
     </div>
+
+    <div class="demo-showcase">
+      <div class="demo-copy">
+        <p class="eyebrow">Captured Interface</p>
+        <h3>One interface for FAQ, campus life, and retrieval-backed answers</h3>
+        <p>The chatbot starts from familiar student requests, then routes each query to the right behavior: fixed FAQ responses, campus-life lookup, dynamic notices, or profile-aware RAG for academic requirements.</p>
+        <div class="demo-tags">
+          <span>FAQ</span><span>School life</span><span>Notice retrieval</span><span>Profile memory</span>
+        </div>
+      </div>
+      <figure class="demo-screenshot">
+        <img src="./static/images/demos/hobit-mainpage.png" alt="hoBIT chatbot interface showing a campus-life answer about library spaces.">
+        <figcaption>Actual hoBIT interface capture with a school-life answer.</figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
@@ -348,13 +369,59 @@
   <div class="container is-max-widescreen">
     <div class="columns is-centered has-text-centered">
       <div class="column is-two-thirds">
-        <h2 class="title is-3">Live Demo Flow</h2>
-        <p class="subtitle is-5 section-lead">A cold session collects missing profile fields; a warm session reuses them without asking again.</p>
+        <h2 class="title is-3">Example Use Cases and Adaptive Profiling</h2>
+        <p class="subtitle is-5 section-lead">The demo cases highlight the difference between ordinary retrieval and profile-dependent advising, where hoBIT asks for missing student context before answering.</p>
       </div>
     </div>
-    <figure class="image paper-figure wide-figure">
-      <img src="./static/images/figures/hobit_user_interface.jpg" alt="hoBIT web interface demonstration showing dual-asking and profile reuse.">
-    </figure>
+
+    <div class="use-case-grid">
+      <article class="use-case-card">
+        <div class="use-case-icon"><img src="./static/images/icons/docs_3.png" alt=""></div>
+        <h3>Latest Notice Search</h3>
+        <p class="query">"최근 공지사항 알려줘."</p>
+        <p>hoBIT searches dynamic notice documents, applies time-sensitive retrieval, and returns a concise summary with source-oriented grounding.</p>
+      </article>
+      <article class="use-case-card">
+        <div class="use-case-icon"><img src="./static/images/icons/docs_1.png" alt=""></div>
+        <h3>Scholarship Inquiry</h3>
+        <p class="query">"장학금 신청 조건이 궁금해."</p>
+        <p>The system retrieves scholarship-specific documents and explains eligibility, required materials, and application timing.</p>
+      </article>
+      <article class="use-case-card is-emphasis">
+        <div class="use-case-icon"><img src="./static/images/icons/student_2.png" alt=""></div>
+        <h3>Adaptive Profiling</h3>
+        <p class="query">"내 전공 필수 과목 알려줘."</p>
+        <p>When profile fields are missing, hoBIT asks targeted follow-up questions and then filters evidence by department, cohort, and major type.</p>
+      </article>
+    </div>
+
+    <div class="walkthrough">
+      <div class="walkthrough-header">
+        <p class="eyebrow">Adaptive Profiling Walkthrough</p>
+        <h3>Cold session: ask, collect profile, then answer with the right evidence</h3>
+      </div>
+      <div class="walkthrough-steps">
+        <article>
+          <span class="step-number">1</span>
+          <h4>User asks a profile-dependent question</h4>
+          <div class="bubble user">졸업 요건 알려줘.</div>
+          <p>The query is ambiguous because the answer changes by department, admission year, and major track.</p>
+        </article>
+        <article>
+          <span class="step-number">2</span>
+          <h4>hoBIT requests only missing fields</h4>
+          <div class="bubble bot ask">정확한 답변을 위해 학과와 입학년도를 알려주세요.</div>
+          <p>Dual asking avoids guessing and builds a reusable session profile.</p>
+        </article>
+        <article>
+          <span class="step-number">3</span>
+          <h4>Profile-aware RAG answers</h4>
+          <div class="profile-chips"><span>CS</span><span>2020</span><span>Intensive Major</span></div>
+          <div class="bubble bot">프로필에 맞는 졸업 요건 문서를 근거로 답변합니다.</div>
+          <p>Retrieval uses both soft profile injection and hard metadata filtering.</p>
+        </article>
+      </div>
+    </div>
   </div>
 </section>
 

@@ -11,11 +11,11 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20260708-tabs">
+  <link rel="stylesheet" href="./static/css/index.css?v=20260708-main-tabs">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/index.js?v=20260708-tabs"></script>
+  <script src="./static/js/index.js?v=20260708-main-tabs"></script>
 </head>
 <body>
 
@@ -35,12 +35,7 @@
     <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
       <a class="navbar-item" href="#why">Why hoBIT?</a>
       <a class="navbar-item" href="#scenario">Scenario</a>
-      <a class="navbar-item" href="#method">Method</a>
-      <a class="navbar-item" href="#capabilities">Capabilities</a>
-      <a class="navbar-item" href="#system">System</a>
-      <a class="navbar-item" href="#demo">Demo</a>
-      <a class="navbar-item" href="#results">Results</a>
-      <a class="navbar-item" href="#human-eval">Human Eval</a>
+      <a class="navbar-item" href="#content-tabs">Overview</a>
       <a class="navbar-item" href="#bibtex">BibTeX</a>
     </div>
   </div>
@@ -75,9 +70,9 @@
               </a>
             </span>
             <span class="link-block">
-              <a href="#demo" class="external-link button is-normal is-rounded is-dark">
+              <a href="#content-tabs" class="external-link button is-normal is-rounded is-dark">
                 <span class="icon"><i class="fas fa-desktop"></i></span>
-                <span>Demo Flow</span>
+                <span>Explore</span>
               </a>
             </span>
           </div>
@@ -177,6 +172,33 @@
   </div>
 </section>
 
+<section class="section" id="content-tabs">
+  <div class="container is-max-widescreen">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h2 class="title is-3">Project Overview</h2>
+        <p class="subtitle is-5 section-lead">Explore the paper through three views: methodology, chatbot capabilities, and evaluation results.</p>
+      </div>
+    </div>
+
+    <div class="content-tabs" data-tabs>
+      <div class="tab-list main-tab-list" role="tablist" aria-label="Project overview tabs">
+        <button class="tab-button is-active" type="button" role="tab" aria-selected="true" aria-controls="tab-methodology" id="tab-methodology-button" data-tab-target="tab-methodology">
+          <span class="step-number">1</span>
+          Methodology
+        </button>
+        <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="tab-capabilities" id="tab-capabilities-button" data-tab-target="tab-capabilities">
+          <span class="step-number">2</span>
+          Capabilities &amp; Demo
+        </button>
+        <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="tab-evaluation" id="tab-evaluation-button" data-tab-target="tab-evaluation">
+          <span class="step-number">3</span>
+          Evaluation Results
+        </button>
+      </div>
+
+      <div class="site-tab-panels">
+        <div class="tab-panel site-tab-panel is-active" id="tab-methodology" role="tabpanel" aria-labelledby="tab-methodology-button">
 <section class="section" id="method">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
@@ -186,53 +208,77 @@
       </div>
     </div>
 
-    <div class="method-tabs" data-tabs>
-      <div class="tab-list" role="tablist" aria-label="Methodology tabs">
-        <button class="tab-button is-active" type="button" role="tab" aria-selected="true" aria-controls="method-intent" id="tab-intent" data-tab-target="method-intent">
-          <span class="step-number">1</span>
-          Intent &amp; RAG
-        </button>
-        <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="method-preprocess" id="tab-preprocess" data-tab-target="method-preprocess">
-          <span class="step-number">2</span>
-          Preprocessing
-        </button>
-        <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="method-profile" id="tab-profile" data-tab-target="method-profile">
-          <span class="step-number">3</span>
-          Profile Injection
-        </button>
-      </div>
-
-      <div class="tab-panels">
-        <article class="tab-panel is-active" id="method-intent" role="tabpanel" aria-labelledby="tab-intent">
+    <div class="method-timeline">
+      <article class="method-step">
+        <span class="step-number">1</span>
+        <div>
           <h3>Intent Classification and RAG Routing</h3>
           <p>hoBIT first decides whether a message should be handled directly or routed into retrieval. Greeting, FAQ, ability, and small-talk intents avoid unnecessary generation; retrieval intents enter the profile-aware RAG pipeline.</p>
           <div class="tag-row">
             <span>greeting</span><span>FAQ</span><span>ability</span><span>small talk</span><span>retrieval</span>
           </div>
           <div class="method-note">Only retrieval queries need source-grounded evidence and profile-conditioned search.</div>
-        </article>
+        </div>
+      </article>
 
-        <article class="tab-panel" id="method-preprocess" role="tabpanel" aria-labelledby="tab-preprocess" hidden>
+      <article class="method-step">
+        <span class="step-number">2</span>
+        <div>
           <h3>Profile-Based Preprocessing</h3>
           <p>Static and dynamic school documents are chunked, tagged with profile metadata, and indexed before deployment. The tags let retrieval distinguish near-identical curriculum documents from different departments or cohorts.</p>
           <div class="mini-pipeline">
             <span>PDFs</span><i class="fas fa-arrow-right"></i><span>chunks</span><i class="fas fa-arrow-right"></i><span>profile tags</span><i class="fas fa-arrow-right"></i><span>Qdrant</span>
           </div>
           <div class="method-note">Tags include department, admission year, and required_profile fields used by reactive dual-asking.</div>
-        </article>
+        </div>
+      </article>
 
-        <article class="tab-panel" id="method-profile" role="tabpanel" aria-labelledby="tab-profile" hidden>
+      <article class="method-step">
+        <span class="step-number">3</span>
+        <div>
           <h3>Profile Injection at Retrieval Time</h3>
           <p>At runtime, hoBIT acquires missing profile fields through dual-asking and injects the session profile in two places: as a soft prefix that steers ranking, and as a hard payload filter that removes wrong-profile evidence.</p>
           <div class="profile-injection">
             <span>Dept: CS</span><span>Cohort: 20</span><span>Major: Intensive</span>
           </div>
           <div class="method-note">The soft prefix improves recall, while the hard filter controls eligibility.</div>
-        </article>
-      </div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
+
+<section class="section" id="system">
+  <div class="container is-max-widescreen">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h2 class="title is-3">Profile-Based Retrieval Pipeline</h2>
+        <p class="subtitle is-5 section-lead">Offline profile tagging meets online dual-asking, soft prefix injection, and hard payload filtering.</p>
+      </div>
+    </div>
+    <figure class="image paper-figure wide-figure">
+      <img src="./static/images/figures/hobit_overview.jpg" alt="hoBIT offline profile-based data preprocessing and online profile-based RAG overview.">
+    </figure>
+  </div>
+</section>
+
+<section class="section is-light" id="runtime">
+  <div class="container is-max-widescreen">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h2 class="title is-3">Runtime: Four Stages</h2>
+        <p class="subtitle is-5 section-lead">Intent classification, filter extraction, profile validation, and source-tracked answer generation run around a session profile.</p>
+      </div>
+    </div>
+    <figure class="image paper-figure wide-figure">
+      <img src="./static/images/figures/hobit_system.jpg" alt="hoBIT runtime pipeline with intent classification, filter extraction, profile validation, and answer generation.">
+    </figure>
+  </div>
+</section>
+
+        </div>
+
+        <div class="tab-panel site-tab-panel" id="tab-capabilities" role="tabpanel" aria-labelledby="tab-capabilities-button" hidden>
 
 <section class="section is-light" id="capabilities">
   <div class="container is-max-widescreen">
@@ -298,34 +344,6 @@
   </div>
 </section>
 
-<section class="section" id="system">
-  <div class="container is-max-widescreen">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-two-thirds">
-        <h2 class="title is-3">Profile-Based Retrieval Pipeline</h2>
-        <p class="subtitle is-5 section-lead">Offline profile tagging meets online dual-asking, soft prefix injection, and hard payload filtering.</p>
-      </div>
-    </div>
-    <figure class="image paper-figure wide-figure">
-      <img src="./static/images/figures/hobit_overview.jpg" alt="hoBIT offline profile-based data preprocessing and online profile-based RAG overview.">
-    </figure>
-  </div>
-</section>
-
-<section class="section is-light" id="runtime">
-  <div class="container is-max-widescreen">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-two-thirds">
-        <h2 class="title is-3">Runtime: Four Stages</h2>
-        <p class="subtitle is-5 section-lead">Intent classification, filter extraction, profile validation, and source-tracked answer generation run around a session profile.</p>
-      </div>
-    </div>
-    <figure class="image paper-figure wide-figure">
-      <img src="./static/images/figures/hobit_system.jpg" alt="hoBIT runtime pipeline with intent classification, filter extraction, profile validation, and answer generation.">
-    </figure>
-  </div>
-</section>
-
 <section class="section" id="demo">
   <div class="container is-max-widescreen">
     <div class="columns is-centered has-text-centered">
@@ -339,6 +357,10 @@
     </figure>
   </div>
 </section>
+
+        </div>
+
+        <div class="tab-panel site-tab-panel" id="tab-evaluation" role="tabpanel" aria-labelledby="tab-evaluation-button" hidden>
 
 <section class="section is-light" id="results">
   <div class="container is-max-desktop">
@@ -440,6 +462,12 @@
         </div>
         <div class="eval-callout">
           hoBIT won all 10 profile-dependent pairs, showing that explicit profile acquisition improves answer usefulness beyond surface semantic matching.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
         </div>
       </div>
     </div>

@@ -165,7 +165,8 @@ body {
   font-weight: 800;
 }
 
-.method-tabs {
+.method-tabs,
+.content-tabs {
   margin-top: 1.5rem;
 }
 
@@ -211,8 +212,37 @@ body {
   box-shadow: 0 10px 24px rgba(15, 35, 70, 0.05);
 }
 
+.site-tab-panels {
+  border: 1px solid #dfe7f1;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(15, 35, 70, 0.05);
+}
+
+.main-tab-list {
+  max-width: 920px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .tab-panel {
   padding: 1.35rem;
+}
+
+.site-tab-panel {
+  padding: 0;
+}
+
+.site-tab-panel > .section {
+  border-radius: 8px;
+}
+
+.site-tab-panel > .section:first-child {
+  padding-top: 2rem;
+}
+
+.site-tab-panel > .section:last-child {
+  padding-bottom: 2rem;
 }
 
 .tab-panel[hidden] {

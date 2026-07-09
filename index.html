@@ -11,11 +11,11 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/index.css?v=20260708-tabs">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/index.js"></script>
+  <script src="./static/js/index.js?v=20260708-tabs"></script>
 </head>
 <body>
 
@@ -186,36 +186,49 @@
       </div>
     </div>
 
-    <div class="method-timeline">
-      <div class="method-step">
-        <span class="step-number">1</span>
-        <div>
-          <h3>Intent Classification</h3>
-          <p>Classify each user query into greeting, FAQ, ability, small talk, or retrieval. Only retrieval queries enter the profile-aware RAG pipeline.</p>
+    <div class="method-tabs" data-tabs>
+      <div class="tab-list" role="tablist" aria-label="Methodology tabs">
+        <button class="tab-button is-active" type="button" role="tab" aria-selected="true" aria-controls="method-intent" id="tab-intent" data-tab-target="method-intent">
+          <span class="step-number">1</span>
+          Intent & RAG
+        </button>
+        <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="method-preprocess" id="tab-preprocess" data-tab-target="method-preprocess">
+          <span class="step-number">2</span>
+          Preprocessing
+        </button>
+        <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="method-profile" id="tab-profile" data-tab-target="method-profile">
+          <span class="step-number">3</span>
+          Profile Injection
+        </button>
+      </div>
+
+      <div class="tab-panels">
+        <article class="tab-panel is-active" id="method-intent" role="tabpanel" aria-labelledby="tab-intent">
+          <h3>Intent Classification and RAG Routing</h3>
+          <p>hoBIT first decides whether a message should be handled directly or routed into retrieval. Greeting, FAQ, ability, and small-talk intents avoid unnecessary generation; retrieval intents enter the profile-aware RAG pipeline.</p>
           <div class="tag-row">
             <span>greeting</span><span>FAQ</span><span>ability</span><span>small talk</span><span>retrieval</span>
           </div>
-        </div>
-      </div>
-      <div class="method-step">
-        <span class="step-number">2</span>
-        <div>
+          <div class="method-note">Only retrieval queries need source-grounded evidence and profile-conditioned search.</div>
+        </article>
+
+        <article class="tab-panel" id="method-preprocess" role="tabpanel" aria-labelledby="tab-preprocess" hidden>
           <h3>Profile-Based Preprocessing</h3>
-          <p>Static and dynamic documents are chunked and tagged with department, admission year, and required profile fields.</p>
+          <p>Static and dynamic school documents are chunked, tagged with profile metadata, and indexed before deployment. The tags let retrieval distinguish near-identical curriculum documents from different departments or cohorts.</p>
           <div class="mini-pipeline">
             <span>PDFs</span><i class="fas fa-arrow-right"></i><span>chunks</span><i class="fas fa-arrow-right"></i><span>profile tags</span><i class="fas fa-arrow-right"></i><span>Qdrant</span>
           </div>
-        </div>
-      </div>
-      <div class="method-step">
-        <span class="step-number">3</span>
-        <div>
-          <h3>Profile Injection</h3>
-          <p>At runtime, hoBIT acquires missing fields through dual-asking and injects the profile as both a soft query prefix and a hard payload filter.</p>
+          <div class="method-note">Tags include department, admission year, and required_profile fields used by reactive dual-asking.</div>
+        </article>
+
+        <article class="tab-panel" id="method-profile" role="tabpanel" aria-labelledby="tab-profile" hidden>
+          <h3>Profile Injection at Retrieval Time</h3>
+          <p>At runtime, hoBIT acquires missing profile fields through dual-asking and injects the session profile in two places: as a soft prefix that steers ranking, and as a hard payload filter that removes wrong-profile evidence.</p>
           <div class="profile-injection">
             <span>Dept: CS</span><span>Cohort: 20</span><span>Major: Intensive</span>
           </div>
-        </div>
+          <div class="method-note">The soft prefix improves recall, while the hard filter controls eligibility.</div>
+        </article>
       </div>
     </div>
   </div>

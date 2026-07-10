@@ -11,11 +11,11 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20260710-figure-notes">
+  <link rel="stylesheet" href="./static/css/index.css?v=20260710-english-demos">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/index.js?v=20260710-figure-notes"></script>
+  <script src="./static/js/index.js?v=20260710-english-demos"></script>
 </head>
 <body>
 
@@ -336,11 +336,69 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-two-thirds">
         <h2 class="title is-3">Supported Interaction Types</h2>
-        <p class="subtitle is-5 section-lead">hoBIT covers casual conversation, campus FAQ, school-life retrieval, and profile-adaptive academic advising in one student-facing interface.</p>
+        <p class="subtitle is-5 section-lead">hoBIT covers casual conversation, campus FAQ, school-life retrieval, and profile-adaptive academic advising in one student-facing interface. The examples below are English renderings of captured hoBIT runs.</p>
       </div>
     </div>
 
-    <div class="capability-grid">
+    <div class="capability-transcripts">
+      <article class="transcript-card">
+        <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>Greeting</span></div>
+        <p class="transcript-query">Hi! What kind of chatbot are you?</p>
+        <p class="transcript-answer">Hello, I am hoBIT, an academic information chatbot for Korea University College of Informatics. I can help with campus life, notices, careers, advising, and academic questions.</p>
+        <p class="intent-label">Intent: greeting</p>
+      </article>
+      <article class="transcript-card">
+        <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>Ability</span></div>
+        <p class="transcript-query">What kinds of questions can you answer?</p>
+        <p class="transcript-answer">hoBIT can handle FAQ, campus life, academic policy, career information, announcements, and profile-based academic advising questions.</p>
+        <p class="intent-label">Intent: ability</p>
+      </article>
+      <article class="transcript-card">
+        <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>FAQ</span></div>
+        <p class="transcript-query">Where is the College of Informatics administration office?</p>
+        <p class="transcript-answer">The undergraduate administration office is located in Room 102 of the Aegineung Student Center at the Seoul Campus. For undergraduate inquiries, the service provides the main office phone numbers and recommends checking official notices before visiting.</p>
+        <p class="intent-label">Intent: faq</p>
+      </article>
+      <article class="transcript-card">
+        <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>Small Talk</span></div>
+        <p class="transcript-query">Studying engineering feels really hard today.</p>
+        <p class="transcript-answer">It is okay to feel overwhelmed. If you need academic or campus-life information from the College of Informatics, I can help you find it right away.</p>
+        <p class="intent-label">Intent: small talk</p>
+      </article>
+      <article class="transcript-card">
+        <div class="chat-top"><img src="./static/images/icons/docs_2.png" alt=""><span>School Life</span></div>
+        <p class="transcript-query">Can you recommend student clubs in the College of Informatics?</p>
+        <p class="transcript-answer">Depending on your interests, you may explore software development clubs such as KWEB, security-related groups, or machine learning and data science study groups. hoBIT retrieves both static campus-life documents and dynamic notices to summarize relevant options.</p>
+        <p class="intent-label">Retrieval: school life</p>
+      </article>
+      <article class="transcript-card">
+        <div class="chat-top"><img src="./static/images/icons/docs_3.png" alt=""><span>Latest Notices</span></div>
+        <p class="transcript-query">Tell me the latest announcements with sources.</p>
+        <p class="transcript-answer">hoBIT searches recent College of Informatics announcements, checks titles, deadlines, attachments, and source links, then returns a concise answer with source cards for the retrieved notices.</p>
+        <p class="intent-label">Dynamic retrieval: notices</p>
+      </article>
+      <article class="transcript-card">
+        <div class="chat-top"><img src="./static/images/icons/person.png" alt=""><span>Career</span></div>
+        <p class="transcript-query">Which companies are recruiting these days?</p>
+        <p class="transcript-answer">Recent recruiting and briefing examples include Hanwha Aerospace campus recruiting, Johnson &amp; Johnson Vision Care AI Engineer recruitment, and a National Intelligence Service recruitment briefing. Time-aware retrieval prioritizes current hiring notices.</p>
+        <p class="intent-label">Time-based RAG</p>
+      </article>
+      <article class="transcript-card">
+        <div class="chat-top"><img src="./static/images/icons/docs_1.png" alt=""><span>Academic Schedule</span></div>
+        <p class="transcript-query">When is the tuition payment period?</p>
+        <p class="transcript-answer">The tuition payment period is determined by the semester academic calendar and finance office notices. hoBIT classifies the query as an academic schedule question and produces a source-tracked answer from registration-related documents.</p>
+        <p class="intent-label">Retrieval: academic</p>
+      </article>
+      <article class="transcript-card dual-card">
+        <div class="chat-top"><img src="./static/images/icons/student_1.png" alt=""><span>Profile-Based Advising</span></div>
+        <p class="transcript-query">Tell me my required major courses.</p>
+        <p class="transcript-answer">To answer accurately, hoBIT first asks for missing profile fields such as department, admission year, and major type. After the profile is filled, it retrieves the matching curriculum document and answers with the correct requirement set.</p>
+        <div class="profile-chips"><span>CS</span><span>2020</span><span>Intensive Major</span></div>
+        <p class="intent-label">Dual asking + profile-aware RAG</p>
+      </article>
+    </div>
+
+    <div class="capability-grid legacy-capability-grid">
       <div class="chat-card">
         <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>Greeting</span></div>
         <div class="bubble user">안녕! 너는 뭐 하는 챗봇이야?</div>
@@ -401,16 +459,16 @@
 
     <div class="demo-showcase">
       <div class="demo-copy">
-        <p class="eyebrow">Captured Interface</p>
-        <h3>One interface for FAQ, campus life, and retrieval-backed answers</h3>
-        <p>The chatbot starts from familiar student requests, then routes each query to the right behavior: fixed FAQ responses, campus-life lookup, dynamic notices, or profile-aware RAG for academic requirements.</p>
+        <p class="eyebrow">Captured hoBIT Runs</p>
+        <h3>Actual interface captures paired with English transcripts</h3>
+        <p>The screenshots were captured from the running hoBIT UI. The visible UI remains Korean, while the surrounding page presents English query-answer renderings for an international paper audience.</p>
         <div class="demo-tags">
-          <span>FAQ</span><span>School life</span><span>Notice retrieval</span><span>Profile memory</span>
+          <span>Greeting</span><span>School life</span><span>Latest notices</span><span>Dual asking</span>
         </div>
       </div>
       <figure class="demo-screenshot">
-        <img src="./static/images/demos/hobit-mainpage.png" alt="hoBIT chatbot interface showing a campus-life answer about library spaces.">
-        <figcaption>Actual hoBIT interface capture with a school-life answer.</figcaption>
+        <img src="./static/images/demos/actual-school-life.png" alt="Actual hoBIT interface capture showing a school-life club recommendation answer.">
+        <figcaption>Actual hoBIT UI capture: school-life retrieval response, rendered in Korean UI.</figcaption>
       </figure>
     </div>
   </div>
@@ -425,7 +483,71 @@
       </div>
     </div>
 
-    <div class="use-case-grid">
+    <div class="actual-demo-strip">
+      <figure>
+        <img src="./static/images/demos/actual-greeting.png" alt="Actual hoBIT greeting response screenshot.">
+        <figcaption>Greeting</figcaption>
+      </figure>
+      <figure>
+        <img src="./static/images/demos/actual-latest-notices.png" alt="Actual hoBIT latest notices response screenshot.">
+        <figcaption>Latest notices</figcaption>
+      </figure>
+      <figure>
+        <img src="./static/images/demos/actual-dual-asking.png" alt="Actual hoBIT profile-based advising response screenshot.">
+        <figcaption>Profile-based advising</figcaption>
+      </figure>
+    </div>
+
+    <div class="use-case-grid english-use-case-grid">
+      <article class="use-case-card">
+        <div class="use-case-icon"><img src="./static/images/icons/docs_3.png" alt=""></div>
+        <h3>Latest Notice Search</h3>
+        <p class="query">"Tell me the latest announcements with sources."</p>
+        <p>hoBIT retrieves recent notices, checks source links and attachments, and returns a source-oriented summary rather than a generic answer.</p>
+      </article>
+      <article class="use-case-card">
+        <div class="use-case-icon"><img src="./static/images/icons/person.png" alt=""></div>
+        <h3>Time-Aware Career Retrieval</h3>
+        <p class="query">"Which companies are recruiting these days?"</p>
+        <p>The system prioritizes current recruiting notices and summarizes company names, briefing schedules, target areas, and application hints.</p>
+      </article>
+      <article class="use-case-card is-emphasis">
+        <div class="use-case-icon"><img src="./static/images/icons/student_2.png" alt=""></div>
+        <h3>Adaptive Profiling</h3>
+        <p class="query">"Tell me my required major courses."</p>
+        <p>When profile fields are missing, hoBIT asks targeted follow-up questions and then filters evidence by department, cohort, and major type.</p>
+      </article>
+    </div>
+
+    <div class="walkthrough english-walkthrough">
+      <div class="walkthrough-header">
+        <p class="eyebrow">Actual Response Pattern</p>
+        <h3>Cold session: ask, collect profile, then answer with the right evidence</h3>
+      </div>
+      <div class="walkthrough-steps">
+        <article>
+          <span class="step-number">1</span>
+          <h4>User asks a profile-dependent question</h4>
+          <div class="bubble user">Tell me my graduation requirements.</div>
+          <p>The query is under-specified because the answer changes by department, admission cohort, and major track.</p>
+        </article>
+        <article>
+          <span class="step-number">2</span>
+          <h4>hoBIT requests only missing fields</h4>
+          <div class="bubble bot ask">To answer accurately, please tell me your department and admission year.</div>
+          <p>Dual asking avoids guessing and turns missing context into reusable session profile data.</p>
+        </article>
+        <article>
+          <span class="step-number">3</span>
+          <h4>Profile-aware RAG answers</h4>
+          <div class="profile-chips"><span>CS</span><span>Cohort: 2020</span><span>Major type: Intensive</span></div>
+          <div class="bubble bot">Based on the curriculum for Computer Science students admitted in 2020, you must complete at least 130 credits, including general education, basic major, advanced major, and other graduation requirements.</div>
+          <p>Retrieval uses both soft profile injection and hard metadata filtering.</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="use-case-grid legacy-use-case-grid">
       <article class="use-case-card">
         <div class="use-case-icon"><img src="./static/images/icons/docs_3.png" alt=""></div>
         <h3>Latest Notice Search</h3>
@@ -446,7 +568,7 @@
       </article>
     </div>
 
-    <div class="walkthrough">
+    <div class="walkthrough legacy-walkthrough">
       <div class="walkthrough-header">
         <p class="eyebrow">Adaptive Profiling Walkthrough</p>
         <h3>Cold session: ask, collect profile, then answer with the right evidence</h3>

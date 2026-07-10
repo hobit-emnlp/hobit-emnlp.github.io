@@ -34,7 +34,7 @@ On a 3,400-case evaluation suite:
 - `index.html` - the GitHub Pages project page.
 - `static/pdf/hobit-paper.pdf` - paper PDF used by the page.
 - `static/images/` - rendered paper figures and demo screenshots.
-- `static/css/` and `static/js/` - static page assets adapted from the Nerfies project page template.
+- `static/css/` and `static/js/` - static page assets.
 
 ## Citation
 
@@ -46,7 +46,3 @@ On a 3,400-case evaluation suite:
   year      = {2026}
 }
 ```
-
-## Acknowledgment
-
-The website structure is adapted from the [Nerfies project page](https://github.com/nerfies/nerfies.github.io).

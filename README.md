@@ -39,9 +39,9 @@ On a 3,400-case evaluation suite:
 ## Citation
 
 ```bibtex
-@inproceedings{anonymous2026hobit,
+@inproceedings{kim2026hobit,
   title     = {hoBIT: A Profile-Aware Retrieval-Augmented Chatbot for University Academic Advising},
-  author    = {Anonymous ACL submission},
+  author    = {Kim, Yoonseo and Lee, Seongmin and Kim, Joongheon and Kang, SeongKu},
   booktitle = {Proceedings of EMNLP 2026: System Demonstrations},
   year      = {2026}
 }

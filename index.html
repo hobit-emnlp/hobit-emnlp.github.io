@@ -634,10 +634,16 @@
       <div class="column is-two-thirds">
         <h2 class="title is-3">Dataset Construction</h2>
         <p class="subtitle is-5 section-lead">The evaluation data covers profile-grounded QA, open-ended advising, intent classification, and profile-annotated corpus chunks.</p>
+        <p class="subtitle is-6 data-source-note">Queries, answers, and content below are shown in English translation; the Korean originals are released in our code repository.</p>
       </div>
     </div>
 
     <div class="data-summary-grid">
+      <article class="data-summary-card">
+        <span class="data-kicker">Index</span>
+        <h3>Profile-Annotated Corpus</h3>
+        <p>Offline indexing annotates chunks over department, major type, grade, admission year, and student status.</p>
+      </article>
       <article class="data-summary-card">
         <span class="data-kicker">Track 1</span>
         <h3>Profile-Grounded QA</h3>
@@ -653,14 +659,44 @@
         <h3>Intent Classification</h3>
         <p>Samples cover greeting, ability, FAQ, smalltalk, and retrieval so that only evidence-seeking queries enter the RAG pipeline.</p>
       </article>
-      <article class="data-summary-card">
-        <span class="data-kicker">Index</span>
-        <h3>Profile-Annotated Corpus</h3>
-        <p>Offline indexing annotates chunks over department, major type, grade, admission year, and student status.</p>
-      </article>
     </div>
 
     <div class="data-example-grid">
+      <article class="data-example-card is-wide">
+        <h3>Profile-Annotated Corpus Chunks</h3>
+        <div class="corpus-chunk">
+          <p><strong>CS curriculum table (2019-2020).</strong> 130 total credits: 31 GenEd, 42 basic major (18 required + 24 elective), 30 intensive major, 27 free elective; required courses are Data Structures, Algorithms, ..., Databases.</p>
+          <dl>
+            <div><dt>department</dt><dd>Computer Science</dd></div>
+            <div><dt>major type</dt><dd>null</dd></div>
+            <div><dt>admission year</dt><dd>2019-2020</dd></div>
+            <div><dt>grade</dt><dd>null</dd></div>
+            <div><dt>student status</dt><dd>null</dd></div>
+          </dl>
+        </div>
+        <div class="corpus-chunk">
+          <p><strong>Computer Science department introduction.</strong> Overview of the department's mission, faculty, and facilities, and its six required and 50+ elective major courses; applies to all CS students regardless of cohort.</p>
+          <dl>
+            <div><dt>department</dt><dd>Computer Science</dd></div>
+            <div><dt>major type</dt><dd>null</dd></div>
+            <div><dt>admission year</dt><dd>null</dd></div>
+            <div><dt>grade</dt><dd>null</dd></div>
+            <div><dt>student status</dt><dd>null</dd></div>
+          </dl>
+        </div>
+        <div class="corpus-chunk">
+          <p><strong>Leave-of-absence / re-enrollment form.</strong> Written leave is filed one semester at a time; re-enrollment must be requested in the return semester; refund amounts depend on the filing date.</p>
+          <dl>
+            <div><dt>department</dt><dd>null</dd></div>
+            <div><dt>major type</dt><dd>null</dd></div>
+            <div><dt>admission year</dt><dd>null</dd></div>
+            <div><dt>grade</dt><dd>null</dd></div>
+            <div><dt>student status</dt><dd>null</dd></div>
+          </dl>
+        </div>
+        <p class="data-note">A curriculum chunk fixes department and admission year, a department-introduction chunk fixes only department, and a general administrative form leaves all profile attributes null.</p>
+      </article>
+
       <article class="data-example-card is-wide">
         <h3>Profile-Grounded QA Samples</h3>
         <div class="data-table-wrap">
@@ -670,68 +706,111 @@
                 <th>Query</th>
                 <th>Profile</th>
                 <th>Gold Answer</th>
+                <th>Gold Source</th>
                 <th>Type</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>What are the major-required courses?</td>
-                <td>CS, intensive, 2019, grade 1</td>
+                <td>CS, intensive, 2019, grade 1, enrolled</td>
                 <td>Data Structures, Algorithms, Computer Architecture, Operating Systems, Computer Networks, Databases</td>
+                <td>CS curriculum table (2019–2020)</td>
                 <td>formal</td>
               </tr>
               <tr>
                 <td>What are the major-required courses?</td>
-                <td>AI, intensive, 2025, grade 2</td>
-                <td>No major-required courses; basic and intensive major courses are both elective</td>
+                <td>AI, intensive, 2025, grade 2, enrolled</td>
+                <td>No major-required courses (basic and intensive major are both elective)</td>
+                <td>AI curriculum table (2025)</td>
                 <td>formal</td>
               </tr>
               <tr>
                 <td>Can you tell me how my graduation credits break down by area?</td>
-                <td>CS, intensive, 2019, grade 3</td>
-                <td>130 total credits: 31 GenEd, 18 required + 24 elective, 30 intensive major, 27 free elective</td>
-                <td>first-person</td>
+                <td>CS, intensive, 2019, grade 3, enrolled</td>
+                <td>130 total credits: 31 GenEd, 18 basic-major required + 24 elective, 30 intensive major, 27 free elective</td>
+                <td>CS curriculum table (2019–2020)</td>
+                <td>personal</td>
+              </tr>
+              <tr>
+                <td>Could you tell me in detail the credit breakdown for graduation?</td>
+                <td>DS, intensive, 2023, grade 2, enrolled</td>
+                <td>130 total credits: 19 required GenEd, 15 academic foundations, 42 basic major, 30 intensive major, 24 free elective</td>
+                <td>DS curriculum table (2023)</td>
+                <td>formal</td>
+              </tr>
+              <tr>
+                <td>What courses are included in the required general-education courses?</td>
+                <td>CS, intensive, 2021, grade 1, enrolled</td>
+                <td>Liberty-Justice-Truth I/II, Writing, Academic English I/II, First-Year Seminar I/II, Computational Thinking</td>
+                <td>CS curriculum table (2021–2023)</td>
+                <td>formal</td>
+              </tr>
+              <tr>
+                <td>Is the required credit for a double major 18?</td>
+                <td>CS, intensive, 2022, grade 4, enrolled</td>
+                <td>Double major: 18 required + 36 elective (54 total); dual major: 18 required + 24 elective (42 total)</td>
+                <td>CS curriculum table (2021–2023)</td>
+                <td>verification</td>
+              </tr>
+              <tr>
+                <td>Tell me the recommended major electives I should take.</td>
+                <td>DS, intensive, 2024, grade 4, enrolled</td>
+                <td>Year-4 recommended: Data Science, Deep Learning, Reinforcement Learning, Statistical Machine Learning, Data Visualization, Graduation Capstone</td>
+                <td>DS curriculum table</td>
+                <td>personal</td>
+              </tr>
+              <tr>
+                <td>Is a field internship one of the graduation-requirement projects?</td>
+                <td>AI, intensive, 2026, grade 1, enrolled</td>
+                <td>Complete one of: field internship, practical SW project, industry–academia capstone, individual research project</td>
+                <td>AI curriculum table (2025)</td>
+                <td>verification</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p class="data-note">The same surface question can yield a different gold answer under a different profile.</p>
+        <p class="data-note">The same question can yield a different gold answer under a different profile (e.g., rows 1 vs. 2: major-required courses for a CS-2019 vs. an AI-2025 student). Type labels follow the released dataset (formal / personal / verification); the paper text refers to "personal" queries as "first-person."</p>
       </article>
 
       <article class="data-example-card">
         <h3>Open-Ended Advising</h3>
-        <ul class="data-list">
-          <li>What should I be careful about when applying for a leave of absence?</li>
-          <li>By when do I have to pay tuition?</li>
-          <li>How do I apply for a scholarship?</li>
-          <li>Where is the college administration office located?</li>
+        <ul class="data-list advising-list">
+          <li><span class="cat-tag is-admin">Leave &amp; return</span>What should I be careful about when applying for a leave of absence?</li>
+          <li><span class="cat-tag is-admin">Credit withdrawal</span>How can I withdraw credits I have already earned?</li>
+          <li><span class="cat-tag is-admin">Credit exchange</span>How do I apply for the Energy New-Industry credit exchange?</li>
+          <li><span class="cat-tag is-admin">Registration &amp; tuition</span>By when do I have to pay tuition?</li>
+          <li><span class="cat-tag is-admin">Scholarships</span>How do I apply for a scholarship?</li>
+          <li><span class="cat-tag is-admin">Notices &amp; schedule</span>When is the new-student orientation held?</li>
+          <li><span class="cat-tag is-life">Facilities / KU Life</span>When must I complete the research-lab safety training?</li>
+          <li><span class="cat-tag is-life">Clubs &amp; council</span>How can I join a college club?</li>
+          <li><span class="cat-tag is-life">Student services</span>How do I put up a poster?</li>
+          <li><span class="cat-tag is-life">Space &amp; facility</span>Where is the college administration office located?</li>
+          <li><span class="cat-tag is-admin">Transfer of major</span>What is a change of major (jeon-gwa)?</li>
+          <li><span class="cat-tag is-admin">Grade evaluation</span>What criteria are used for grade evaluation?</li>
+          <li><span class="cat-tag is-admin">Enrollment period</span>What is the maximum period of enrollment?</li>
+          <li><span class="cat-tag is-admin">Admission</span>What are the admission requirements?</li>
         </ul>
+        <p class="data-note">Scored by LLM judges for Top-3 Precision and Answer Completeness, since these questions have no deterministic reference answer.</p>
       </article>
 
       <article class="data-example-card">
         <h3>Intent Classification</h3>
         <div class="intent-samples">
           <span>Hi <b>greeting</b></span>
+          <span>Hello <b>greeting</b></span>
+          <span>What features do you have? <b>ability</b></span>
           <span>What can you do for me? <b>ability</b></span>
+          <span>Show me the frequently asked questions <b>faq</b></span>
           <span>Tell me the FAQ <b>faq</b></span>
           <span>I'm bored <b>smalltalk</b></span>
+          <span>How's the weather today? <b>smalltalk</b></span>
+          <span>What should I be careful about when applying for a leave of absence? <b>retrieval</b></span>
+          <span>Is there anything I must know when re-enrolling? <b>retrieval</b></span>
           <span>What are the graduation requirements? <b>retrieval</b></span>
+          <span>How many credits do I need to graduate? <b>retrieval</b></span>
         </div>
-      </article>
-
-      <article class="data-example-card is-wide">
-        <h3>Profile-Annotated Corpus Chunks</h3>
-        <div class="corpus-chunk">
-          <p><strong>CS curriculum table (2019-2020).</strong> 130 total credits: 31 GenEd, 42 basic major, 30 intensive major, 27 free elective; required courses include Data Structures, Algorithms, and Databases.</p>
-          <dl>
-            <div><dt>department</dt><dd>Computer Science</dd></div>
-            <div><dt>major type</dt><dd>null</dd></div>
-            <div><dt>admission year</dt><dd>2019-2020</dd></div>
-            <div><dt>grade</dt><dd>null</dd></div>
-            <div><dt>student status</dt><dd>null</dd></div>
-          </dl>
-        </div>
-        <p class="data-note">Curriculum chunks fix department and cohort, department-introduction chunks may fix only department, and general administrative forms can leave all profile attributes null.</p>
+        <p class="data-note">Only retrieval queries proceed to the RAG pipeline; the others are answered by templates, the FAQ store, or a lightweight conversational reply.</p>
       </article>
     </div>
   </div>

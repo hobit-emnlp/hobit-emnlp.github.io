@@ -937,7 +937,7 @@ body {
 }
 
 .data-table {
-  min-width: 760px;
+  min-width: 920px;
   font-size: 0.86rem;
 }
 
@@ -951,12 +951,43 @@ body {
   font-weight: 700;
 }
 
+.data-source-note {
+  margin-top: 0.35rem;
+  color: #6a7789;
+  font-weight: 400;
+}
+
 .data-list {
   margin-left: 1.1rem;
 }
 
 .data-list li + li {
   margin-top: 0.45rem;
+}
+
+.advising-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.55rem;
+}
+
+.cat-tag {
+  display: inline-block;
+  flex-shrink: 0;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: #eaf1ff;
+  color: #0a2c63;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.cat-tag.is-life {
+  background: #eafaf0;
+  color: #0a6b3d;
 }
 
 .intent-samples {
@@ -987,6 +1018,10 @@ body {
   padding: 0.9rem;
   border-radius: 8px;
   background: #f8fafc;
+}
+
+.corpus-chunk + .corpus-chunk {
+  margin-top: 0.75rem;
 }
 
 .corpus-chunk p {

@@ -255,9 +255,17 @@
         </div>
       </article>
     </div>
-    <figure class="image paper-figure wide-figure method-routing-figure" aria-label="Runtime pipeline figure highlighting intent routing">
-      <img src="./static/images/figures/intent_routing.png?v=20260711-intent-routing" alt="Intent routing diagram showing validated FAQ data, an LLM intent router, Redis user profile, and academic or school-life response paths.">
-      <figcaption class="figure-caption">Intent routing figure: user queries are classified before academic and school-life requests are routed to the appropriate response path.</figcaption>
+    <figure class="image paper-figure wide-figure method-routing-figure" aria-label="Runtime pipeline figures highlighting intent routing">
+      <div class="routing-figure-grid">
+        <figure>
+          <img src="./static/images/figures/intent_routing_direct.png?v=20260711-routing-direct" alt="Intent routing diagram for direct-response intents including greeting, ability, FAQ, and small talk.">
+          <figcaption>Direct-response routing: greeting, ability, FAQ, and small-talk turns are routed away from retrieval.</figcaption>
+        </figure>
+        <figure>
+          <img src="./static/images/figures/intent_routing.png?v=20260711-intent-routing" alt="Intent routing diagram showing retrieval-oriented academic and school-life response paths.">
+          <figcaption>Retrieval routing: academic and school-life questions enter the retrieval path after intent classification.</figcaption>
+        </figure>
+      </div>
       <div class="figure-note intent-note">
         <h4>Intent routing in hoBIT</h4>
         <p>hoBIT begins each turn by classifying the query into retrieval, ability, FAQ, greeting, or small talk. Greeting, ability, and FAQ queries are handled without an additional generation call, while retrieval queries continue into proFILL.</p>

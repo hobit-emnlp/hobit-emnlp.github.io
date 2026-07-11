@@ -299,6 +299,32 @@ body {
   margin-top: 2.25rem;
 }
 
+.routing-figure-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.routing-figure-grid figure {
+  margin: 0;
+}
+
+.routing-figure-grid img {
+  width: 100%;
+  border: 1px solid #dfe7f1;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.routing-figure-grid figcaption {
+  margin-top: 0.5rem;
+  color: #526173;
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1.45;
+  text-align: center;
+}
+
 .intent-routing-figure {
   display: none;
 }
@@ -1131,6 +1157,7 @@ pre {
   .actual-demo-strip,
   .demo-showcase,
   .use-case-grid,
+  .routing-figure-grid,
   .routing-split,
   .walkthrough-steps,
   .eval-layout,

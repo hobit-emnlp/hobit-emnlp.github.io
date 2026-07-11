@@ -8,26 +8,26 @@ This repository hosts the project page for:
 
 ## Overview
 
-University advising questions often look identical on the surface, but the correct answer depends on a student's profile: department, admission cohort, grade, major type, and student status. A profile-blind RAG system can retrieve a semantically similar curriculum document while still citing the wrong cohort or rule.
+In university academic advising, identical questions can require different answers depending on a student's department, admission cohort, and degree program. A profile-blind retriever can surface semantically similar but inapplicable evidence.
 
-hoBIT treats a schema-typed session profile as a first-class retrieval signal. It enriches documents with profile metadata offline, acquires missing profile fields through dual-asking online, and injects the profile into retrieval through both a soft query prefix and a hard metadata filter.
+proFILL extends hoBIT with profile-aware indexing and on-demand adaptive profiling. It annotates institutional evidence with applicable profile values offline, acquires only the attributes needed for each query online, and conditions retrieval using soft query augmentation and hard filtering.
 
 ## Key Ideas
 
-- **Profile-aware retrieval:** Student profile fields are used directly during retrieval, not only in the prompt.
-- **Dual-asking:** hoBIT asks for missing fields proactively before retrieval and reactively when cited evidence requires more profile detail.
-- **Filter-prefix synergy:** The soft prefix improves recall, while the hard filter removes wrong-cohort distractors.
-- **Source-tracked answers:** Responses are grounded in cited curriculum or advising evidence.
+- **Offline profile-aware indexing:** Chunks are annotated with the profile values for which they are valid.
+- **Query-driven profiling:** Missing profile attributes are requested only when the query requires them.
+- **Evidence-driven profiling:** Retrieved evidence can trigger targeted follow-up questions and re-retrieval.
+- **Soft augmentation + hard filtering:** Profile values are prepended to the query and used to filter incompatible chunks.
 - **Deployability:** Open-weight retrievers and generators remain competitive, supporting lower-cost on-premise deployment.
 
 ## Main Findings
 
-On a 3,400-case evaluation suite:
+On the paper's profile-grounded QA evaluation:
 
-- Profile injection dominates other retrieval components.
-- Profile-blind reranking and HyDE become redundant once the profile is available.
-- Combining soft profile prefixing with hard payload filtering gives the strongest top-rank retrieval.
-- Open embeddings and generators can match or exceed the proprietary baseline on key faithfulness metrics.
+- In the deployment setting, proFILL reaches 0.593 MRR, 0.749 Source Match, and 0.625 Grounded Correctness.
+- In the oracle setting with complete profiles, proFILL reaches 0.780 MRR and 0.847 Source Match.
+- Both soft query augmentation and hard filtering are critical in ablation.
+- In a blind pairwise study with 48 students, proFILL is preferred on all ten profile-dependent questions, with an 85.3% aggregate non-tie win rate.
 
 ## Website Contents
 

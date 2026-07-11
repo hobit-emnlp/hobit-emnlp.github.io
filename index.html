@@ -47,16 +47,19 @@
       <div class="columns is-centered">
         <div class="column has-text-centered">
           <h1 class="title is-1 publication-title">hoBIT: A Profile-Aware Retrieval-Augmented Chatbot for University Academic Advising</h1>
-          <p class="subtitle is-4 publication-subtitle">Identical advising questions need different curriculum evidence depending on the student profile.</p>
+          <p class="subtitle is-4 publication-subtitle">Identical advising questions can require different answers depending on department, admission cohort, and degree program.</p>
 
           <div class="is-size-5 publication-authors">
             <span class="author-block">Yoonseo Kim<sup>1</sup>,</span>
             <span class="author-block">Seongmin Lee<sup>1</sup>,</span>
             <span class="author-block">Joongheon Kim<sup>1</sup>,</span>
-            <span class="author-block">SeongKu Kang<sup>1</sup></span>
+            <span class="author-block">SeongKu Kang<sup>1,*</sup></span>
           </div>
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>Korea University, Seoul, Republic of Korea</span>
+          </div>
+          <div class="is-size-6 publication-authors">
+            <span class="author-block"><sup>*</sup>Corresponding author.</span>
           </div>
           <div class="is-size-5 publication-authors">
             <span class="author-block">EMNLP 2026 Demo Submission</span>
@@ -98,7 +101,7 @@
         <img class="floating-icon icon-bot" src="./static/images/icons/chatbot.png" alt="">
       </div>
       <h2 class="subtitle has-text-centered">
-        <span class="dnerf">hoBIT</span> acquires a compact session profile by dual-asking, then uses it as both a soft query prefix and a hard metadata filter.
+        <span class="dnerf">proFILL</span> extends hoBIT with profile-aware indexing and on-demand adaptive profiling for university academic advising.
       </h2>
     </div>
   </div>
@@ -109,7 +112,7 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Why hoBIT?</h2>
-        <p class="subtitle is-5 section-lead">Academic advising is profile-dependent retrieval: semantic similarity alone is not enough.</p>
+        <p class="subtitle is-5 section-lead">Academic advising is profile-dependent: semantic similarity alone can surface plausible but inapplicable evidence.</p>
       </div>
     </div>
 
@@ -124,15 +127,15 @@
       <div class="column">
         <div class="feature-card">
           <img src="./static/images/icons/data_mining.png" alt="">
-          <h3>Profile metadata is indexed offline</h3>
-          <p>Chunks are tagged with department, admission cohort, and required profile fields before retrieval.</p>
+          <h3>Profile-aware indexing structures evidence</h3>
+          <p>Each chunk is annotated with applicable profile values and the fields required to interpret it reliably.</p>
         </div>
       </div>
       <div class="column">
         <div class="feature-card">
           <img src="./static/images/icons/chatbot.png" alt="">
-          <h3>Dual-asking keeps interaction light</h3>
-          <p>The bot asks for missing fields only when they are needed, then reuses them inside the session.</p>
+          <h3>Adaptive profiling keeps interaction light</h3>
+          <p>proFILL acquires only the attributes needed for the current query, then updates the session profile on demand.</p>
         </div>
       </div>
     </div>
@@ -144,7 +147,7 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Same Question, Different Correct Answer</h2>
-        <p class="subtitle is-5 section-lead">Like realistic search snippets, curriculum documents can look near-identical. hoBIT exposes the hidden profile signal that decides which evidence is correct.</p>
+        <p class="subtitle is-5 section-lead">Semantically similar curriculum documents can apply to different students. proFILL makes evidence validity profile-aware.</p>
       </div>
     </div>
 
@@ -152,27 +155,27 @@
       <div class="comparison-panel is-bad">
         <div class="panel-heading">
           <img src="./static/images/icons/chatbot_bad.png" alt="">
-          <h3>Profile-Blind RAG</h3>
+          <h3>Profile-Blind Retriever</h3>
         </div>
         <p class="query">"Can you tell me my graduation requirements?"</p>
         <div class="evidence-row">
           <img src="./static/images/icons/docs_2.png" alt="">
           <span>Semantically similar document</span>
         </div>
-        <p class="panel-verdict">Wrong cohort evidence, wrong answer, or insufficient user information.</p>
+        <p class="panel-verdict">Plausible but inapplicable evidence can lead to the wrong answer.</p>
       </div>
 
       <div class="comparison-panel is-good">
         <div class="panel-heading">
           <img src="./static/images/icons/chatbot_good.png" alt="">
-          <h3>hoBIT Profile-Aware RAG</h3>
+          <h3>proFILL in hoBIT</h3>
         </div>
         <p class="query">Dept: CS, Cohort: 2020; graduation requirements?</p>
         <div class="evidence-row">
           <img src="./static/images/icons/docs_1.png" alt="">
           <span>Profile-matched source evidence</span>
         </div>
-        <p class="panel-verdict">Correct cohort evidence, source-tracked answer, reusable session profile.</p>
+        <p class="panel-verdict">Applicable evidence is retrieved from a profile-indexed corpus and reused through the session profile.</p>
       </div>
     </div>
   </div>
@@ -210,7 +213,7 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Methodology</h2>
-        <p class="subtitle is-5 section-lead">hoBIT combines intent routing and profile-aware RAG, with profile signals introduced before indexing and again at retrieval time.</p>
+        <p class="subtitle is-5 section-lead">proFILL combines offline profile-aware indexing with online on-demand profiling for profile-dependent academic advising.</p>
       </div>
     </div>
 
@@ -218,46 +221,46 @@
       <article class="method-step">
         <span class="step-number">1</span>
         <div>
-          <h3>Intent Classification and RAG Routing</h3>
-          <p>hoBIT first decides whether a message should be handled directly or routed into retrieval. Greeting, FAQ, ability, and small-talk intents avoid unnecessary generation; retrieval intents enter the profile-aware RAG pipeline.</p>
+          <h3>Intent Routing and Session-Profile Initialization</h3>
+          <p>At query time, hoBIT classifies each incoming query into retrieval, ability, FAQ, greeting, or small talk. Only retrieval queries proceed to retrieval and answer generation, while direct intents are handled by templates or the FAQ store.</p>
           <div class="tag-row">
             <span>greeting</span><span>FAQ</span><span>ability</span><span>small talk</span><span>retrieval</span>
           </div>
-          <div class="method-note">Only retrieval queries need source-grounded evidence and profile-conditioned search.</div>
+          <div class="method-note">For retrieval queries, proFILL identifies required profile attributes and initializes a time-limited session profile.</div>
         </div>
       </article>
 
       <article class="method-step">
         <span class="step-number">2</span>
         <div>
-          <h3>Profile-Based Preprocessing</h3>
-          <p>Static and dynamic school documents are chunked, tagged with profile metadata, and indexed before deployment. The tags let retrieval distinguish near-identical curriculum documents from different departments, admission cohorts, and major types.</p>
+          <h3>Offline Profile-Aware Indexing</h3>
+          <p>Institutional materials are cleaned, chunked, and annotated with structured profile records before indexing. Non-null profile fields encode which students each chunk applies to.</p>
           <div class="mini-pipeline">
-            <span>PDFs</span><i class="fas fa-arrow-right"></i><span>chunks</span><i class="fas fa-arrow-right"></i><span>profile tags</span><i class="fas fa-arrow-right"></i><span>Qdrant</span>
+            <span>sources</span><i class="fas fa-arrow-right"></i><span>chunks</span><i class="fas fa-arrow-right"></i><span>profile records</span><i class="fas fa-arrow-right"></i><span>Qdrant</span>
           </div>
-          <div class="method-note">Tags include department, admission_year, and required_profile fields used by reactive dual-asking.</div>
+          <div class="method-note">The default schema covers department, major type, grade, admission year, and student status.</div>
         </div>
       </article>
 
       <article class="method-step">
         <span class="step-number">3</span>
         <div>
-          <h3>Profile Injection at Retrieval Time</h3>
-          <p>At runtime, hoBIT acquires missing profile fields through dual-asking and injects the session profile in two places: as a soft prefix that steers ranking, and as a hard payload filter that removes wrong-profile evidence.</p>
+          <h3>On-Demand Adaptive Profiling and RAG</h3>
+          <p>proFILL acquires missing information through query-driven profiling before retrieval and evidence-driven profiling when retrieved evidence reveals unresolved applicability requirements.</p>
           <div class="profile-injection">
             <span>Dept: CS</span><span>Cohort: 2020</span><span>Major type: Intensive</span>
           </div>
-          <div class="method-note">The soft prefix improves recall, while the hard filter controls eligibility.</div>
+          <div class="method-note">Profile values are incorporated through soft query augmentation and hard filtering over profile annotations.</div>
         </div>
       </article>
     </div>
     <figure class="image paper-figure wide-figure method-routing-figure" aria-label="Runtime pipeline figure highlighting intent routing">
       <img src="./static/images/figures/hobit_system.png" alt="hoBIT runtime pipeline with Stage 1 intent classification and routing into profile-aware RAG.">
-      <figcaption class="figure-caption">Actual runtime figure: Stage 1 classifies the user query into greeting, ability, FAQ, small talk, or retrieval before routing academic questions into profile-aware RAG.</figcaption>
+      <figcaption class="figure-caption">Runtime figure: intent routing classifies the query before retrieval queries enter profile-aware RAG.</figcaption>
       <div class="figure-note intent-note">
         <h4>Intent routing in hoBIT</h4>
-        <p>hoBIT begins each turn by deciding which interaction path the user needs. Greetings, FAQ, ability questions, and small talk are handled by lightweight response paths, while academic advising questions are routed into the profile-aware RAG pipeline. This design keeps everyday chatbot interactions fast and reserves retrieval, profile validation, and source-grounded generation for questions that actually require evidence.</p>
-        <p>When a query is routed as academic advising, the classifier also extracts keywords and predicts which profile fields may be required. These signals connect intent routing to dual-asking: if department, admission year, major type, grade, or status is missing, hoBIT asks for the missing context before generating an answer from potentially ambiguous curriculum evidence.</p>
+        <p>hoBIT begins each turn by classifying the query into retrieval, ability, FAQ, greeting, or small talk. Greeting, ability, and FAQ queries are handled without an additional generation call, while retrieval queries continue into proFILL.</p>
+        <p>For retrieval queries, the system initializes the session profile by extracting profile values from the query and marking unresolved attributes as missing. These missing values are acquired only when needed through adaptive profiling.</p>
       </div>
     </figure>
     <figure class="intent-routing-figure" aria-label="Intent routing figure">
@@ -280,7 +283,7 @@
         </article>
         <article class="is-rag">
           <h4>Profile-aware RAG</h4>
-          <p>Retrieval turns enter filter extraction, profile validation, dual-asking, and source-tracked generation.</p>
+          <p>Retrieval turns enter query-driven profiling, profile-aware retrieval, evidence validation, and answer generation.</p>
         </article>
       </div>
     </figure>
@@ -292,15 +295,15 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-two-thirds">
         <h2 class="title is-3">hoBIT System Overview</h2>
-        <p class="subtitle is-5 section-lead">Offline profile-based data preprocessing meets online profile-based RAG with dual-asking, soft prefix injection, and hard payload filtering.</p>
+        <p class="subtitle is-5 section-lead">Offline profile-aware indexing meets online query-driven and evidence-driven profiling.</p>
       </div>
     </div>
     <figure class="image paper-figure wide-figure">
-      <img src="./static/images/figures/hobit_overview.png" alt="hoBIT offline profile-based data preprocessing and online profile-based RAG overview.">
-      <figcaption class="figure-caption">Paper Figure 2: offline profile-based preprocessing and online profile-based RAG around a schema-typed session profile.</figcaption>
+      <img src="./static/images/figures/hobit_overview.png" alt="hoBIT offline profile-aware indexing and online query-driven profiling overview.">
+      <figcaption class="figure-caption">Paper Figure 2: offline profile-aware indexing and online query-driven profiling around a session profile.</figcaption>
       <div class="figure-note">
         <h4>What this figure adds</h4>
-        <p>This overview shows the main contribution: profile information is not treated as prompt decoration. hoBIT attaches profile metadata to documents offline, stores the student's session profile online, and uses both signals during retrieval so near-identical curriculum documents can be separated by cohort, department, and major type.</p>
+        <p>This overview shows the main contribution: profile-dependent evidence validity is encoded in the index structure. hoBIT stores a session profile online and retrieves only evidence whose profile annotations are compatible with the student.</p>
       </div>
     </figure>
     <figure class="image paper-figure wide-figure">
@@ -308,7 +311,7 @@
       <figcaption class="figure-caption">Supplementary website figure: profile-indexed documents and adaptive profiling, including query-driven and evidence-driven profile acquisition.</figcaption>
       <div class="figure-note">
         <h4>Why the supplementary view matters</h4>
-        <p>The website version makes the contrast with ordinary RAG explicit. A profile-blind retriever can find semantically similar but policy-mismatched evidence; adaptive profiling turns missing student context into a recoverable interaction step before the final answer is produced.</p>
+        <p>The website version makes the contrast with conventional RAG explicit. A profile-blind retriever can find semantically similar but policy-mismatched evidence; adaptive profiling turns missing student context into a recoverable interaction step before the final answer is produced.</p>
       </div>
     </figure>
   </div>
@@ -319,15 +322,15 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-two-thirds">
         <h2 class="title is-3">Runtime Pipeline: Four Stages</h2>
-        <p class="subtitle is-5 section-lead">Intent classification, filter extraction, profile validation, and source-tracked answer generation run around a session profile.</p>
+        <p class="subtitle is-5 section-lead">Intent routing, query-driven profiling, profile-aware retrieval, and evidence-driven re-retrieval run around a session profile.</p>
       </div>
     </div>
     <figure class="image paper-figure wide-figure">
       <img src="./static/images/figures/hobit_system.png" alt="hoBIT runtime pipeline with intent classification, filter extraction, profile validation, and answer generation.">
-      <figcaption class="figure-caption">Appendix Figure 5: four-stage runtime with intent classification, filter extraction, profile validation, and answer generation.</figcaption>
+      <figcaption class="figure-caption">Runtime overview: intent routing, profile-aware retrieval, evidence validation, and answer generation.</figcaption>
       <div class="figure-note">
         <h4>How to read the runtime stages</h4>
-        <p>Stage 1 performs intent routing and proactive profile acquisition. Stage 2 extracts filters and retrieves from static and dynamic collections. Stage 3 validates whether the cited chunks require profile fields that are still missing. Stage 4 generates a source-tracked answer only after the evidence and profile state are aligned.</p>
+        <p>At runtime, proFILL first initializes the session profile from the query. It then retrieves with soft query augmentation and hard filtering, checks whether selected evidence still requires unresolved profile fields, and re-retrieves after targeted follow-up questions when needed.</p>
       </div>
     </figure>
   </div>
@@ -342,7 +345,7 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-two-thirds">
         <h2 class="title is-3">Supported Interaction Types</h2>
-        <p class="subtitle is-5 section-lead">hoBIT covers casual conversation, campus FAQ, school-life retrieval, and profile-adaptive academic advising in one student-facing interface. The examples below keep English query-answer pairs while faithfully translating captured hoBIT service outputs.</p>
+        <p class="subtitle is-5 section-lead">hoBIT covers casual conversation, campus FAQ, school-life retrieval, and profile-aware academic advising in one student-facing interface. The examples below keep English query-answer pairs while faithfully translating captured hoBIT service outputs.</p>
       </div>
     </div>
 
@@ -396,7 +399,7 @@
         <p class="intent-label">Retrieval: academic</p>
       </article>
       <article class="transcript-card dual-card">
-        <div class="chat-top"><img src="./static/images/icons/student_1.png" alt=""><span>Profile-Based Advising</span></div>
+        <div class="chat-top"><img src="./static/images/icons/student_1.png" alt=""><span>Profile-Aware Advising</span></div>
         <p class="transcript-query">Tell me my required major courses.</p>
         <p class="transcript-answer">This answer is based on the entered profile: Department: Computer Science; Admission year: 2020.<br><br>For Computer Science students admitted in 2020, the 2019-2020 curriculum of the College of Informatics requires at least 130 total credits.<br><br>The credit requirements are as follows:<br>- General education: at least 31 credits<br>- Basic major: 18 credits of required major courses and at least 24 credits of major electives<br>- Six required basic-major courses: Data Structures, Algorithms, Computer Architecture, Operating Systems, Computer Networks, and Databases<br>- Intensive major: at least 30 credits of major electives<br>- General electives: at least 27 credits<br><br>Common graduation requirements must also be satisfied:<br>- Completion of a second major is required, except for transfer students entering through bachelor's admission<br>- Chinese character certificate is not required<br>- Official English score: one of TOEIC 650, TOEFL PBT 530/CBT 197/IBT 74, TOSEL(A) 512, TEPS 571, or IELTS 5.5<br>- Completion of three English-taught courses</p>
         <div class="profile-chips"><span>CS</span><span>2020</span><span>Intensive Major</span></div>
@@ -541,14 +544,14 @@
           <span class="step-number">2</span>
           <h4>hoBIT requests only missing fields</h4>
           <div class="bubble bot ask">To answer accurately, please tell me your department and admission year.</div>
-          <p>Dual asking avoids guessing and turns missing context into reusable session profile data.</p>
+          <p>Query-driven profiling avoids guessing and turns missing context into reusable session profile data.</p>
         </article>
         <article>
           <span class="step-number">3</span>
           <h4>Profile-aware RAG answers</h4>
           <div class="profile-chips"><span>CS</span><span>Cohort: 2020</span><span>Major type: Intensive</span></div>
           <div class="bubble bot">Based on the curriculum for Computer Science students admitted in 2020, you must complete at least 130 credits, including general education, basic major, advanced major, and other graduation requirements.</div>
-          <p>Retrieval uses both soft profile injection and hard metadata filtering.</p>
+          <p>Retrieval uses both soft query augmentation and hard filtering over profile annotations.</p>
         </article>
       </div>
     </div>
@@ -590,20 +593,20 @@
           <span class="step-number">2</span>
           <h4>hoBIT requests only missing fields</h4>
           <div class="bubble bot ask">To answer accurately, please tell me your department and admission year.</div>
-          <p>Dual asking avoids guessing and builds a reusable session profile.</p>
+          <p>Query-driven profiling avoids guessing and builds a reusable session profile.</p>
         </article>
         <article>
           <span class="step-number">3</span>
           <h4>Profile-aware RAG answers</h4>
           <div class="profile-chips"><span>CS</span><span>Cohort: 2020</span><span>Major type: Intensive</span></div>
           <div class="bubble bot">hoBIT answers using graduation-requirement documents that match the student's profile.</div>
-          <p>Retrieval uses both soft profile injection and hard metadata filtering.</p>
+          <p>Retrieval uses both soft query augmentation and hard filtering over profile annotations.</p>
         </article>
       </div>
     </div>
     <figure class="image paper-figure wide-figure">
-      <img src="./static/images/figures/hobit_user_interface.png" alt="hoBIT user interface walkthrough showing cold start, dual asking, profile update, and profile reuse.">
-      <figcaption class="figure-caption">Paper Figure 4: cold start, proactive/reactive dual-asking, profile update, and profile reuse across later questions.</figcaption>
+      <img src="./static/images/figures/hobit_user_interface.png" alt="hoBIT user interface walkthrough showing cold start, adaptive profiling, profile update, and profile reuse.">
+      <figcaption class="figure-caption">Paper Figure 4: cold start, adaptive profiling, profile update, and profile reuse across later questions.</figcaption>
       <div class="figure-note">
         <h4>Interaction-level evidence</h4>
         <p>This figure connects the system design to the student-facing experience. The chatbot does not expose retrieval internals; it asks targeted profile questions only when needed, stores the answer as session context, and reuses that profile in later advising turns.</p>
@@ -621,7 +624,7 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Results</h2>
-        <p class="subtitle is-5 section-lead">Profile injection dominates the retrieval stack and makes profile-blind boosters redundant.</p>
+        <p class="subtitle is-5 section-lead">proFILL outperforms profile-blind RAG baselines in both retrieval and grounded answer generation.</p>
       </div>
     </div>
 
@@ -629,34 +632,34 @@
       <div class="column">
         <div class="result-list">
           <div class="result-item">
+            <strong>Deployment MRR</strong>
+            <span>0.593</span>
+            <p>proFILL achieves the strongest retrieval performance in the realistic setting where profiles must be acquired during interaction.</p>
+          </div>
+          <div class="result-item">
             <strong>Source Match</strong>
-            <span>0.070 -> 0.585</span>
-            <p>Adding profile injection produces the largest jump in the deployed ablation.</p>
+            <span>0.749</span>
+            <p>Generated answers use the correct institutional sources more reliably than profile-blind baselines.</p>
           </div>
           <div class="result-item">
-            <strong>Overall PASS</strong>
-            <span>6.8% -> 47.4%</span>
-            <p>Dual-asking plus profile-aware retrieval makes correct answers reachable.</p>
+            <strong>Grounded Correctness</strong>
+            <span>0.625</span>
+            <p>Answers are evaluated for both correctness and grounding in appropriate sources.</p>
           </div>
           <div class="result-item">
-            <strong>Intent routing</strong>
-            <span>96.0% acc.</span>
-            <p>The retrieval-intent gate reaches 0.990 F1, so only retrieval queries enter the profile-aware pipeline.</p>
-          </div>
-          <div class="result-item">
-            <strong>Open-ended advising</strong>
-            <span>0.796 overall</span>
-            <p>The ground-truth-free track reaches 59.1% Overall PASS with the deployed pipeline.</p>
+            <strong>Open-weight deployment</strong>
+            <span>competitive</span>
+            <p>Open-weight models remain viable for cost-effective on-premise deployment.</p>
           </div>
         </div>
       </div>
       <div class="column">
         <figure class="image paper-figure">
           <img src="./static/images/figures/appendix_ablation.png" alt="Ablation and dataset distribution figures for hoBIT.">
-          <figcaption class="figure-caption">Ablation summary: profile injection is the dominant component in source matching and pass-rate gains.</figcaption>
+          <figcaption class="figure-caption">Ablation summary: both soft query augmentation and hard filtering are critical for proFILL.</figcaption>
           <div class="figure-note compact">
             <h4>Reading the ablation</h4>
-            <p>The largest jump appears when profile information is actually injected into retrieval. This supports the page's central claim: schema-typed profile signals matter more than generic retrieval boosters for academic advising.</p>
+            <p>Removing either the soft prefix or the hard filter degrades retrieval performance, and disabling evidence-driven re-retrieval also hurts performance.</p>
           </div>
         </figure>
       </div>
@@ -677,7 +680,7 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Human Evaluation Examples</h2>
-        <p class="subtitle is-5 section-lead">Human judges compared answers on profile-dependent advising pairs where a profile-blind baseline often retrieved plausible but wrong evidence.</p>
+        <p class="subtitle is-5 section-lead">Students compared proFILL against conventional dense retrieval-based RAG on profile-dependent advising questions.</p>
       </div>
     </div>
 
@@ -723,9 +726,9 @@
 
       <div class="eval-chart">
         <h3>Blind Pairwise Study</h3>
-        <p class="chart-note">n = 48 judgments, 10 profile-dependent pairs</p>
+        <p class="chart-note">Blind pairwise study with 48 students and 10 profile-dependent questions</p>
         <div class="bar-row">
-          <span>hoBIT win</span>
+          <span>proFILL win</span>
           <div class="bar-track"><div class="bar-fill" style="width: 85.3%;">85.3%</div></div>
         </div>
         <div class="bar-row">
@@ -733,7 +736,7 @@
           <div class="bar-track"><div class="bar-fill muted" style="width: 14.7%;">14.7%</div></div>
         </div>
         <div class="eval-callout">
-          hoBIT won all 10 profile-dependent pairs, showing that explicit profile acquisition improves answer usefulness beyond surface semantic matching.
+          proFILL was preferred on all ten questions, with an aggregate non-tie win rate of 85.3%.
         </div>
       </div>
     </div>

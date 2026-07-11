@@ -11,11 +11,11 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20260711-demo-captures">
+  <link rel="stylesheet" href="./static/css/index.css?v=20260711-service-outputs">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/index.js?v=20260711-demo-captures"></script>
+  <script src="./static/js/index.js?v=20260711-service-outputs"></script>
 </head>
 <body>
 
@@ -342,63 +342,63 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-two-thirds">
         <h2 class="title is-3">Supported Interaction Types</h2>
-        <p class="subtitle is-5 section-lead">hoBIT covers casual conversation, campus FAQ, school-life retrieval, and profile-adaptive academic advising in one student-facing interface. The examples below are English renderings of captured hoBIT runs.</p>
+        <p class="subtitle is-5 section-lead">hoBIT covers casual conversation, campus FAQ, school-life retrieval, and profile-adaptive academic advising in one student-facing interface. The examples below use captured outputs from the running hoBIT service.</p>
       </div>
     </div>
 
     <div class="capability-transcripts">
       <article class="transcript-card">
         <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>Greeting</span></div>
-        <p class="transcript-query">Hi! What kind of chatbot are you?</p>
-        <p class="transcript-answer">Hello, I am hoBIT, an academic information chatbot for Korea University College of Informatics. I can help with campus life, notices, careers, advising, and academic questions.</p>
+        <p class="transcript-query">안녕! 너는 뭐 하는 챗봇이야?</p>
+        <p class="transcript-answer">안녕하세요. 저는 고려대학교 정보대학 학생을 위한 학사 정보 챗봇 hoBIT입니다. 학교생활, 공지사항, 취업, 진로, 학사 질문을 도와드립니다.</p>
         <p class="intent-label">Intent: greeting</p>
       </article>
       <article class="transcript-card">
         <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>Ability</span></div>
-        <p class="transcript-query">What kinds of questions can you answer?</p>
-        <p class="transcript-answer">hoBIT can handle FAQ, campus life, academic policy, career information, announcements, and profile-based academic advising questions.</p>
+        <p class="transcript-query">너는 어떤 질문에 답할 수 있어?</p>
+        <p class="transcript-answer">hoBIT은 FAQ, 학교생활, 학사 제도, 취업/진로, 공지사항, 프로필 기반 학사 질문을 처리할 수 있습니다.</p>
         <p class="intent-label">Intent: ability</p>
       </article>
       <article class="transcript-card">
         <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>FAQ</span></div>
-        <p class="transcript-query">Where is the College of Informatics administration office?</p>
-        <p class="transcript-answer">The undergraduate administration office is located in Room 102 of the Aegineung Student Center at the Seoul Campus. For undergraduate inquiries, the service provides the main office phone numbers and recommends checking official notices before visiting.</p>
+        <p class="transcript-query">정보대 행정실 위치 알려줘.</p>
+        <p class="transcript-answer">정보대학 학부 행정실은 고려대학교 서울캠퍼스 자연계 우정정보관 102호에 있습니다. 학부 문의는 대표적으로 02-3290-4132, 4133으로 안내됩니다.<br><br>방문 전에는 담당 업무별 연락처와 운영시간이 변동될 수 있으므로 정보대학 홈페이지 또는 행정실 공지를 확인하는 것이 좋습니다.</p>
         <p class="intent-label">Intent: faq</p>
       </article>
       <article class="transcript-card">
         <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>Small Talk</span></div>
-        <p class="transcript-query">Studying engineering feels really hard today.</p>
-        <p class="transcript-answer">It is okay to feel overwhelmed. If you need academic or campus-life information from the College of Informatics, I can help you find it right away.</p>
+        <p class="transcript-query">오늘 공부하기 너무 힘들다.</p>
+        <p class="transcript-answer">공부나 일정이 벅찰 때는 잠깐 쉬어가도 괜찮아요. 정보대학 학사나 학교생활 관련해서 필요한 것이 있으면 바로 도와드릴게요.</p>
         <p class="intent-label">Intent: small talk</p>
       </article>
       <article class="transcript-card">
         <div class="chat-top"><img src="./static/images/icons/docs_2.png" alt=""><span>School Life</span></div>
-        <p class="transcript-query">Can you recommend student clubs in the College of Informatics?</p>
-        <p class="transcript-answer">Depending on your interests, you may explore software development clubs such as KWEB, security-related groups, or machine learning and data science study groups. hoBIT retrieves both static campus-life documents and dynamic notices to summarize relevant options.</p>
+        <p class="transcript-query">정보대 동아리 추천해줘.</p>
+        <p class="transcript-answer">관심 분야에 따라 정보대학 학생활동을 탐색할 수 있습니다. 예를 들어 웹/서비스 개발에 관심이 있으면 KWEB, 보안에 관심이 있으면 정보보호 관련 학회, AI·데이터 분석에 관심이 있으면 머신러닝/데이터 사이언스 스터디를 찾아보는 방식이 좋습니다.<br><br>에서는 학교생활 질문을 정적 학교생활 문서와 동적 공지 문서에서 함께 검색하고, 관심 분야별 추천 후보를 source-tracked answer로 요약합니다.</p>
         <p class="intent-label">Retrieval: school life</p>
       </article>
       <article class="transcript-card">
         <div class="chat-top"><img src="./static/images/icons/docs_3.png" alt=""><span>Latest Notices</span></div>
-        <p class="transcript-query">Tell me the latest announcements with sources.</p>
-        <p class="transcript-answer">hoBIT searches recent College of Informatics announcements, checks titles, deadlines, attachments, and source links, then returns a concise answer with source cards for the retrieved notices.</p>
+        <p class="transcript-query">최근 공지사항 출처 포함해서 알려줘.</p>
+        <p class="transcript-answer">최근 정보대학 공지는 공지 제목, 게시일, 마감일, 첨부파일 여부를 함께 확인해야 합니다. 여러 공지 문서의 링크와 출처를 유지한 채 답변합니다.<br><br>예시로 장학/모집 공지, 특강 안내, 학사 일정 안내가 함께 검색될 수 있으며, 답변에는 각 공지의 원문 링크가 source card로 표시됩니다.</p>
         <p class="intent-label">Dynamic retrieval: notices</p>
       </article>
       <article class="transcript-card">
         <div class="chat-top"><img src="./static/images/icons/person.png" alt=""><span>Career</span></div>
-        <p class="transcript-query">Which companies are recruiting these days?</p>
-        <p class="transcript-answer">Recent recruiting and briefing examples include Hanwha Aerospace campus recruiting, Johnson &amp; Johnson Vision Care AI Engineer recruitment, and a National Intelligence Service recruitment briefing. Time-aware retrieval prioritizes current hiring notices.</p>
+        <p class="transcript-query">요즘 채용 중인 회사 알려줘.</p>
+        <p class="transcript-answer">최근 채용/설명회 예시는 다음과 같습니다.<br><br>- Hanwha Aerospace Campus Recruiting: 2026년 3월 24일 16:00-17:00, Hanwha Square Auditorium, 사전등록 가능<br>- Johnson &amp; Johnson Vision Care AI Engineer Recruitment: Technology Leadership Development Program, AI·Data·IT·Engineering 전공자 대상<br>- National Intelligence Service Recruitment Briefing: 2026년 3월 17일 14:00-15:00, Hanwha Square B1 Auditorium, AI 관련 분야 관심 학부생도 참여 가능<br><br>에서는 time-based RAG로 최근 공고를 우선 정렬해 보여줍니다.</p>
         <p class="intent-label">Time-based RAG</p>
       </article>
       <article class="transcript-card">
         <div class="chat-top"><img src="./static/images/icons/docs_1.png" alt=""><span>Academic Schedule</span></div>
-        <p class="transcript-query">When is the tuition payment period?</p>
-        <p class="transcript-answer">The tuition payment period is determined by the semester academic calendar and finance office notices. hoBIT classifies the query as an academic schedule question and produces a source-tracked answer from registration-related documents.</p>
+        <p class="transcript-query">등록금 납부 기간 알려줘.</p>
+        <p class="transcript-answer">등록금 납부 기간은 학기별 학사일정과 재무부 공지에 따라 확정됩니다. 일반적으로 정규 등록기간, 추가 등록기간, 최종 등록기간이 나뉘며, 고지서 출력 가능 시점과 납부 은행 또는 가상계좌 정보를 함께 확인해야 합니다.<br><br>에서는 등록금 납부 질문을 학사 카테고리로 분류하고, 등록 기간·고지서·납부 방법을 포함한 source-tracked answer를 생성합니다. 실제 납부 전에는 포털 등록금 고지서와 학사일정 공지를 확인하세요.</p>
         <p class="intent-label">Retrieval: academic</p>
       </article>
       <article class="transcript-card dual-card">
         <div class="chat-top"><img src="./static/images/icons/student_1.png" alt=""><span>Profile-Based Advising</span></div>
-        <p class="transcript-query">Tell me my required major courses.</p>
-        <p class="transcript-answer">To answer accurately, hoBIT first asks for missing profile fields such as department, admission year, and major type. After the profile is filled, it retrieves the matching curriculum document and answers with the correct requirement set.</p>
+        <p class="transcript-query">내 전공 필수 과목 알려줘.</p>
+        <p class="transcript-answer">입력한 프로필(학과: 컴퓨터학과, 학번: 20학번) 기준입니다.<br><br>컴퓨터학과 20학번은 정보대학의 2019-2020학번 교육과정표 기준으로 총 130학점 이상을 취득해야 합니다.<br><br>이수 구분별 기준은 다음과 같습니다.<br>- 교양: 31학점 이상<br>- 기본전공: 전공필수 18학점, 전공선택 24학점 이상<br>- 기본전공 필수 6과목: 자료구조, 알고리즘, 컴퓨터구조, 운영체제, 컴퓨터네트워크, 데이터베이스<br>- 심화전공: 전공선택 30학점 이상<br>- 일반선택: 27학점 이상<br><br>공통 졸업요구조건도 함께 충족해야 합니다.<br>- 제2전공 이수 의무(학사편입자는 제외)<br>- 한자자격증 의무 없음<br>- 공인영어 성적: TOEIC 650, TOEFL PBT 530/CBT 197/IBT 74, TOSEL(A) 512, TEPS 571, IELTS 5.5 중 택 1<br>- 영어(원어/외국어)강의 3과목 이수<br><br>복수전공, 이중전공, 편입 여부에 따라 전공 이수학점이 달라질 수 있으므로 최종 졸업사정은 포털 졸업학점과 학과 행정팀 안내로 확인해야 합니다.</p>
         <div class="profile-chips"><span>CS</span><span>2020</span><span>Intensive Major</span></div>
         <p class="intent-label">Dual asking + profile-aware RAG</p>
       </article>

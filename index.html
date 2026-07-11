@@ -183,7 +183,7 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-two-thirds">
         <h2 class="title is-3">Project Overview</h2>
-        <p class="subtitle is-5 section-lead">Explore the paper through three views: methodology, chatbot capabilities, and evaluation results.</p>
+        <p class="subtitle is-5 section-lead">Explore the paper through four views: methodology, chatbot capabilities, dataset construction, and evaluation results.</p>
       </div>
     </div>
 
@@ -197,8 +197,12 @@
           <span class="step-number">2</span>
           Capabilities &amp; Demo
         </button>
-        <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="tab-evaluation" id="tab-evaluation-button" data-tab-target="tab-evaluation">
+        <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="tab-data" id="tab-data-button" data-tab-target="tab-data">
           <span class="step-number">3</span>
+          Data
+        </button>
+        <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="tab-evaluation" id="tab-evaluation-button" data-tab-target="tab-evaluation">
+          <span class="step-number">4</span>
           Evaluation Results
         </button>
       </div>
@@ -609,6 +613,119 @@
         <p>This figure connects the system design to the student-facing experience. The chatbot does not expose retrieval internals; it asks targeted profile questions only when needed, stores the answer as session context, and reuses that profile in later advising turns.</p>
       </div>
     </figure>
+  </div>
+</section>
+
+        </div>
+
+        <div class="tab-panel site-tab-panel" id="tab-data" role="tabpanel" aria-labelledby="tab-data-button" hidden>
+
+<section class="section is-light" id="data">
+  <div class="container is-max-widescreen">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h2 class="title is-3">Dataset Construction</h2>
+        <p class="subtitle is-5 section-lead">The evaluation data covers profile-grounded QA, open-ended advising, intent classification, and profile-annotated corpus chunks.</p>
+      </div>
+    </div>
+
+    <div class="data-summary-grid">
+      <article class="data-summary-card">
+        <span class="data-kicker">Track 1</span>
+        <h3>Profile-Grounded QA</h3>
+        <p>Each query is paired with a synthetic student profile, a manually encoded gold answer, a gold source, and a phrasing type.</p>
+      </article>
+      <article class="data-summary-card">
+        <span class="data-kicker">Track 2</span>
+        <h3>Open-Ended Advising</h3>
+        <p>Questions without deterministic reference answers are evaluated by LLM judges for retrieved evidence quality and answer completeness.</p>
+      </article>
+      <article class="data-summary-card">
+        <span class="data-kicker">Track 3</span>
+        <h3>Intent Classification</h3>
+        <p>Samples cover greeting, ability, FAQ, smalltalk, and retrieval so that only evidence-seeking queries enter the RAG pipeline.</p>
+      </article>
+      <article class="data-summary-card">
+        <span class="data-kicker">Index</span>
+        <h3>Profile-Annotated Corpus</h3>
+        <p>Offline indexing annotates chunks over department, major type, grade, admission year, and student status.</p>
+      </article>
+    </div>
+
+    <div class="data-example-grid">
+      <article class="data-example-card is-wide">
+        <h3>Profile-Grounded QA Samples</h3>
+        <div class="data-table-wrap">
+          <table class="table is-fullwidth data-table">
+            <thead>
+              <tr>
+                <th>Query</th>
+                <th>Profile</th>
+                <th>Gold Answer</th>
+                <th>Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>What are the major-required courses?</td>
+                <td>CS, intensive, 2019, grade 1</td>
+                <td>Data Structures, Algorithms, Computer Architecture, Operating Systems, Computer Networks, Databases</td>
+                <td>formal</td>
+              </tr>
+              <tr>
+                <td>What are the major-required courses?</td>
+                <td>AI, intensive, 2025, grade 2</td>
+                <td>No major-required courses; basic and intensive major courses are both elective</td>
+                <td>formal</td>
+              </tr>
+              <tr>
+                <td>Can you tell me how my graduation credits break down by area?</td>
+                <td>CS, intensive, 2019, grade 3</td>
+                <td>130 total credits: 31 GenEd, 18 required + 24 elective, 30 intensive major, 27 free elective</td>
+                <td>personal</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="data-note">The same surface question can yield a different gold answer under a different profile.</p>
+      </article>
+
+      <article class="data-example-card">
+        <h3>Open-Ended Advising</h3>
+        <ul class="data-list">
+          <li>What should I be careful about when applying for a leave of absence?</li>
+          <li>By when do I have to pay tuition?</li>
+          <li>How do I apply for a scholarship?</li>
+          <li>Where is the college administration office located?</li>
+        </ul>
+      </article>
+
+      <article class="data-example-card">
+        <h3>Intent Classification</h3>
+        <div class="intent-samples">
+          <span>Hi <b>greeting</b></span>
+          <span>What can you do for me? <b>ability</b></span>
+          <span>Tell me the FAQ <b>faq</b></span>
+          <span>I'm bored <b>smalltalk</b></span>
+          <span>What are the graduation requirements? <b>retrieval</b></span>
+        </div>
+      </article>
+
+      <article class="data-example-card is-wide">
+        <h3>Profile-Annotated Corpus Chunks</h3>
+        <div class="corpus-chunk">
+          <p><strong>CS curriculum table (2019-2020).</strong> 130 total credits: 31 GenEd, 42 basic major, 30 intensive major, 27 free elective; required courses include Data Structures, Algorithms, and Databases.</p>
+          <dl>
+            <div><dt>department</dt><dd>Computer Science</dd></div>
+            <div><dt>major type</dt><dd>null</dd></div>
+            <div><dt>admission year</dt><dd>2019-2020</dd></div>
+            <div><dt>grade</dt><dd>null</dd></div>
+            <div><dt>student status</dt><dd>null</dd></div>
+          </dl>
+        </div>
+        <p class="data-note">Curriculum chunks fix department and cohort, department-introduction chunks may fix only department, and general administrative forms can leave all profile attributes null.</p>
+      </article>
+    </div>
   </div>
 </section>
 

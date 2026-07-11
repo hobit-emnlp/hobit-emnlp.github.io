@@ -223,7 +223,7 @@
         <span class="step-number">1</span>
         <div>
           <h3>Intent Routing and Session-Profile Initialization</h3>
-          <p>At query time, hoBIT classifies each incoming query into retrieval, ability, FAQ, greeting, or small talk. Only retrieval queries proceed to retrieval and answer generation, while direct intents are handled by templates or the FAQ store.</p>
+          <p>At query time, hoBIT classifies each incoming query into retrieval, ability, FAQ, greeting, or small talk. Only retrieval queries proceed to retrieval and answer generation; greeting, ability, and FAQ queries are handled by templates or the FAQ store, while small talk receives a lightweight conversational reply.</p>
           <div class="tag-row">
             <span>greeting</span><span>FAQ</span><span>ability</span><span>small talk</span><span>retrieval</span>
           </div>
@@ -320,7 +320,7 @@
       <figcaption class="figure-caption">Supplementary website figure: profile-indexed documents and adaptive profiling, including query-driven and evidence-driven profile acquisition.</figcaption>
       <div class="figure-note">
         <h4>Why the supplementary view matters</h4>
-        <p>The website version makes the contrast with conventional RAG explicit. A profile-blind retriever can find semantically similar but policy-mismatched evidence; adaptive profiling turns missing student context into a recoverable interaction step before the final answer is produced.</p>
+        <p>The website version makes the contrast with conventional RAG explicit. A profile-blind retriever can find semantically similar but policy-mismatched evidence; adaptive profiling turns missing student context into a quick follow-up question instead of a dead end.</p>
       </div>
     </figure>
   </div>
@@ -331,7 +331,7 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-two-thirds">
         <h2 class="title is-3">Runtime Pipeline: Four Stages</h2>
-        <p class="subtitle is-5 section-lead">Intent routing, query-driven profiling, profile-aware retrieval, and evidence-driven re-retrieval run around a session profile.</p>
+        <p class="subtitle is-5 section-lead">Intent routing, query-driven profiling, profile-aware retrieval, and evidence-driven re-retrieval all revolve around a session profile.</p>
       </div>
     </div>
     <figure class="image paper-figure wide-figure">
@@ -354,7 +354,7 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-two-thirds">
         <h2 class="title is-3">Supported Interaction Types</h2>
-        <p class="subtitle is-5 section-lead">hoBIT covers casual conversation, campus FAQ, school-life retrieval, and profile-aware academic advising in one student-facing interface. The examples below keep English query-answer pairs while faithfully translating captured hoBIT service outputs.</p>
+        <p class="subtitle is-5 section-lead">hoBIT covers casual conversation, campus FAQ, school-life retrieval, and profile-aware academic advising in one student-facing interface. The examples below are English translations of real hoBIT conversations, kept faithful to the original service outputs.</p>
       </div>
     </div>
 
@@ -478,15 +478,15 @@
     <div class="demo-showcase">
       <div class="demo-copy">
         <p class="eyebrow">Captured hoBIT Runs</p>
-        <h3>Actual interface captures paired with English transcripts</h3>
-        <p>The screenshots were captured from the running hoBIT UI. The visible UI remains Korean, while the surrounding page presents English query-answer renderings for an international paper audience.</p>
+        <h3>Real hoBIT screenshots with English translations</h3>
+        <p>These screenshots come from the live hoBIT interface. The UI itself stays in Korean, so each one is paired with an English translation of the query and answer for readers of this paper.</p>
         <div class="demo-tags">
           <span>Greeting</span><span>School life</span><span>Latest notices</span><span>Dual asking</span>
         </div>
       </div>
       <figure class="demo-screenshot">
         <img src="./static/images/demos/actual-school-life.png" alt="Actual hoBIT interface capture showing a school-life club recommendation answer.">
-        <figcaption>Actual hoBIT UI capture: school-life retrieval response, rendered in Korean UI.</figcaption>
+        <figcaption>hoBIT UI screenshot: a school-life club recommendation, shown in the original Korean interface.</figcaption>
       </figure>
     </div>
   </div>
@@ -497,7 +497,7 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-two-thirds">
         <h2 class="title is-3">Example Use Cases and Adaptive Profiling</h2>
-        <p class="subtitle is-5 section-lead">The demo cases highlight the difference between ordinary retrieval and profile-dependent advising, where hoBIT asks for missing student context before answering.</p>
+        <p class="subtitle is-5 section-lead">The demo cases highlight the difference between profile-blind retrieval and profile-dependent advising, where hoBIT asks for missing student context before answering.</p>
       </div>
     </div>
 
@@ -646,7 +646,7 @@
       <article class="data-summary-card">
         <span class="data-kicker">Track 2</span>
         <h3>Open-Ended Advising</h3>
-        <p>Questions without deterministic reference answers are evaluated by LLM judges for retrieved evidence quality and answer completeness.</p>
+        <p>Questions without deterministic reference answers are evaluated by LLM judges for retrieval precision, Korean faithfulness, and answer completeness.</p>
       </article>
       <article class="data-summary-card">
         <span class="data-kicker">Track 3</span>
@@ -690,7 +690,7 @@
                 <td>Can you tell me how my graduation credits break down by area?</td>
                 <td>CS, intensive, 2019, grade 3</td>
                 <td>130 total credits: 31 GenEd, 18 required + 24 elective, 30 intensive major, 27 free elective</td>
-                <td>personal</td>
+                <td>first-person</td>
               </tr>
             </tbody>
           </table>
@@ -833,14 +833,14 @@
             <tr>
               <td>Course recommendation</td>
               <td>What is the recommended course for me this year?</td>
-              <td>AI, 2026 cohort, grade 1</td>
-              <td>hoBIT preferred</td>
+              <td>CS cohort</td>
+              <td>hoBIT preferred (98%)</td>
             </tr>
             <tr>
-              <td>Double major</td>
-              <td>How many credits do I need for a double major?</td>
-              <td>Department and cohort</td>
-              <td>Mixed / harder case</td>
+              <td>Available major courses</td>
+              <td>What major courses are available to me?</td>
+              <td>DS cohort</td>
+              <td>Closest race (58%)</td>
             </tr>
           </tbody>
         </table>

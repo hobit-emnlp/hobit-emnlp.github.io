@@ -256,8 +256,8 @@
       </article>
     </div>
     <figure class="image paper-figure wide-figure method-routing-figure" aria-label="Runtime pipeline figure highlighting intent routing">
-      <img src="./static/images/figures/hobit_system.png" alt="hoBIT runtime pipeline with Stage 1 intent classification and routing into profile-aware RAG.">
-      <figcaption class="figure-caption">Runtime figure: intent routing classifies the query before retrieval queries enter profile-aware RAG.</figcaption>
+      <img src="./static/images/figures/intent_routing.png?v=20260711-intent-routing" alt="Intent routing diagram showing validated FAQ data, an LLM intent router, Redis user profile, and academic or school-life response paths.">
+      <figcaption class="figure-caption">Intent routing figure: user queries are classified before academic and school-life requests are routed to the appropriate response path.</figcaption>
       <div class="figure-note intent-note">
         <h4>Intent routing in hoBIT</h4>
         <p>hoBIT begins each turn by classifying the query into retrieval, ability, FAQ, greeting, or small talk. Greeting, ability, and FAQ queries are handled without an additional generation call, while retrieval queries continue into proFILL.</p>

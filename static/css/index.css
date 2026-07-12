@@ -112,6 +112,7 @@ body {
   bottom: 1rem;
   right: -1rem;
   width: clamp(52px, 7vw, 86px);
+  border-radius: 50%;
 }
 
 .section-lead {
@@ -1075,6 +1076,7 @@ body {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.8rem;
+  margin-top: 2.25rem;
   margin-bottom: 1.5rem;
 }
 

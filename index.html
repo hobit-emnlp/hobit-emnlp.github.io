@@ -22,7 +22,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item brand-mark" href="#">
-      <img src="./static/images/icons/chatbot.png" alt="hoBIT icon">
+      <img src="./static/images/icons/hobit-avatar.png" alt="hoBIT icon">
       <span>hoBIT</span>
     </a>
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
@@ -95,10 +95,10 @@
     <div class="hero-body">
       <div class="hero-figure-wrap">
         <img class="teaser-image" src="./static/images/figures/hobit_intro.png?v=20260711-intro-v4" alt="Profile-dependent advising questions require different evidence for different students.">
-        <img class="floating-icon icon-bot" src="./static/images/icons/chatbot.png" alt="">
+        <img class="floating-icon icon-bot" src="./static/images/icons/hobit-avatar.png" alt="">
       </div>
       <h2 class="subtitle has-text-centered">
-        <span class="dnerf">proFILL</span> extends hoBIT with profile-aware indexing and on-demand adaptive profiling for university academic advising.
+        <span class="dnerf">ProFILL</span> extends hoBIT with profile-aware indexing and on-demand adaptive profiling for university academic advising.
       </h2>
     </div>
   </div>
@@ -130,9 +130,9 @@
       </div>
       <div class="column">
         <div class="feature-card">
-          <img src="./static/images/icons/chatbot.png" alt="">
+          <img src="./static/images/icons/hobit-avatar.png" alt="">
           <h3>Adaptive profiling keeps interaction light</h3>
-          <p>proFILL acquires only the attributes needed for the current query, then updates the session profile on demand.</p>
+          <p>ProFILL acquires only the attributes needed for the current query, then updates the session profile on demand.</p>
         </div>
       </div>
     </div>
@@ -144,7 +144,7 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Same Question, Different Correct Answer</h2>
-        <p class="subtitle is-5 section-lead">Semantically similar curriculum documents can apply to different students. proFILL makes evidence validity profile-aware.</p>
+        <p class="subtitle is-5 section-lead">Semantically similar curriculum documents can apply to different students. ProFILL makes evidence validity profile-aware.</p>
       </div>
     </div>
 
@@ -165,7 +165,7 @@
       <div class="comparison-panel is-good">
         <div class="panel-heading">
           <img src="./static/images/icons/chatbot_good.png" alt="">
-          <h3>proFILL in hoBIT</h3>
+          <h3>ProFILL in hoBIT</h3>
         </div>
         <p class="query">Dept: CS, Cohort: 2020; graduation requirements?</p>
         <div class="evidence-row">
@@ -218,7 +218,7 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Methodology</h2>
-        <p class="subtitle is-5 section-lead">proFILL combines offline profile-aware indexing with online on-demand profiling for profile-dependent academic advising.</p>
+        <p class="subtitle is-5 section-lead">ProFILL combines offline profile-aware indexing with online on-demand profiling for profile-dependent academic advising.</p>
       </div>
     </div>
 
@@ -231,7 +231,7 @@
           <div class="tag-row">
             <span>greeting</span><span>FAQ</span><span>ability</span><span>small talk</span><span>retrieval</span>
           </div>
-          <div class="method-note">For retrieval queries, proFILL identifies required profile attributes and initializes a time-limited session profile.</div>
+          <div class="method-note">For retrieval queries, ProFILL identifies required profile attributes and initializes a time-limited session profile.</div>
         </div>
       </article>
 
@@ -251,7 +251,7 @@
         <span class="step-number">3</span>
         <div>
           <h3>On-Demand Adaptive Profiling and RAG</h3>
-          <p>proFILL acquires missing information through query-driven profiling before retrieval and evidence-driven profiling when retrieved evidence reveals unresolved applicability requirements.</p>
+          <p>ProFILL acquires missing information through query-driven profiling before retrieval and evidence-driven profiling when retrieved evidence reveals unresolved applicability requirements.</p>
           <div class="profile-injection">
             <span>Dept: CS</span><span>Cohort: 2020</span><span>Major type: Intensive</span>
           </div>
@@ -272,7 +272,7 @@
       </div>
       <div class="figure-note intent-note">
         <h4>Intent routing in hoBIT</h4>
-        <p>hoBIT begins each turn by classifying the query into retrieval, ability, FAQ, greeting, or small talk. Greeting, ability, and FAQ queries are handled without an additional generation call, while retrieval queries continue into proFILL.</p>
+        <p>hoBIT begins each turn by classifying the query into retrieval, ability, FAQ, greeting, or small talk. Greeting, ability, and FAQ queries are handled without an additional generation call, while retrieval queries continue into ProFILL.</p>
         <p>For retrieval queries, the system initializes the session profile by extracting profile values from the query and marking unresolved attributes as missing. These missing values are acquired only when needed through adaptive profiling.</p>
       </div>
     </figure>
@@ -343,7 +343,7 @@
       <figcaption class="figure-caption">Runtime overview: intent routing, profile-aware retrieval, evidence validation, and answer generation.</figcaption>
       <div class="figure-note">
         <h4>How to read the runtime stages</h4>
-        <p>At runtime, proFILL first initializes the session profile from the query. It then retrieves with soft query augmentation and hard filtering, checks whether selected evidence still requires unresolved profile fields, and re-retrieves after targeted follow-up questions when needed.</p>
+        <p>At runtime, ProFILL first initializes the session profile from the query. It then retrieves with soft query augmentation and hard filtering, checks whether selected evidence still requires unresolved profile fields, and re-retrieves after targeted follow-up questions when needed.</p>
       </div>
     </figure>
   </div>
@@ -484,7 +484,7 @@
         <p class="eyebrow">Captured hoBIT Runs</p>
         <h3>Real Conversations from the Deployed System</h3>
         <p>Each screenshot is captured directly from the deployed hoBIT service, showing how real student queries are handled end-to-end. Since the interface itself is in Korean, we annotate each capture with the query and answer for readers of this paper.</p>
-        <p class="version-note">Note: hoBIT's live service currently runs on its original rule-based backend. proFILL, the profile-aware pipeline this paper presents, is a research extension that has not yet fully replaced it in production.</p>
+        <p class="version-note">Note: hoBIT's live service currently runs on its original rule-based backend. ProFILL, the profile-aware pipeline this paper presents, is a research extension that has not yet fully replaced it in production.</p>
         <div class="demo-tags">
           <span>Greeting</span><span>School life</span><span>Latest notices</span><span>Dual asking</span>
         </div>
@@ -519,27 +519,6 @@
         <img src="./static/images/demos/english-profile-advising.png" alt="Actual hoBIT UI screenshot showing a profile-based graduation query and answer.">
         <figcaption>Profile-based advising</figcaption>
       </figure>
-    </div>
-
-    <div class="use-case-grid english-use-case-grid">
-      <article class="use-case-card">
-        <div class="use-case-icon"><img src="./static/images/icons/docs_3.png" alt=""></div>
-        <h3>Latest Notice Search</h3>
-        <p class="query">"Tell me the latest announcements with sources."</p>
-        <p>hoBIT retrieves recent notices, checks source links and attachments, and returns a source-oriented summary rather than a generic answer.</p>
-      </article>
-      <article class="use-case-card">
-        <div class="use-case-icon"><img src="./static/images/icons/person.png" alt=""></div>
-        <h3>Time-Aware Career Retrieval</h3>
-        <p class="query">"Which companies are recruiting these days?"</p>
-        <p>The system prioritizes current recruiting notices and summarizes company names, briefing schedules, target areas, and application hints.</p>
-      </article>
-      <article class="use-case-card is-emphasis">
-        <div class="use-case-icon"><img src="./static/images/icons/student_2.png" alt=""></div>
-        <h3>Adaptive Profiling</h3>
-        <p class="query">"Tell me my required major courses."</p>
-        <p>When profile fields are missing, hoBIT asks targeted follow-up questions and then filters evidence by department, cohort, and major type.</p>
-      </article>
     </div>
 
     <div class="walkthrough english-walkthrough">
@@ -775,7 +754,7 @@
             </tbody>
           </table>
         </div>
-        <p class="data-note">The same question can yield a different gold answer under a different profile (e.g., rows 1 vs. 2: major-required courses for a CS-2019 vs. an AI-2025 student). Type labels follow the released dataset (formal / personal / verification); the paper text refers to "personal" queries as "first-person."</p>
+        <p class="data-note">The same question can yield a different gold answer under a different profile (e.g., rows 1 vs. 2: major-required courses for a CS-2019 vs. an AI-2025 student). Type labels follow the released dataset (formal / personal / verification); the paper text refers to "personal" queries as "first-person." Gold-source documents (curriculum tables, department notices) are drawn from the Korea University <a href="https://info.korea.ac.kr/" target="_blank" rel="noopener noreferrer">College of Informatics website</a>.</p>
       </article>
 
       <article class="data-example-card">
@@ -826,12 +805,12 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-two-thirds">
         <h2 class="title is-3">Grounded in Real Usage</h2>
-        <p class="subtitle is-5 section-lead">Track 2's open-ended advising benchmark is distilled from real hoBIT usage logs, not authored from scratch.</p>
+        <p class="subtitle is-5 section-lead">Track 2's open-ended advising benchmark is distilled from real usage logs of hoBIT's original rule-based service, not authored from scratch.</p>
       </div>
     </div>
     <figure class="image paper-figure wide-figure">
-      <img src="./static/images/figures/real_query_distribution.png" alt="Real query distribution across top advising categories, distilled from historical hoBIT usage logs.">
-      <figcaption class="figure-caption">797 in-scope query anchors distilled from 3,058 historical hoBIT usage logs, by category.</figcaption>
+      <img src="./static/images/figures/real_query_distribution.png" alt="Real query distribution across top advising categories, distilled from historical usage logs of hoBIT's original rule-based service.">
+      <figcaption class="figure-caption">797 in-scope query anchors distilled from 3,058 historical usage logs of hoBIT's original rule-based service, by category.</figcaption>
     </figure>
     <figure class="image paper-figure wide-figure">
       <img src="./static/images/figures/benchmark_distribution.png" alt="Benchmark category distribution compared against real user-log demand.">
@@ -1200,16 +1179,16 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Results</h2>
-        <p class="subtitle is-5 section-lead">proFILL outperforms profile-blind RAG baselines in both retrieval and grounded answer generation.</p>
+        <p class="subtitle is-5 section-lead">ProFILL outperforms profile-blind RAG baselines in both retrieval and grounded answer generation.</p>
       </div>
     </div>
 
     <figure class="image paper-figure wide-figure">
-      <img src="./static/images/figures/results_comparison.png" alt="Retrieval MRR and generation grounded correctness across BM25, Dense, Hybrid, HyDE, and proFILL under Oracle and Deployment settings.">
-      <figcaption class="figure-caption">proFILL leads every baseline in both retrieval MRR and grounded correctness, in both the Oracle (profile given) and Deployment (profile unknown) settings.</figcaption>
+      <img src="./static/images/figures/results_comparison.png" alt="Retrieval MRR and generation grounded correctness across BM25, Dense, Hybrid, HyDE, and ProFILL under Oracle and Deployment settings.">
+      <figcaption class="figure-caption">ProFILL leads every baseline in both retrieval MRR and grounded correctness, in both the Oracle (profile given) and Deployment (profile unknown) settings.</figcaption>
       <div class="figure-note compact">
         <h4>Reading the comparison</h4>
-        <p>proFILL and proFILL+rerank sit well above BM25, Dense, Hybrid, and HyDE baselines across both metrics, with the largest gains in the realistic Deployment setting where the student profile must be acquired during the conversation.</p>
+        <p>ProFILL and ProFILL+rerank sit well above BM25, Dense, Hybrid, and HyDE baselines across both metrics, with the largest gains in the realistic Deployment setting where the student profile must be acquired during the conversation.</p>
       </div>
     </figure>
 
@@ -1217,7 +1196,7 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
       <div class="result-item">
         <strong>Deployment MRR</strong>
         <span>0.593</span>
-        <p>proFILL achieves the strongest retrieval performance in the realistic setting where profiles must be acquired during interaction.</p>
+        <p>ProFILL achieves the strongest retrieval performance in the realistic setting where profiles must be acquired during interaction.</p>
       </div>
       <div class="result-item">
         <strong>Source Match</strong>
@@ -1259,7 +1238,7 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Human Evaluation Examples</h2>
-        <p class="subtitle is-5 section-lead">Students compared proFILL against conventional dense retrieval-based RAG on profile-dependent advising questions.</p>
+        <p class="subtitle is-5 section-lead">Students compared ProFILL against conventional dense retrieval-based RAG on profile-dependent advising questions.</p>
       </div>
     </div>
 
@@ -1307,7 +1286,7 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
         <h3>Blind Pairwise Study</h3>
         <p class="chart-note">Blind pairwise study with 48 students and 10 profile-dependent questions</p>
         <div class="bar-row">
-          <span>proFILL win</span>
+          <span>ProFILL win</span>
           <div class="bar-track"><div class="bar-fill" style="width: 85.3%;">85.3%</div></div>
         </div>
         <div class="bar-row">
@@ -1315,7 +1294,7 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
           <div class="bar-track"><div class="bar-fill muted" style="width: 14.7%;">14.7%</div></div>
         </div>
         <div class="eval-callout">
-          proFILL was preferred on all ten questions, with an aggregate non-tie win rate of 85.3%.
+          ProFILL was preferred on all ten questions, with an aggregate non-tie win rate of 85.3%.
         </div>
       </div>
     </div>

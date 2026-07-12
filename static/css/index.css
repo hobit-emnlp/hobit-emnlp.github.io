@@ -157,8 +157,10 @@ body {
 .step-number {
   display: grid;
   place-items: center;
+  flex: 0 0 32px;
   width: 32px;
   height: 32px;
+  min-width: 32px;
   border-radius: 50%;
   background: #072b67;
   color: #fff;
@@ -232,6 +234,8 @@ body {
   gap: 0.45rem;
   padding-inline: 0.65rem;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tab-panel {

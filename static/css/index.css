@@ -34,7 +34,7 @@ body {
   top: 0;
   z-index: 90;
   background: #ffffff;
-  padding: 0.6rem 1rem;
+  padding: 0.6rem 4.5rem; /* room on both sides so the absolute logo does not overlap */
 }
 
 .publication-links-bar .publication-links {
@@ -44,6 +44,34 @@ body {
   gap: 0.75rem;
   flex-wrap: wrap;
   margin: 0;
+}
+
+/* Small hoBIT brand mark shown on the left inside every sticky bar
+   (pill bar and 5-tab bar). Absolutely positioned so it does not disturb
+   the centered layout of the main content. */
+.sticky-brand {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #0a2c63;
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  text-decoration: none;
+  z-index: 1;
+}
+
+.sticky-brand:hover {
+  color: #072b67;
+}
+
+.sticky-brand img {
+  height: 1.6rem;
+  width: auto;
 }
 
 .brand-mark {
@@ -269,9 +297,14 @@ body {
   top: 0; /* navbar is no longer sticky; 5-tab pins straight to viewport top */
   z-index: 90;
   background: #ffffff;
-  padding-top: 0.6rem;
-  padding-bottom: 0.6rem;
+  padding: 0.6rem 4.5rem; /* room for the absolute logo on the left */
   box-shadow: 0 4px 12px -8px rgba(15, 35, 70, 0.18);
+}
+
+/* Skip the .sticky-brand (link) from occupying a grid column so the 5 tab
+   buttons still fill the grid evenly. */
+.main-tab-list > .sticky-brand {
+  grid-column: unset;
 }
 
 .main-tab-list .tab-button {

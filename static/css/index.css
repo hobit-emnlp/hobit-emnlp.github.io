@@ -626,6 +626,18 @@ body {
   color: #536172;
 }
 
+.version-note {
+  margin-top: 0.75rem;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid #eddfe2;
+  border-left: 4px solid #8b1030;
+  border-radius: 6px;
+  background: #fbf4f5;
+  color: #6a4048 !important;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
 .demo-tags {
   display: flex;
   flex-wrap: wrap;
@@ -1168,6 +1180,79 @@ body {
 
 pre {
   border-radius: 8px;
+}
+
+.prompt-block {
+  margin-top: 1.75rem;
+  padding: 1.25rem 1.4rem;
+  border: 1px solid #dfe7f1;
+  border-left: 4px solid #072b67;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(15, 35, 70, 0.05);
+  text-align: left;
+}
+
+.prompt-block.is-judge {
+  border-left-color: #8b1030;
+}
+
+.prompt-block h3 {
+  margin-bottom: 0.4rem;
+  color: #0a2c63;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.prompt-meta {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: #eaf1ff;
+  color: #0a2c63;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.prompt-block.is-judge .prompt-meta {
+  background: #fbe9ec;
+  color: #8b1030;
+}
+
+.prompt-desc {
+  margin-bottom: 0.75rem;
+  color: #536172;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.prompt-code {
+  max-height: 460px;
+  margin: 0;
+  padding: 1rem 1.1rem;
+  overflow-y: auto;
+  border-radius: 8px;
+  background: #0f1b2d;
+  color: #dbe6f5;
+  font-family: 'Courier New', monospace;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  text-align: left;
+}
+
+.prompt-note {
+  margin-top: 0.6rem;
+  margin-bottom: 0;
+  color: #6a7789;
+  font-size: 0.82rem;
+  font-style: italic;
+  line-height: 1.5;
 }
 
 @media screen and (max-width: 768px) {

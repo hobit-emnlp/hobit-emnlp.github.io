@@ -12,10 +12,22 @@ body {
 }
 
 .navbar {
-  position: static; /* not sticky — scroll naturally with the page */
-  top: auto;
+  /* Always pinned at the top so the hoBIT logo stays visible while the
+     user scrolls. Transparent background so that whichever sticky bar
+     sits below it at top:0 (pill bar or 5-tab menu) shows through, and
+     the navbar icon + that bar together read as a single horizontal row. */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: transparent;
   border-bottom: none;
   box-shadow: none;
+  pointer-events: none; /* let clicks fall through to the sticky bar below */
+}
+
+.navbar .navbar-brand,
+.navbar .navbar-brand * {
+  pointer-events: auto; /* re-enable interaction on the logo itself */
 }
 
 /* Sticky region that scopes .publication-links-bar. It ends right before the
@@ -30,13 +42,19 @@ body {
      work relative to the viewport while still being confined to this scope. */
 }
 
-/* Pill bar (Paper / Code / Video) — sticks at top while sticky-scope is visible. */
+/* Pill bar (Paper / Code / Video) — sticks at top: 0 (same y as the
+   sticky navbar). Its height is matched to the navbar (min 3.25rem) so
+   the icon (in the navbar) and the pills align on a single horizontal
+   row when both are pinned. The left/right padding is symmetric and
+   reserves space that overlaps the navbar icon area. */
 .publication-links-bar {
   position: sticky;
   top: 0;
   z-index: 90;
   background: #ffffff;
-  padding: 0.6rem 1rem;
+  min-height: 3.25rem;
+  padding: 0.35rem 9rem;
+  box-sizing: border-box;
 }
 
 .publication-links-bar .publication-links {
@@ -268,15 +286,20 @@ body {
   top: 0;
   z-index: 90;
   background: #ffffff;
+  min-height: 3.25rem;
   /* Break out of .container.is-max-widescreen so the sticky bar spans the
-     full viewport width like .publication-links-bar. Inner padding keeps
-     the 5 tab buttons within a comfortable centered zone on wide screens. */
+     FULL viewport width; inner padding then constrains the actual tab
+     buttons to the same width as .container.is-max-widescreen (1344px)
+     so there is no visible seam between the sticky bar and the tab panels
+     directly below it. Left/right padding also reserves room for the navbar
+     icon overlay so it never overlaps the leftmost tab button. */
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  padding: 0.6rem max(1rem, calc((100vw - 1200px) / 2));
+  padding: 0.35rem max(9rem, calc((100vw - 1344px) / 2));
   box-sizing: border-box;
-  box-shadow: 0 4px 12px -8px rgba(15, 35, 70, 0.18);
+  /* No border/shadow — keep the sticky bar visually seamless with the
+     tab panels rendered below it. */
 }
 
 .main-tab-list .tab-button {

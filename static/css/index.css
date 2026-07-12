@@ -35,8 +35,6 @@ body {
   z-index: 90;
   background: #ffffff;
   padding: 0.6rem 1rem;
-  border-bottom: 1px solid #e6ebf2;
-  box-shadow: 0 4px 12px -8px rgba(15, 35, 70, 0.18);
 }
 
 .publication-links-bar .publication-links {

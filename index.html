@@ -404,7 +404,14 @@
       <article class="transcript-card">
         <div class="chat-top"><img src="./static/images/icons/person.png" alt=""><span>Career</span></div>
         <p class="transcript-query">Which companies are recruiting these days?</p>
-        <p class="transcript-answer">Recent recruiting and briefing examples include:<br><br>- Hanwha Aerospace Campus Recruiting: March 24, 2026, 16:00-17:00, Hanwha Square Auditorium, with pre-registration available<br>- Johnson &amp; Johnson Vision Care AI Engineer Recruitment: Technology Leadership Development Program for AI, Data, IT, and Engineering majors<br>- National Intelligence Service Recruitment Briefing: March 17, 2026, 14:00-15:00, Hanwha Square B1 Auditorium, also open to undergraduates interested in AI-related fields</p>
+        <div class="transcript-answer transcript-answer-structured">
+          <p class="answer-lead">Recent recruiting and briefing examples include:</p>
+          <ul>
+            <li><strong>Hanwha Aerospace Campus Recruiting</strong><span>March 24, 2026, 16:00-17:00, Hanwha Square Auditorium; pre-registration available.</span></li>
+            <li><strong>Johnson &amp; Johnson Vision Care</strong><span>AI Engineer recruitment for AI, Data, IT, and Engineering majors.</span></li>
+            <li><strong>National Intelligence Service Briefing</strong><span>March 17, 2026, 14:00-15:00, Hanwha Square B1 Auditorium; open to undergraduates interested in AI-related fields.</span></li>
+          </ul>
+        </div>
         <p class="intent-label">Time-aware RAG</p>
       </article>
       <article class="transcript-card">
@@ -549,27 +556,6 @@
           <p>Retrieval uses both soft query augmentation and hard filtering over profile annotations.</p>
         </article>
       </div>
-    </div>
-
-    <div class="use-case-grid legacy-use-case-grid">
-      <article class="use-case-card">
-        <div class="use-case-icon"><img src="./static/images/icons/docs_3.png" alt=""></div>
-        <h3>Latest Notice Search</h3>
-        <p class="query">"Tell me recent announcements."</p>
-        <p>hoBIT searches dynamic notice documents, applies time-sensitive retrieval, and returns a concise summary with source-oriented grounding.</p>
-      </article>
-      <article class="use-case-card">
-        <div class="use-case-icon"><img src="./static/images/icons/docs_1.png" alt=""></div>
-        <h3>Scholarship Inquiry</h3>
-        <p class="query">"What are the scholarship application requirements?"</p>
-        <p>The system retrieves scholarship-specific documents and explains eligibility, required materials, and application timing.</p>
-      </article>
-      <article class="use-case-card is-emphasis">
-        <div class="use-case-icon"><img src="./static/images/icons/student_2.png" alt=""></div>
-        <h3>Adaptive Profiling</h3>
-        <p class="query">"Tell me my required major courses."</p>
-        <p>When profile fields are missing, hoBIT asks targeted follow-up questions and then filters evidence by department, cohort, and major type.</p>
-      </article>
     </div>
 
     <div class="walkthrough legacy-walkthrough">

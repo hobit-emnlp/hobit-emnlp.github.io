@@ -529,6 +529,42 @@ body {
   width: 100%;
 }
 
+.transcript-answer-structured {
+  padding: 0.85rem;
+}
+
+.transcript-answer-structured .answer-lead {
+  margin-bottom: 0.65rem;
+  color: #172b4d;
+  font-weight: 800;
+}
+
+.transcript-answer-structured ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.transcript-answer-structured li {
+  padding: 0.65rem 0;
+  border-top: 1px solid #dfe7f1;
+}
+
+.transcript-answer-structured li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.transcript-answer-structured strong,
+.transcript-answer-structured span {
+  display: block;
+}
+
+.transcript-answer-structured strong {
+  margin-bottom: 0.25rem;
+  color: #0a2c63;
+}
+
 .chat-card {
   display: flex;
   min-height: 285px;

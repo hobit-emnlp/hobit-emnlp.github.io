@@ -22,7 +22,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item brand-mark" href="#">
-      <img src="./static/images/icons/hobit-avatar.png" alt="hoBIT icon">
+      <img src="./static/images/icons/chatbot.png" alt="hoBIT icon">
       <span>hoBIT</span>
     </a>
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
@@ -33,6 +33,20 @@
   </div>
   <div class="navbar-menu">
     <div class="navbar-start" style="flex-grow: 1; justify-content: center;"></div>
+    <div class="navbar-end nav-quick-links">
+      <a href="./static/pdf/hobit-paper.pdf" class="button is-small is-rounded is-dark nav-quick-link">
+        <span class="icon is-small"><i class="fas fa-file-pdf"></i></span>
+        <span>Paper</span>
+      </a>
+      <a href="https://github.com/hobit-emnlp/hobit-emnlp" class="button is-small is-rounded is-dark nav-quick-link">
+        <span class="icon is-small"><i class="fab fa-github"></i></span>
+        <span>Code</span>
+      </a>
+      <a href="https://www.youtube.com/watch?v=IU4EcYIszZM&feature=youtu.be" target="_blank" rel="noopener" class="button is-small is-rounded is-dark nav-quick-link">
+        <span class="icon is-small"><i class="fab fa-youtube"></i></span>
+        <span>Video</span>
+      </a>
+    </div>
   </div>
 </nav>
 
@@ -91,7 +105,7 @@
     <div class="hero-body">
       <div class="hero-figure-wrap">
         <img class="teaser-image" src="./static/images/figures/hobit_intro.png?v=20260711-intro-v4" alt="Profile-dependent advising questions require different evidence for different students.">
-        <!-- <img class="floating-icon icon-bot" src="./static/images/icons/hobit-avatar.png" alt=""> -->
+        <!-- <img class="floating-icon icon-bot" src="./static/images/icons/chatbot.png" alt=""> -->
       </div>
       <h2 class="subtitle has-text-centered">
         <span class="dnerf">proFILL</span> extends hoBIT with profile-aware indexing and on-demand adaptive profiling for university academic advising.
@@ -126,7 +140,7 @@
       </div>
       <div class="column">
         <div class="feature-card">
-          <img src="./static/images/icons/hobit-avatar.png" alt="">
+          <!-- <img src="./static/images/icons/chatbot.png" alt=""> -->
           <h3>Adaptive profiling keeps interaction light</h3>
           <p>proFILL acquires only the attributes needed for the current query, then updates the session profile on demand.</p>
         </div>
@@ -326,7 +340,7 @@
   </div>
 </section>
 
-<section class="section is-light" id="runtime">
+<!-- <section class="section is-light" id="runtime">
   <div class="container is-max-widescreen">
     <div class="columns is-centered has-text-centered">
       <div class="column is-two-thirds">
@@ -343,7 +357,7 @@
       </div>
     </figure>
   </div>
-</section>
+</section> -->
 
         </div>
 
@@ -360,19 +374,19 @@
 
     <div class="capability-transcripts">
       <article class="transcript-card">
-        <div class="chat-top"><img src="./static/images/icons/hobit-avatar.png" alt=""><span>Greeting</span></div>
+        <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>Greeting</span></div>
         <p class="transcript-query">Hi! What kind of chatbot are you?</p>
         <p class="transcript-answer">Hello. I am hoBIT, an academic information chatbot for students in the College of Informatics at Korea University. I can help with campus life, announcements, careers, advising, and academic questions.</p>
         <p class="intent-label">Intent: greeting</p>
       </article>
       <article class="transcript-card">
-        <div class="chat-top"><img src="./static/images/icons/hobit-avatar.png" alt=""><span>Ability</span></div>
+        <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>Ability</span></div>
         <p class="transcript-query">What kinds of questions can you answer?</p>
         <p class="transcript-answer">hoBIT can handle FAQ, campus life, academic policies, career and advising information, announcements, and profile-based academic questions.</p>
         <p class="intent-label">Intent: ability</p>
       </article>
       <article class="transcript-card">
-        <div class="chat-top"><img src="./static/images/icons/hobit-avatar.png" alt=""><span>FAQ</span></div>
+        <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>FAQ</span></div>
         <p class="transcript-query">Show me the frequently asked questions.</p>
         <figure class="transcript-shot">
           <img src="./static/images/demos/faq-list.png?v=20260712-faq-list" alt="hoBIT FAQ list screen showing frequently asked questions in the College of Informatics service.">
@@ -380,7 +394,7 @@
         <p class="intent-label">Intent: faq</p>
       </article>
       <article class="transcript-card">
-        <div class="chat-top"><img src="./static/images/icons/hobit-avatar.png" alt=""><span>Small Talk</span></div>
+        <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>Small Talk</span></div>
         <p class="transcript-query">Studying feels really hard today.</p>
         <p class="transcript-answer">When studying or schedules feel overwhelming, it is okay to take a short break. If you need help with academic or campus-life information from the College of Informatics, I can help right away.</p>
         <p class="intent-label">Intent: small talk</p>
@@ -427,25 +441,25 @@
 
     <div class="capability-grid legacy-capability-grid">
       <div class="chat-card">
-        <div class="chat-top"><img src="./static/images/icons/hobit-avatar.png" alt=""><span>Greeting</span></div>
+        <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>Greeting</span></div>
         <div class="bubble user">Hi! What kind of chatbot are you?</div>
         <div class="bubble bot">Hello. I am hoBIT, an academic information chatbot for the College of Informatics.</div>
         <p class="intent-label">Intent: greeting</p>
       </div>
       <div class="chat-card">
-        <div class="chat-top"><img src="./static/images/icons/hobit-avatar.png" alt=""><span>FAQ</span></div>
+        <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>FAQ</span></div>
         <div class="bubble user">Where is the College of Informatics administration office?</div>
         <div class="bubble bot">hoBIT checks the FAQ and provides the office location and operating information.</div>
         <p class="intent-label">Intent: faq</p>
       </div>
       <div class="chat-card">
-        <div class="chat-top"><img src="./static/images/icons/hobit-avatar.png" alt=""><span>Ability</span></div>
+        <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>Ability</span></div>
         <div class="bubble user">What kinds of questions can you answer?</div>
         <div class="bubble bot">I can help with announcements, scholarships, careers, campus life, major requirements, and graduation requirements.</div>
         <p class="intent-label">Intent: ability</p>
       </div>
       <div class="chat-card">
-        <div class="chat-top"><img src="./static/images/icons/hobit-avatar.png" alt=""><span>Small Talk</span></div>
+        <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>Small Talk</span></div>
         <div class="bubble user">Studying feels really hard today.</div>
         <div class="bubble bot">It is okay to take a short break. If you need academic information, I can help right away.</div>
         <p class="intent-label">Intent: small talk</p>

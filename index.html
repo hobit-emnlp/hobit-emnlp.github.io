@@ -22,7 +22,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item brand-mark" href="#">
-      <img src="./static/images/icons/chatbot.png" alt="hoBIT icon">
+      <img src="./static/images/icons/profile.png" alt="hoBIT icon">
       <span>hoBIT</span>
     </a>
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
@@ -33,22 +33,10 @@
   </div>
   <div class="navbar-menu">
     <div class="navbar-start" style="flex-grow: 1; justify-content: center;"></div>
-    <div class="navbar-end nav-quick-links">
-      <a href="./static/pdf/hobit-paper.pdf" class="button is-small is-rounded is-dark nav-quick-link">
-        <span class="icon is-small"><i class="fas fa-file-pdf"></i></span>
-        <span>Paper</span>
-      </a>
-      <a href="https://github.com/hobit-emnlp/hobit-emnlp" class="button is-small is-rounded is-dark nav-quick-link">
-        <span class="icon is-small"><i class="fab fa-github"></i></span>
-        <span>Code</span>
-      </a>
-      <a href="https://www.youtube.com/watch?v=IU4EcYIszZM&feature=youtu.be" target="_blank" rel="noopener" class="button is-small is-rounded is-dark nav-quick-link">
-        <span class="icon is-small"><i class="fab fa-youtube"></i></span>
-        <span>Video</span>
-      </a>
-    </div>
   </div>
 </nav>
+
+<div class="sticky-scope">
 
 <section class="hero publication-header">
   <div class="hero-body">
@@ -73,32 +61,34 @@
           <div class="is-size-5 publication-authors">
             <span class="author-block">EMNLP 2026 Demo Submission</span>
           </div>
-
-          <div class="publication-links">
-            <span class="link-block">
-              <a href="./static/pdf/hobit-paper.pdf" class="external-link button is-normal is-rounded is-dark">
-                <span class="icon"><i class="fas fa-file-pdf"></i></span>
-                <span>Paper</span>
-              </a>
-            </span>
-            <span class="link-block">
-              <a href="https://github.com/hobit-emnlp/hobit-emnlp" class="external-link button is-normal is-rounded is-dark">
-                <span class="icon"><i class="fab fa-github"></i></span>
-                <span>Code</span>
-              </a>
-            </span>
-            <span class="link-block">
-              <a href="https://www.youtube.com/watch?v=IU4EcYIszZM&feature=youtu.be" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark">
-                <span class="icon"><i class="fab fa-youtube"></i></span>
-                <span>Video</span>
-              </a>
-            </span>
-          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<div class="publication-links-bar">
+  <div class="publication-links">
+    <span class="link-block">
+      <a href="./static/pdf/hobit-paper.pdf" class="external-link button is-normal is-rounded is-dark">
+        <span class="icon"><i class="fas fa-file-pdf"></i></span>
+        <span>Paper</span>
+      </a>
+    </span>
+    <span class="link-block">
+      <a href="https://github.com/hobit-emnlp/hobit-emnlp" class="external-link button is-normal is-rounded is-dark">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>Code</span>
+      </a>
+    </span>
+    <span class="link-block">
+      <a href="https://www.youtube.com/watch?v=IU4EcYIszZM&feature=youtu.be" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark">
+        <span class="icon"><i class="fab fa-youtube"></i></span>
+        <span>Video</span>
+      </a>
+    </span>
+  </div>
+</div>
 
 <section class="hero teaser">
   <div class="container is-max-widescreen">
@@ -187,6 +177,9 @@
     </div>
   </div>
 </section>
+
+</div>
+<!-- /sticky-scope: publication-links-bar releases here; 5-tab takes over below -->
 
 <section class="section" id="content-tabs">
   <div class="container is-max-widescreen">

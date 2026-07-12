@@ -5,43 +5,31 @@ body {
 }
 
 .navbar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: #ffffff;
   border-bottom: 1px solid #e6ebf2;
   box-shadow: 0 1px 0 rgba(10, 10, 10, 0.04);
 }
 
-/* Quick links inside sticky navbar (Paper / Code / Video) */
-.nav-quick-links {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding-right: 0.75rem;
+/* Sticky region that scopes .publication-links-bar. It ends right before the
+   Project Overview section so the sticky pill bar releases as the 5-tab menu
+   takes over. */
+.sticky-scope {
+  position: relative;
 }
 
-.nav-quick-link {
-  font-family: 'Google Sans', sans-serif;
-  font-weight: 700;
+/* Pill bar (Paper / Code / Video) — sticks at top while sticky-scope is visible. */
+.publication-links-bar {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  background: #ffffff;
+  padding: 0.6rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid #e6ebf2;
+  box-shadow: 0 4px 12px -8px rgba(15, 35, 70, 0.18);
 }
 
-/* Keep navbar menu visible on narrow screens so quick links do not hide behind the burger */
-@media screen and (max-width: 1023px) {
-  .navbar-menu {
-    display: flex !important;
-    align-items: center;
-    background: transparent;
-    box-shadow: none;
-    padding: 0;
-  }
-  .navbar-menu > .navbar-start {
-    display: none;
-  }
-  .nav-quick-links {
-    flex-wrap: wrap;
-    justify-content: flex-end;
-  }
+.publication-links-bar .publication-links {
+  margin-top: 0;
 }
 
 .brand-mark {
@@ -264,7 +252,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   position: sticky;
-  top: 3.25rem; /* below the sticky navbar (approx. Bulma navbar height 52px) */
+  top: 0; /* navbar is no longer sticky; 5-tab pins straight to viewport top */
   z-index: 90;
   background: #ffffff;
   padding-top: 0.6rem;

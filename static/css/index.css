@@ -12,8 +12,8 @@ body {
 }
 
 .navbar {
-  border-bottom: 1px solid #e6ebf2;
-  box-shadow: 0 1px 0 rgba(10, 10, 10, 0.04);
+  border-bottom: none;
+  box-shadow: none;
 }
 
 /* Sticky region that scopes .publication-links-bar. It ends right before the

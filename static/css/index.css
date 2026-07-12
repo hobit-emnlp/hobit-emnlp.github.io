@@ -516,6 +516,19 @@ body {
   line-height: 1.5;
 }
 
+.transcript-shot {
+  margin: 0 0 0.75rem;
+  overflow: hidden;
+  border: 1px solid #dfe7f1;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.transcript-shot img {
+  display: block;
+  width: 100%;
+}
+
 .chat-card {
   display: flex;
   min-height: 285px;

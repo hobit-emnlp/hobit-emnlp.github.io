@@ -12,6 +12,8 @@ body {
 }
 
 .navbar {
+  position: static; /* not sticky — scroll naturally with the page */
+  top: auto;
   border-bottom: none;
   box-shadow: none;
 }

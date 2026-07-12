@@ -478,8 +478,8 @@
     <div class="demo-showcase">
       <div class="demo-copy">
         <p class="eyebrow">Captured hoBIT Runs</p>
-        <h3>Real hoBIT screenshots with English translations</h3>
-        <p>These screenshots come from the live hoBIT interface. The UI itself stays in Korean, so each one is paired with an English translation of the query and answer for readers of this paper.</p>
+        <h3>Real Conversations from the Deployed System</h3>
+        <p>Each screenshot is captured directly from the deployed hoBIT service, showing how real student queries are handled end-to-end. Since the interface itself is in Korean, we annotate each capture with the query and answer for readers of this paper.</p>
         <div class="demo-tags">
           <span>Greeting</span><span>School life</span><span>Latest notices</span><span>Dual asking</span>
         </div>
@@ -503,16 +503,16 @@
 
     <div class="actual-demo-strip">
       <figure>
-        <img src="./static/images/demos/english-latest-notices.png" alt="Actual hoBIT UI screenshot with an English latest-announcements query and answer.">
-        <figcaption>Latest notices: English query and answer</figcaption>
+        <img src="./static/images/demos/english-latest-notices.png" alt="Actual hoBIT UI screenshot showing a latest-announcements query and answer.">
+        <figcaption>Latest notices retrieval</figcaption>
       </figure>
       <figure>
-        <img src="./static/images/demos/english-career-recruiting.png" alt="Actual hoBIT UI screenshot with an English recruiting query and answer.">
-        <figcaption>Career retrieval: English query and answer</figcaption>
+        <img src="./static/images/demos/english-career-recruiting.png" alt="Actual hoBIT UI screenshot showing a recruiting query and answer.">
+        <figcaption>Career retrieval</figcaption>
       </figure>
       <figure>
-        <img src="./static/images/demos/english-profile-advising.png" alt="Actual hoBIT UI screenshot with an English profile-based graduation query and answer.">
-        <figcaption>Profile-based advising: English query and answer</figcaption>
+        <img src="./static/images/demos/english-profile-advising.png" alt="Actual hoBIT UI screenshot showing a profile-based graduation query and answer.">
+        <figcaption>Profile-based advising</figcaption>
       </figure>
     </div>
 
@@ -614,11 +614,11 @@
       </div>
     </div>
     <figure class="image paper-figure wide-figure">
-      <img src="./static/images/figures/hobit_user_interface.png" alt="hoBIT user interface walkthrough showing cold start, adaptive profiling, profile update, and profile reuse.">
-      <figcaption class="figure-caption">Paper Figure 4: cold start, adaptive profiling, profile update, and profile reuse across later questions.</figcaption>
+      <img src="./static/images/figures/hobit_user_interface.png" alt="hoBIT user interface walkthrough comparing query-driven only retrieval, query-driven profiling with evidence-driven re-retrieval, and adaptive profiling.">
+      <figcaption class="figure-caption">Paper Figure 4: landing page, query-driven-only retrieval, query-driven profiling with evidence-driven re-retrieval, and adaptive profiling.</figcaption>
       <div class="figure-note">
         <h4>Interaction-level evidence</h4>
-        <p>This figure connects the system design to the student-facing experience. The chatbot does not expose retrieval internals; it asks targeted profile questions only when needed, stores the answer as session context, and reuses that profile in later advising turns.</p>
+        <p>This figure connects the system design to the student-facing experience. The chatbot does not expose retrieval internals; it asks targeted profile questions only when needed, re-retrieves with the added evidence, and reuses the resulting profile in later advising turns.</p>
       </div>
     </figure>
   </div>
@@ -816,6 +816,25 @@
   </div>
 </section>
 
+<section class="section" id="data-grounding">
+  <div class="container is-max-widescreen">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h2 class="title is-3">Grounded in Real Usage</h2>
+        <p class="subtitle is-5 section-lead">Track 2's open-ended advising benchmark is distilled from real hoBIT usage logs, not authored from scratch.</p>
+      </div>
+    </div>
+    <figure class="image paper-figure wide-figure">
+      <img src="./static/images/figures/real_query_distribution.png" alt="Real query distribution across top advising categories, distilled from historical hoBIT usage logs.">
+      <figcaption class="figure-caption">797 in-scope query anchors distilled from 3,058 historical hoBIT usage logs, by category.</figcaption>
+    </figure>
+    <figure class="image paper-figure wide-figure">
+      <img src="./static/images/figures/benchmark_distribution.png" alt="Benchmark category distribution compared against real user-log demand.">
+      <figcaption class="figure-caption">The open-ended benchmark's category distribution tracks real user-log demand (Pearson r = 0.65; category coverage 14/15; semantic coverage 82.4% at &theta;=0.5).</figcaption>
+    </figure>
+  </div>
+</section>
+
         </div>
 
         <div class="tab-panel site-tab-panel" id="tab-evaluation" role="tabpanel" aria-labelledby="tab-evaluation-button" hidden>
@@ -856,17 +875,25 @@
       </div>
       <div class="column">
         <figure class="image paper-figure">
-          <img src="./static/images/figures/appendix_ablation.png" alt="Ablation and dataset distribution figures for hoBIT.">
-          <figcaption class="figure-caption">Ablation summary: both soft query augmentation and hard filtering are critical for proFILL.</figcaption>
+          <img src="./static/images/figures/results_comparison.png" alt="Retrieval MRR and generation grounded correctness across BM25, Dense, Hybrid, HyDE, and proFILL under Oracle and Deployment settings.">
+          <figcaption class="figure-caption">proFILL leads every baseline in both retrieval MRR and grounded correctness, in both the Oracle (profile given) and Deployment (profile unknown) settings.</figcaption>
           <div class="figure-note compact">
-            <h4>Reading the ablation</h4>
-            <p>Removing either the soft prefix or the hard filter degrades retrieval performance, and disabling evidence-driven re-retrieval also hurts performance.</p>
+            <h4>Reading the comparison</h4>
+            <p>proFILL and proFILL+rerank sit well above BM25, Dense, Hybrid, and HyDE baselines across both metrics, with the largest gains in the realistic Deployment setting where the student profile must be acquired during the conversation.</p>
           </div>
         </figure>
       </div>
     </div>
     <figure class="image paper-figure wide-figure">
-      <img src="./static/images/figures/appendix_tsne.png" alt="t-SNE visualization showing test set overlap with real user anchor regions.">
+      <img src="./static/images/figures/results_breakdown.png" alt="Category-level breakdown for Profile-Grounded QA, Open-ended Advising, and Intent Classification.">
+      <figcaption class="figure-caption">Category-level breakdown: Profile-Grounded QA (MRR), Open-ended Advising (Top-3 Precision / Answer Completeness), and Intent Classification (F1) by category.</figcaption>
+      <div class="figure-note">
+        <h4>Where performance varies</h4>
+        <p>Deployment MRR is highest for well-defined categories like GenEd-required and lowest for cross-cutting cases like double-major credits; open-ended advising completeness stays high across categories while precision varies more; intent classification is strong across all five intents (overall accuracy 0.960).</p>
+      </div>
+    </figure>
+    <figure class="image paper-figure wide-figure">
+      <img src="./static/images/figures/tsne_overlap.png" alt="t-SNE visualization showing test set overlap with real user anchor regions.">
       <figcaption class="figure-caption">Supplementary visualization: the synthetic/open-ended evaluation space overlaps with real user-log anchor regions.</figcaption>
       <div class="figure-note">
         <h4>Evaluation coverage</h4>

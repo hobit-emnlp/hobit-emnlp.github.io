@@ -1,3 +1,10 @@
+/* Override Bulma's `html { overflow-x: hidden }` which silently disables
+   position: sticky in some Chromium/WebKit builds. We keep vertical scroll on
+   html (the sticky ancestor) and let the body flow normally. */
+html {
+  overflow-x: clip;
+}
+
 body {
   color: #1f2633;
   font-family: 'Noto Sans', sans-serif;
@@ -13,7 +20,12 @@ body {
    Project Overview section so the sticky pill bar releases as the 5-tab menu
    takes over. */
 .sticky-scope {
-  position: relative;
+  display: block;
+  /* NO position: relative — it would become the sticky child's containing
+     block and confine sticking to the wrapper coordinate system, which
+     breaks in some browsers when the wrapper's height stacks tall content.
+     Keeping this as a plain block-level container is enough for sticky to
+     work relative to the viewport while still being confined to this scope. */
 }
 
 /* Pill bar (Paper / Code / Video) — sticks at top while sticky-scope is visible. */
@@ -23,13 +35,17 @@ body {
   z-index: 90;
   background: #ffffff;
   padding: 0.6rem 1rem;
-  text-align: center;
   border-bottom: 1px solid #e6ebf2;
   box-shadow: 0 4px 12px -8px rgba(15, 35, 70, 0.18);
 }
 
 .publication-links-bar .publication-links {
-  margin-top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin: 0;
 }
 
 .brand-mark {

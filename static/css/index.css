@@ -221,9 +221,16 @@ body {
 }
 
 .main-tab-list {
-  max-width: 1280px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  max-width: none;
   margin-left: auto;
   margin-right: auto;
+}
+
+.main-tab-list .tab-button {
+  gap: 0.45rem;
+  padding-inline: 0.65rem;
+  white-space: nowrap;
 }
 
 .tab-panel {
@@ -1066,7 +1073,9 @@ body {
 
 .result-list {
   display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.8rem;
+  margin-bottom: 1.5rem;
 }
 
 .result-item {
@@ -1197,6 +1206,14 @@ pre {
   border-left-color: #8b1030;
 }
 
+.prompt-block.is-deterministic {
+  border-left-color: #0d7a5f;
+}
+
+.prompt-block.is-reference {
+  border-left-color: #7a5b1a;
+}
+
 .prompt-block h3 {
   margin-bottom: 0.4rem;
   color: #0a2c63;
@@ -1223,11 +1240,34 @@ pre {
   color: #8b1030;
 }
 
+.prompt-block.is-deterministic .prompt-meta {
+  background: #e4f4ee;
+  color: #0d7a5f;
+}
+
+.prompt-block.is-reference .prompt-meta {
+  background: #f6efdd;
+  color: #7a5b1a;
+}
+
 .prompt-desc {
   margin-bottom: 0.75rem;
   color: #536172;
   font-size: 0.92rem;
   line-height: 1.55;
+}
+
+.prompt-lang + .prompt-lang {
+  margin-top: 0.85rem;
+}
+
+.prompt-lang-label {
+  margin-bottom: 0.3rem;
+  color: #8592a3;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .prompt-code {
@@ -1246,6 +1286,15 @@ pre {
   text-align: left;
 }
 
+.prompt-code-en {
+  background: #1b2a41;
+  color: #c3d2e6;
+}
+
+.prompt-code-rule {
+  max-height: none;
+}
+
 .prompt-note {
   margin-top: 0.6rem;
   margin-bottom: 0;
@@ -1253,6 +1302,26 @@ pre {
   font-size: 0.82rem;
   font-style: italic;
   line-height: 1.5;
+}
+
+.metric-summary-wrap {
+  margin-top: 1.75rem;
+  padding: 1rem;
+  border: 1px solid #dfe7f1;
+  border-radius: 8px;
+  background: #fff;
+  overflow-x: auto;
+}
+
+.metric-summary-table {
+  min-width: 720px;
+  margin-bottom: 0;
+  font-size: 0.85rem;
+}
+
+.metric-summary-table th {
+  color: #0a2c63;
+  font-family: 'Google Sans', sans-serif;
 }
 
 @media screen and (max-width: 768px) {
@@ -1280,6 +1349,7 @@ pre {
   .routing-figure-grid,
   .routing-split,
   .walkthrough-steps,
+  .result-list,
   .eval-layout,
   .data-summary-grid,
   .data-example-grid,

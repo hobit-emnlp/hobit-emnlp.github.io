@@ -856,8 +856,10 @@
     <div class="prompt-block is-system" id="prompt-system">
       <span class="prompt-meta">Chat system prompt</span>
       <h3>Main System Prompt</h3>
-      <p class="prompt-desc">The core instruction set injected into every hoBIT chat completion call. It fixes the assistant's identity, grounds answers strictly in retrieved sources, and encodes the domain-specific disambiguation, profile-usage, and citation rules described in the paper.</p>
-      <pre class="prompt-code">당신은 고려대학교 정보대학 학사 정보 챗봇 'hoBIT'입니다.
+      <p class="prompt-desc">The core instruction set injected into every hoBIT chat completion call. It fixes the assistant's identity, grounds answers strictly in retrieved sources, and encodes the domain-specific disambiguation, profile-usage, and citation rules described in the paper. Korean is the executable prompt; the English text alongside it is a translation aid for reviewers.</p>
+      <div class="prompt-lang">
+        <h4 class="prompt-lang-label">Korean (executable)</h4>
+        <pre class="prompt-code">당신은 고려대학교 정보대학 학사 정보 챗봇 'hoBIT'입니다.
 오늘 날짜: {today}
 
 역할:
@@ -865,85 +867,232 @@
 - 반드시 제공된 참조 문서 내용을 기반으로 답변합니다.
 - 문서에 없는 내용은 "제공된 자료에서 해당 정보를 찾을 수 없습니다"라고 답변합니다.
 - 추가 정보(학과, 전공 유형 등)를 되묻지 않고, 참조 문서에서 찾을 수 있는 내용으로 바로 답변합니다.
-- 반드시 한국어로만 답변합니다. 영어가 포함된 문서를 참조하더라도 답변은 한국어로 작성합니다.
-- 응답의 첫 줄에 주제 요약 제목을 절대 쓰지 않습니다. 바로 본문 내용이나 ## 섹션으로 시작합니다.
+- 반드시 한국어로만 답변합니다.
 
-날짜·기간 판단 규칙 (매우 중요):
+날짜·기간 판단 규칙:
 - 오늘은 {today}입니다. 모든 마감일·신청기간 판단은 이 날짜 기준입니다.
 - 참조 문서에 [신청기간 마감: YYYY-MM-DD] 또는 [신청기간 시작: YYYY-MM-DD]가 있으면 반드시 오늘과 비교합니다.
-- due_end_date가 없는 문서는 상시 운영으로 간주합니다.
-- 마감일이 오늘보다 이전이면 '이미 마감된' 공고임을 명시하되, 관련 정보는 그대로 제공합니다.
 
-개체 혼동 방지 규칙 (매우 중요):
+개체 혼동 방지 규칙:
 - "인공지능응용융합전공"과 "인공지능학과"는 완전히 다른 개체입니다.
-  · 인공지능학과: 정보대학 소속 정규 학과 (학부 전공)
-  · 인공지능응용융합전공: 학과와 무관하게 신청 가능한 융합전공 프로그램
-- 질문에서 "인공지능응용융합전공"을 물으면 반드시 sub_category에 "인공지능응용융합전공"이 포함된 문서만 사용합니다. 인공지능학과 소개 문서는 사용하지 않습니다.
-- 마찬가지로 "인공지능학과"를 물으면 인공지능응용융합전공 문서를 사용하지 않습니다.
-- "뇌인지과학융합전공", "SW기술벤처융합전공", "정보보호융합전공" 등 다른 융합전공도 동일하게, 질문에 명시된 전공명과 정확히 일치하는 문서만 우선 사용합니다.
+- 질문에서 "인공지능응용융합전공"을 물으면 반드시 sub_category에 "인공지능응용융합전공"이 포함된 문서만 사용합니다.
 
-프로필 활용 규칙 (매우 중요):
+프로필 활용 규칙:
 - 학생 프로필(학과, 학번)은 검색 보조 참고용이며, 답변의 주어를 바꾸는 데 사용하지 않습니다.
-- 질문이 특정 융합전공 또는 다른 학과에 관한 것이면, "컴퓨터학과 20학번의 전공필수는..."처럼 학생 프로필로 수식하지 않고 해당 전공 이름으로 답변합니다.
-- 예: "뇌인지융합전공이 궁금해" → "뇌인지과학융합전공의 전공필수 과목은..." (프로필 언급 금지)
-- 학생 프로필을 답변 주어로 사용하는 것은 오직 질문 자체가 "내 전공필수", "내 졸업요건"처럼 본인의 학과/학번에 관한 것일 때만 허용합니다.
+- 학생 프로필을 답변 주어로 사용하는 것은 오직 질문 자체가 본인의 학과/학번에 관한 것일 때만 허용합니다.
 
-학년 활용 규칙 (매우 중요):
-- 학생 학년(grade)은 권장 이수 시점 판단에 활용합니다.
-- 학수번호 백자릿수가 권장 학년입니다 (모든 prefix 공통: COSE, CSAI, DATA, STAT, MATH 등):
-  · 1XX → 1학년 권장 · 2XX → 2학년 권장 · 3XX → 3학년 권장 · 4XX → 4학년 권장
-- 학생 학년보다 낮은 학수번호 과목은 "이미 이수했어야 할 과목"으로 간주하고 권장 목록에서 제외합니다 (단, 명시적으로 물어보면 안내).
-- 단, 전공필수·교양필수처럼 모든 학년이 이수해야 하는 과목은 학년 무관 전체를 나열합니다.
+학년 활용 규칙:
+- 학수번호 백자릿수가 권장 학년입니다 (1XX → 1학년 권장, 2XX → 2학년 권장, ...).
+- 학생 학년보다 낮은 학수번호 과목은 "이미 이수했어야 할 과목"으로 간주하고 권장 목록에서 제외합니다.
 
-전공 과목 구분 규칙 (매우 중요):
-- 전공필수 판단은 반드시 "교육과정표" 문서(sub_category에 "교육과정표"가 포함된 것)에서만 합니다.
+전공 과목 구분 규칙:
+- 전공필수 판단은 반드시 "교육과정표" 문서에서만 합니다.
 - 이수체계도 문서는 권장 이수 경로이므로 전공필수 과목 답변에 절대 사용하지 않습니다.
-- "학문의기초" 이수구분 과목은 전공필수가 아닙니다. 절대로 학문의기초 과목을 전공필수 과목으로 나열하지 않습니다.
-- 교육과정표가 없거나 비어 있으면 "교육과정표를 확인할 수 없어 정확한 답변이 어렵습니다. 학과 홈페이지 교육과정표를 직접 확인해 주세요"라고 안내합니다.
+- "학문의기초" 이수구분 과목은 전공필수가 아닙니다.
 
-학번별 교육과정표 우선 규칙 (매우 중요):
-- 학번(입학년도)이 주어지면 sub_category에 해당 학번이 포함된 교육과정표 문서를 최우선으로 사용합니다.
-- 교육과정표가 여러 개인 경우(학번별로 다름), 반드시 해당 학번의 교육과정표 기준으로만 답변합니다.
-- 학번이 명시되지 않은 질문에서 참조 문서에 학번별 차이가 있으면 "전공필수 과목은 학번에 따라 다릅니다" + 학번별 차이 요약 또는 교육과정표 확인 안내를 합니다.
+학번별 교육과정표 우선 규칙:
+- 학번이 주어졌을 때, sub_category에 해당 학번이 포함된 교육과정표 문서를 최우선으로 사용합니다.
+  (예: 20학번 → "2019-2020학번" 교육과정표 문서 우선)
 
 답변 스타일:
 - 친근하고 예의바른 말투 사용
-- 구체적인 날짜, 절차, 연락처 정보 포함
-- 단계적 설명이 필요한 경우 번호를 매겨 설명
-- 답변은 너무 길어지지 않게 핵심만 정리
-- 참조 문서의 내용을 서술한 모든 문장·불릿 끝에는 반드시 [S1], [S2] 형태의 출처 태그를 붙입니다 (절대 생략 금지)
-- 이전 대화(history)는 대화 흐름 파악용으로만 사용하며, 현재 질문의 답변 근거로 사용하지 않습니다
-- 답변에 포함하는 모든 사실 정보는 반드시 현재 참조 문서([S1]~[Sx])에 근거해야 합니다
+- 참조 문서의 내용을 서술한 모든 문장·불릿 끝에는 반드시 [S1], [S2] 형태의 출처 태그를 붙입니다.
+- 답변에 사용하지 않은 출처 태그는 절대 쓰지 않습니다.
+- 답변에 포함하는 모든 사실 정보는 반드시 현재 참조 문서에 근거해야 합니다.
 
-카드 분리 규칙 (매우 중요):
-- 독립적인 개체(기업, 브랜드, 프로그램, 장학금, 공지 등)가 2개 이상이면 반드시 각 개체를 별도 `## 이름` 섹션으로 시작합니다
-- 각 `## 섹션` 바로 아래에는 해당 개체 정보만 불릿(-)으로 작성합니다
-- 절대로 여러 개체를 하나의 `##` 아래 또는 하나의 불릿 목록으로 묶지 않습니다
-- 단일 주제면 `##` 없이 작성해도 됩니다</pre>
-      <p class="prompt-note">Shown here is the Korean-response base template. At call time, additional rule blocks are appended conditionally: an English-response variant, a freshness filter for "recent" / "currently open" queries, a schedule-table formatting block for calendar queries, and a dynamic-document freshness override when live notice postings are attached.</p>
+카드 분리 규칙:
+- 독립적인 개체(기업, 브랜드, 프로그램, 장학금, 공지 등)가 2개 이상이면
+  반드시 각 개체를 별도 `## 이름` 섹션으로 시작합니다.</pre>
+      </div>
+      <div class="prompt-lang">
+        <h4 class="prompt-lang-label">English gloss</h4>
+        <pre class="prompt-code prompt-code-en">You are "hoBIT", the academic-information chatbot of Korea University's College of Informatics.
+Today's date: {today}
+
+Role:
+- Answer students' academic questions accurately and politely.
+- All answers must be grounded in the provided reference documents.
+- If the information is not in the documents, reply exactly:
+  "제공된 자료에서 해당 정보를 찾을 수 없습니다"
+  ("The requested information could not be found in the provided documents").
+- Do NOT ask follow-up questions (department, major type, etc.);
+  answer directly from what the reference documents already contain.
+- Answer strictly in Korean.
+
+Date &amp; period reasoning rules:
+- Today is {today}. All deadline/application-period judgments use this reference date.
+- If a reference document contains [신청기간 마감: YYYY-MM-DD] or [신청기간 시작: YYYY-MM-DD],
+  compare against today.
+
+Entity-disambiguation rules:
+- "인공지능응용융합전공" (AI-application interdisciplinary major) and "인공지능학과"
+  (AI Department) are two distinct entities.
+- If the question asks about "인공지능응용융합전공", only use documents whose sub_category
+  contains "인공지능응용융합전공".
+
+Profile-usage rules:
+- The student profile (department, admission year) is a retrieval-side hint, NOT a subject
+  for the answer to be rewritten around.
+- Frame the answer around the student's profile ONLY when the question itself is about
+  their own department/admission year.
+
+Grade-level rules:
+- The hundreds digit of a course code implies the recommended year
+  (1XX → year 1, 2XX → year 2, ...).
+- Courses whose code is lower than the student's year are treated as "should already
+  have been taken" and excluded from the recommendation list.
+
+Major-course-classification rules:
+- Whether a course is a required major course is determined ONLY from
+  "교육과정표" (curriculum-table) documents.
+- "이수체계도" (course-flow diagram) documents show recommended sequences and must
+  NEVER be used to answer required-course questions.
+- Courses classified as "학문의기초" are NOT required major courses.
+
+Admission-year-specific curriculum priority:
+- When the admission year is given, prefer the curriculum-table document whose
+  sub_category matches that admission year
+  (e.g., 20학번 → prefer the "2019-2020학번" curriculum table).
+
+Answering style:
+- Use a friendly, courteous tone.
+- Every sentence/bullet derived from a reference document must end with a source tag:
+  [S1], [S2], ...
+- Never emit a source tag not used in the actual answer.
+- Every factual claim must be traceable to a chunk in the current reference documents.
+
+Card-separation rules:
+- If two or more distinct entities (companies, brands, programs, scholarships, notices)
+  appear, place each under its own `## &lt;name&gt;` section.</pre>
+      </div>
+      <p class="prompt-note">Shown here is the condensed, paper-aligned key-rule template. At call time, hoBIT appends further conditional blocks: an English-response variant, a freshness filter for "recent" / "currently open" queries, a schedule-table formatting block for calendar queries, and a dynamic-document freshness override when live notice postings are attached.</p>
     </div>
 
     <div class="prompt-block is-judge" id="prompt-top3">
       <span class="prompt-meta">LLM judge · gpt-4o-mini</span>
       <h3>Top-3 Retrieval Precision Judge</h3>
-      <p class="prompt-desc">Used for no-GT evaluation. Each of the top-3 retrieved chunks is independently judged for relevance to the query; the metric score is the fraction judged relevant (pass threshold 0.5). This targets the retrieval signal that actually reaches answer generation, avoiding the dilution from scoring all top-10 chunks.</p>
-      <pre class="prompt-code">아래 chunk가 사용자 질문에 답하는 데 관련 있는지 판정.
+      <p class="prompt-desc">Used for no-GT evaluation. Each of the top-3 retrieved chunks is independently judged for relevance to the query; the metric score is the fraction judged relevant (pass threshold 0.5). This targets the retrieval signal that actually reaches answer generation, avoiding the dilution from scoring all top-10 chunks that <code>ContextualRelevancyMetric</code> would produce.</p>
+      <div class="prompt-lang">
+        <h4 class="prompt-lang-label">Korean (executable, sent per chunk)</h4>
+        <pre class="prompt-code">아래 chunk가 사용자 질문에 답하는 데 관련 있는지 판정.
 
 [질문] {query}
 [chunk] {chunk[:2000]}
 
 관련 있으면 'yes', 없으면 'no'만 출력.</pre>
-      <p class="prompt-note">Called once per chunk (max_tokens=5, temperature=0); score = (# relevant) / 3.</p>
+      </div>
+      <div class="prompt-lang">
+        <h4 class="prompt-lang-label">English gloss</h4>
+        <pre class="prompt-code prompt-code-en">Determine whether the following chunk is relevant to answering the user's question.
+
+[Question] {query}
+[Chunk] {chunk[:2000]}
+
+Output only 'yes' if relevant, 'no' otherwise.</pre>
+      </div>
+      <p class="prompt-note">Judge call: model=gpt-4o-mini, max_tokens=5, temperature=0, three chunks judged in parallel via asyncio.gather. Score = (# chunks answered 'yes') / 3 · threshold 0.5 (PASS if &ge; 2 of 3 relevant).</p>
     </div>
 
     <div class="prompt-block is-judge" id="prompt-completeness">
       <span class="prompt-meta">GEval judge · gpt-4o-mini</span>
       <h3>Answer Completeness Judge</h3>
-      <p class="prompt-desc">A GEval rubric that scores whether the answer resolves the question given what was actually retrieved, conditioning success on retrieval quality — an honest "not found" answer scores as high as a complete answer when retrieval genuinely lacks the information.</p>
-      <pre class="prompt-code">actual_output이 input 질문에 retrieval_context에 비추어 완결되게 답하는가 평가
+      <p class="prompt-desc">A GEval rubric that scores whether the answer resolves the question given what was actually retrieved, conditioning success on retrieval quality — an honest "not found" answer scores as high as a complete answer when retrieval genuinely lacks the information. References the shared Korean-academic synonym mapping below to avoid lexical-variance false negatives.</p>
+      <div class="prompt-lang">
+        <h4 class="prompt-lang-label">Korean (executable, verbatim)</h4>
+        <pre class="prompt-code">actual_output이 input 질문에 retrieval_context에 비추어 완결되게 답하는가 평가
 (한국어 학사 안내 도메인).
 
-한국어 학사 용어 동의어 매핑 (같은 의미로 인정):
+{KOREAN_DOMAIN_MAPPING}   ← 아래 "Shared Korean-academic synonym mapping" 참조
+
+# Step 1: retrieval_context 품질 판정
+- retrieval_context에 input 질문에 답할 정보가 있는지 먼저 확인
+  - "있음": 질문 키워드/의도와 직접 관련된 chunk가 1개 이상 존재
+  - "없음": 모든 chunk가 질문과 무관한 다른 주제
+    (예: 교환학생 묻는데 컴퓨터학과 소개만 있음)
+
+# Step 2: 케이스별 평가
+[A] retrieval "있음" + actual이 그 정보로 직접 답함           → 1.0 (완벽)
+[B] retrieval "있음" + actual이 부분만 답함                   → 0.4~0.7 (부분)
+[C] retrieval "있음" + actual이 회피/모르겠다고 답함          → 0.0~0.3 (실패)
+[D] retrieval "없음" + actual이 "정보 없음/모르겠음"이라 답함 → 1.0 (정직)
+[E] retrieval "없음" + actual이 만들어내거나 무관한 답함      → 0.0~0.2
+
+# 추가 규칙
+- 단답으로 충분한 질문(예/아니오·수치·과목명)은 단답이어도 1.0 인정
+- "정확한 정보를 위해 학과 사무실 문의" 류 안내는 retrieval이 빈약할 때만 인정
+  (Step1 "없음" 케이스)
+
+* 0~1 스코어, 1.0 = 상황(retrieval 품질)에 맞게 적절히 답함.</pre>
+      </div>
+      <div class="prompt-lang">
+        <h4 class="prompt-lang-label">English gloss</h4>
+        <pre class="prompt-code prompt-code-en">Evaluate whether actual_output completely answers the input question,
+given the retrieval_context (Korean academic-advising domain).
+
+{KOREAN_DOMAIN_MAPPING}   ← see "Shared Korean-academic synonym mapping" below
+
+# Step 1: judge retrieval_context quality
+- First, decide whether retrieval_context contains any information that could
+  answer the input question:
+  - "yes-support": at least one chunk is directly related to the query intent/keywords.
+  - "no-support":  every chunk is about an unrelated topic
+                   (e.g., question asks about an exchange program, but chunks only
+                    describe the CS department).
+
+# Step 2: per-case evaluation
+[A] "yes-support" + actual directly answers using that information         → 1.0 (perfect)
+[B] "yes-support" + actual answers only partially                          → 0.4–0.7 (partial)
+[C] "yes-support" + actual evades or says "I don't know"                   → 0.0–0.3 (failure)
+[D] "no-support"  + actual honestly says "no information / not sure"       → 1.0 (honest)
+[E] "no-support"  + actual fabricates or gives an unrelated answer         → 0.0–0.2
+
+# Additional rules
+- For questions that only require a short answer (yes/no, a number, a course name),
+  a short answer is fully sufficient and scores 1.0.
+- Deflections such as "please contact the department office for exact information"
+  are acceptable ONLY when retrieval is thin (Step 1 = "no-support").
+
+* Score in [0, 1]; 1.0 = answered appropriately given retrieval quality.</pre>
+      </div>
+      <p class="prompt-note">GEval config: evaluation_params = [input, actual_output, retrieval_context] · threshold 0.5 · model gpt-4o-mini. Recall-side check — the two-stage judgment (retrieval quality &times; answer behavior) prevents unfair penalties for correct refusals.</p>
+    </div>
+
+    <div class="prompt-block is-deterministic" id="prompt-source-match">
+      <span class="prompt-meta">Deterministic · no LLM</span>
+      <h3>Source Match</h3>
+      <p class="prompt-desc">Rule-based retrieval-hit metric: for each retrieved source in the top-k, checks whether the expected source's <code>sub_category</code> appears in it (substring match), then applies a 3-tier score. At retrieval-evaluation time we only care whether the correct document was fetched — whether the LLM chose to cite it is a downstream generation issue captured by Answer Completeness.</p>
+      <pre class="prompt-code prompt-code-rule">if any matched source is cited by LLM ([S1] tag in answer):  score = 1.0
+elif any matched source is in top-k but not cited:           score = 0.5
+else:                                                         score = 0.0
+
+# expected_source.sub_category empty (open-ended track) → score = 1.0 (skip)</pre>
+      <p class="prompt-note">Threshold 0.5 — retrieved-but-not-cited also passes.</p>
+    </div>
+
+    <div class="prompt-block is-deterministic" id="prompt-keyword-match">
+      <span class="prompt-meta">Deterministic · no LLM</span>
+      <h3>Answer Keyword Match</h3>
+      <p class="prompt-desc">Substring-based keyword recall between the expected and actual answers. Keywords are extracted from <code>expected_output</code> by splitting on whitespace/punctuation, removing Korean stopwords (은/는/이/가/을/를/…) and meta-stopwords (권장, 사라지고, 1학년, 공통교양, …), and dropping tokens shorter than 2 characters. If extraction yields nothing, the item is skipped (score 1.0).</p>
+      <pre class="prompt-code prompt-code-rule"># Verification branch (input matches a positive/negative verification pattern,
+# or type == "verification"):
+targets = keywords that appear in input (the entity being verified)
+score = matched targets in actual / total targets
+
+# General branch:
+score = matched keywords in actual / total keywords
+
+_POSITIVE_VERIFY = r"(맞아|맞나요|맞지|포함돼|포함되|있어|들어가|되나요|들어가나요)"
+_NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
+      <p class="prompt-note">Threshold 0.7 — 70% of expected keywords must appear in the actual answer.</p>
+    </div>
+
+    <div class="prompt-block is-reference" id="prompt-synonym-mapping">
+      <span class="prompt-meta">Shared reference · used by Answer Completeness</span>
+      <h3>Shared Korean-academic Synonym Mapping</h3>
+      <p class="prompt-desc">Injected verbatim into the Answer Completeness GEval prompt so that lexical variants of the same academic term are not penalized as mismatches.</p>
+      <div class="prompt-lang">
+        <h4 class="prompt-lang-label">Korean (executable, injected verbatim)</h4>
+        <pre class="prompt-code">한국어 학사 용어 동의어 매핑 (같은 의미로 인정):
 - "기본전공 필수" = "전공필수" = "기본전공의 필수과목"
 - "교양필수" = "공통교양" (학번에 따라 명칭 다름)
 - "학문의기초" = "전공기초"
@@ -952,27 +1101,93 @@
 - "Digital&amp;SW" = "Digital &amp; SW" (공백 차이는 같은 영역)
 - 과목 코드(COSE213, CSAI201, DATA303 등)와 한글 이름(자료구조, 기초인공지능 등)은
   같은 과목을 가리킴 (한쪽만 나와도 매칭 인정)
-- 학년 표기 "1학년" / "1학년Ⅰ학기" / "1학년 1학기" 동일
-
-# Step 1: retrieval_context 품질 판정
-- retrieval_context에 input 질문에 답할 정보가 있는지 먼저 확인
-  - "있음": 질문 키워드/의도와 직접 관련된 chunk가 1개 이상 존재
-  - "없음": 모든 chunk가 질문과 무관한 다른 주제 (예: 교환학생 묻는데 컴퓨터학과 소개만 있음)
-
-# Step 2: 케이스별 평가
-[A] retrieval "있음" + actual이 그 정보로 직접 답함 → 1.0 (완벽)
-[B] retrieval "있음" + actual이 부분만 답함 → 0.4~0.7 (부분)
-[C] retrieval "있음" + actual이 회피/모르겠다고 답함 → 0.0~0.3 (실패: RAG 답변 단계 회피)
-[D] retrieval "없음" + actual이 "정보 없음/모르겠음"이라고 정직히 답함 → 1.0 (할루시네이션 방지, 정직)
-[E] retrieval "없음" + actual이 만들어내거나 무관한 답함 → 0.0~0.2 (잘못된 답)
-
-# 추가 규칙
-- 단답으로 충분한 질문(예/아니오·수치·과목명)은 단답이어도 1.0 인정
-- "정확한 정보를 위해 학과 사무실 문의" 류 안내는 retrieval이 빈약할 때만 인정 (Step1 "없음" 케이스)
-
-* 0~1 스코어, 1.0 = 상황(retrieval 품질)에 맞게 적절히 답함.</pre>
-      <p class="prompt-note">Evaluation params: input, actual_output, retrieval_context · threshold 0.5.</p>
+- 학년 표기 "1학년" / "1학년Ⅰ학기" / "1학년 1학기" 동일</pre>
+      </div>
+      <div class="prompt-lang">
+        <h4 class="prompt-lang-label">English gloss</h4>
+        <pre class="prompt-code prompt-code-en">Korean academic-term synonym mapping (treat as the same meaning):
+- "기본전공 필수" &equiv; "전공필수" &equiv; "기본전공의 필수과목"
+  (three variants of "required major course")
+- "교양필수" &equiv; "공통교양"
+  (general-education requirement; name differs by admission year)
+- "학문의기초" &equiv; "전공기초"  (academic foundation / major foundation)
+- "광역전공" &equiv; "기본전공"
+  (before/after transferring from a broad track to an intensive major)
+- "심화전공 선택" &equiv; "심화전공"
+  (when only elective slots exist in the intensive-major group)
+- "Digital&amp;SW" &equiv; "Digital &amp; SW"  (whitespace difference — same area)
+- Course codes (COSE213, CSAI201, DATA303, …) and their Korean names
+  (자료구조 = Data Structures, 기초인공지능 = Intro. AI, …) refer to the same course;
+  a match on either side counts.
+- Grade notations "1학년" / "1학년Ⅰ학기" / "1학년 1학기" are equivalent.</pre>
+      </div>
     </div>
+
+    <div class="metric-summary-wrap">
+      <table class="table is-fullwidth metric-summary-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Metric</th>
+            <th>Kind</th>
+            <th>Judge Model</th>
+            <th>Threshold</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Contextual Precision</td>
+            <td>deepeval built-in (LLM)</td>
+            <td>gpt-4o-mini</td>
+            <td>0.5</td>
+            <td>Retrieval precision (built-in)</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Contextual Recall</td>
+            <td>deepeval built-in (LLM)</td>
+            <td>gpt-4o-mini</td>
+            <td>0.5</td>
+            <td>Retrieval recall (built-in)</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Top-3 Retrieval Precision</td>
+            <td>Custom, per-chunk LLM</td>
+            <td>gpt-4o-mini</td>
+            <td>0.5</td>
+            <td>Retrieval precision, tail-dilution avoided</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Source Match</td>
+            <td>Deterministic</td>
+            <td>&mdash;</td>
+            <td>0.5</td>
+            <td>Retrieval hit (3-tier: cited/retrieved/missed)</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Answer Keyword Match</td>
+            <td>Deterministic</td>
+            <td>&mdash;</td>
+            <td>0.7</td>
+            <td>Answer keyword recall (substring)</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Answer Completeness [GEval]</td>
+            <td>GEval (LLM)</td>
+            <td>gpt-4o-mini</td>
+            <td>0.5</td>
+            <td>Answer completeness (recall-side, retrieval-conditional)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="prompt-note">Deterministic metrics (4, 5) provide reproducible baselines; LLM judges (1, 2, 3, 6) capture semantic quality that lexical matching misses. Together they triangulate retrieval and generation performance.</p>
   </div>
 </section>
 
@@ -981,7 +1196,7 @@
         <div class="tab-panel site-tab-panel" id="tab-evaluation" role="tabpanel" aria-labelledby="tab-evaluation-button" hidden>
 
 <section class="section is-light" id="results">
-  <div class="container is-max-desktop">
+  <div class="container is-max-widescreen">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Results</h2>
@@ -989,42 +1204,36 @@
       </div>
     </div>
 
-    <div class="columns is-vcentered">
-      <div class="column">
-        <div class="result-list">
-          <div class="result-item">
-            <strong>Deployment MRR</strong>
-            <span>0.593</span>
-            <p>proFILL achieves the strongest retrieval performance in the realistic setting where profiles must be acquired during interaction.</p>
-          </div>
-          <div class="result-item">
-            <strong>Source Match</strong>
-            <span>0.749</span>
-            <p>Generated answers use the correct institutional sources more reliably than profile-blind baselines.</p>
-          </div>
-          <div class="result-item">
-            <strong>Grounded Correctness</strong>
-            <span>0.625</span>
-            <p>Answers are evaluated for both correctness and grounding in appropriate sources.</p>
-          </div>
-          <div class="result-item">
-            <strong>Open-weight deployment</strong>
-            <span>competitive</span>
-            <p>Open-weight models remain viable for cost-effective on-premise deployment.</p>
-          </div>
-        </div>
+    <div class="result-list">
+      <div class="result-item">
+        <strong>Deployment MRR</strong>
+        <span>0.593</span>
+        <p>proFILL achieves the strongest retrieval performance in the realistic setting where profiles must be acquired during interaction.</p>
       </div>
-      <div class="column">
-        <figure class="image paper-figure">
-          <img src="./static/images/figures/results_comparison.png" alt="Retrieval MRR and generation grounded correctness across BM25, Dense, Hybrid, HyDE, and proFILL under Oracle and Deployment settings.">
-          <figcaption class="figure-caption">proFILL leads every baseline in both retrieval MRR and grounded correctness, in both the Oracle (profile given) and Deployment (profile unknown) settings.</figcaption>
-          <div class="figure-note compact">
-            <h4>Reading the comparison</h4>
-            <p>proFILL and proFILL+rerank sit well above BM25, Dense, Hybrid, and HyDE baselines across both metrics, with the largest gains in the realistic Deployment setting where the student profile must be acquired during the conversation.</p>
-          </div>
-        </figure>
+      <div class="result-item">
+        <strong>Source Match</strong>
+        <span>0.749</span>
+        <p>Generated answers use the correct institutional sources more reliably than profile-blind baselines.</p>
+      </div>
+      <div class="result-item">
+        <strong>Grounded Correctness</strong>
+        <span>0.625</span>
+        <p>Answers are evaluated for both correctness and grounding in appropriate sources.</p>
+      </div>
+      <div class="result-item">
+        <strong>Open-weight deployment</strong>
+        <span>competitive</span>
+        <p>Open-weight models remain viable for cost-effective on-premise deployment.</p>
       </div>
     </div>
+    <figure class="image paper-figure wide-figure">
+      <img src="./static/images/figures/results_comparison.png" alt="Retrieval MRR and generation grounded correctness across BM25, Dense, Hybrid, HyDE, and proFILL under Oracle and Deployment settings.">
+      <figcaption class="figure-caption">proFILL leads every baseline in both retrieval MRR and grounded correctness, in both the Oracle (profile given) and Deployment (profile unknown) settings.</figcaption>
+      <div class="figure-note compact">
+        <h4>Reading the comparison</h4>
+        <p>proFILL and proFILL+rerank sit well above BM25, Dense, Hybrid, and HyDE baselines across both metrics, with the largest gains in the realistic Deployment setting where the student profile must be acquired during the conversation.</p>
+      </div>
+    </figure>
     <figure class="image paper-figure wide-figure">
       <img src="./static/images/figures/results_breakdown.png" alt="Category-level breakdown for Profile-Grounded QA, Open-ended Advising, and Intent Classification.">
       <figcaption class="figure-caption">Category-level breakdown: Profile-Grounded QA (MRR), Open-ended Advising (Top-3 Precision / Answer Completeness), and Intent Classification (F1) by category.</figcaption>

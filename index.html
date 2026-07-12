@@ -1204,6 +1204,15 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
       </div>
     </div>
 
+    <figure class="image paper-figure wide-figure">
+      <img src="./static/images/figures/results_comparison.png" alt="Retrieval MRR and generation grounded correctness across BM25, Dense, Hybrid, HyDE, and proFILL under Oracle and Deployment settings.">
+      <figcaption class="figure-caption">proFILL leads every baseline in both retrieval MRR and grounded correctness, in both the Oracle (profile given) and Deployment (profile unknown) settings.</figcaption>
+      <div class="figure-note compact">
+        <h4>Reading the comparison</h4>
+        <p>proFILL and proFILL+rerank sit well above BM25, Dense, Hybrid, and HyDE baselines across both metrics, with the largest gains in the realistic Deployment setting where the student profile must be acquired during the conversation.</p>
+      </div>
+    </figure>
+
     <div class="result-list">
       <div class="result-item">
         <strong>Deployment MRR</strong>
@@ -1226,14 +1235,6 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
         <p>Open-weight models remain viable for cost-effective on-premise deployment.</p>
       </div>
     </div>
-    <figure class="image paper-figure wide-figure">
-      <img src="./static/images/figures/results_comparison.png" alt="Retrieval MRR and generation grounded correctness across BM25, Dense, Hybrid, HyDE, and proFILL under Oracle and Deployment settings.">
-      <figcaption class="figure-caption">proFILL leads every baseline in both retrieval MRR and grounded correctness, in both the Oracle (profile given) and Deployment (profile unknown) settings.</figcaption>
-      <div class="figure-note compact">
-        <h4>Reading the comparison</h4>
-        <p>proFILL and proFILL+rerank sit well above BM25, Dense, Hybrid, and HyDE baselines across both metrics, with the largest gains in the realistic Deployment setting where the student profile must be acquired during the conversation.</p>
-      </div>
-    </figure>
     <figure class="image paper-figure wide-figure">
       <img src="./static/images/figures/results_breakdown.png" alt="Category-level breakdown for Profile-Grounded QA, Open-ended Advising, and Intent Classification.">
       <figcaption class="figure-caption">Category-level breakdown: Profile-Grounded QA (MRR), Open-ended Advising (Top-3 Precision / Answer Completeness), and Intent Classification (F1) by category.</figcaption>

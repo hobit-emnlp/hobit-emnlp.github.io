@@ -1234,33 +1234,45 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
       <article>
         <span class="survey-kicker">Participants</span>
         <strong>48 students</strong>
-        <p>Placeholder for participant profile and recruitment details.</p>
+        <p>Students and affiliates of Korea University College of Informatics evaluated answer quality.</p>
       </article>
       <article>
         <span class="survey-kicker">Questions</span>
         <strong>10 advising cases</strong>
-        <p>Placeholder for the final profile-dependent question set.</p>
+        <p>The survey used profile-dependent academic advising questions drawn from realistic student needs.</p>
       </article>
       <article>
         <span class="survey-kicker">Protocol</span>
         <strong>Blind pairwise comparison</strong>
-        <p>Placeholder for the survey flow and answer-order randomization.</p>
+        <p>Participants compared two anonymized answers, Option A and Option B, without system labels.</p>
       </article>
       <article>
         <span class="survey-kicker">Criterion</span>
         <strong>Preferred answer</strong>
-        <p>Placeholder for evaluator instructions and preference rubric.</p>
+        <p>Preference was based on correctness, completeness, readability, and overall usefulness.</p>
       </article>
     </div>
 
-    <div class="survey-screenshots">
-      <figure class="survey-placeholder">
-        <div class="placeholder-frame">Survey screenshot placeholder</div>
-        <figcaption>Replace with the actual survey UI capture after anonymization.</figcaption>
+    <div class="survey-screenshots survey-flow">
+      <figure class="survey-shot-card">
+        <span class="flow-step">1</span>
+        <img src="./static/images/eval/survey-intro.png?v=survey-flow-20260712" alt="Survey introduction and participant profile fields in Google Forms.">
+        <figcaption>Survey setup: participants first read the blind pairwise-evaluation instructions and enter basic profile information.</figcaption>
       </figure>
-      <figure class="survey-placeholder">
-        <div class="placeholder-frame">Question / response choice placeholder</div>
-        <figcaption>Replace with a captured sample item showing the compared answers.</figcaption>
+      <figure class="survey-shot-card">
+        <span class="flow-step">2</span>
+        <img src="./static/images/eval/survey-question-context.png?v=survey-flow-20260712" alt="Reference context and ground-truth answer shown before an evaluation item.">
+        <figcaption>Item context: each question provides the target student profile and reference information for the advising case.</figcaption>
+      </figure>
+      <figure class="survey-shot-card is-wide">
+        <span class="flow-step">3</span>
+        <img src="./static/images/eval/survey-answer-pair.png?v=survey-flow-20260712" alt="Blind Option A and Option B answer screenshots in the pairwise survey.">
+        <figcaption>Blind answer pair: evaluators compare Option A and Option B as screenshots, without knowing which system generated each answer.</figcaption>
+      </figure>
+      <figure class="survey-shot-card">
+        <span class="flow-step">4</span>
+        <img src="./static/images/eval/survey-preference-choice.png?v=survey-flow-20260712" alt="Radio-button preference choices for Answer A, Answer B, or Similar.">
+        <figcaption>Preference choice: the final response records whether Answer A, Answer B, or both answers are similar.</figcaption>
       </figure>
     </div>
 
@@ -1279,19 +1291,19 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
           <tr>
             <td>Graduation</td>
             <td>CS, 2020 cohort</td>
-            <td>Placeholder: final survey question</td>
+            <td>Can you tell me my graduation requirements?</td>
             <td>ProFILL answer vs. profile-blind RAG answer</td>
           </tr>
           <tr>
             <td>Major courses</td>
             <td>Major type: intensive</td>
-            <td>Placeholder: final survey question</td>
+            <td>What are my required major courses?</td>
             <td>Correct profile-specific course list vs. generic retrieval answer</td>
           </tr>
           <tr>
             <td>Course recommendation</td>
             <td>Department / cohort signal</td>
-            <td>Placeholder: final survey question</td>
+            <td>What is the recommended course for me this year?</td>
             <td>Profile-aware recommendation vs. baseline recommendation</td>
           </tr>
         </tbody>

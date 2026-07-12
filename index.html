@@ -227,9 +227,9 @@
         <span class="step-number">1</span>
         <div>
           <h3>Intent Routing and Session-Profile Initialization</h3>
-          <p>At query time, hoBIT classifies each incoming query into retrieval, ability, FAQ, greeting, or small talk. Only retrieval queries proceed to retrieval and answer generation; greeting, ability, and FAQ queries are handled by templates or the FAQ store, while small talk receives a lightweight conversational reply.</p>
+          <p>At query time, hoBIT classifies each incoming query into greeting, ability, FAQ, small talk, or retrieval. Only retrieval queries proceed to retrieval and answer generation; greeting, ability, and FAQ queries are handled by templates or the FAQ store, while small talk receives a lightweight conversational reply.</p>
           <div class="tag-row">
-            <span>greeting</span><span>FAQ</span><span>ability</span><span>small talk</span><span>retrieval</span>
+            <span>greeting</span><span>ability</span><span>FAQ</span><span>small talk</span><span>retrieval</span>
           </div>
           <div class="method-note">For retrieval queries, ProFILL identifies required profile attributes and initializes a time-limited session profile.</div>
         </div>
@@ -272,7 +272,7 @@
       </div>
       <div class="figure-note intent-note">
         <h4>Intent routing in hoBIT</h4>
-        <p>hoBIT begins each turn by classifying the query into retrieval, ability, FAQ, greeting, or small talk. Greeting, ability, and FAQ queries are handled without an additional generation call, while retrieval queries continue into ProFILL.</p>
+        <p>hoBIT begins each turn by classifying the query into greeting, ability, FAQ, small talk, or retrieval. Greeting, ability, and FAQ queries are handled without an additional generation call, while retrieval queries continue into ProFILL.</p>
         <p>For retrieval queries, the system initializes the session profile by extracting profile values from the query and marking unresolved attributes as missing. These missing values are acquired only when needed through adaptive profiling.</p>
       </div>
     </figure>
@@ -286,7 +286,7 @@
       <div class="routing-classifier">
         <span>Intent classifier</span>
         <div class="routing-intents">
-          <b>greeting</b><b>FAQ</b><b>ability</b><b>small talk</b><b class="is-retrieval">retrieval</b>
+          <b>greeting</b><b>ability</b><b>FAQ</b><b>small talk</b><b class="is-retrieval">retrieval</b>
         </div>
       </div>
       <div class="routing-split">
@@ -399,13 +399,13 @@
         <div class="chat-top"><img src="./static/images/icons/docs_3.png" alt=""><span>Latest Notices</span></div>
         <p class="transcript-query">Tell me recent announcements with sources.</p>
         <p class="transcript-answer">Recent College of Informatics notices should be checked together with their titles, posting dates, deadlines, and attached files. hoBIT answers while preserving links and sources from multiple notice documents.</p>
-        <p class="intent-label">Dynamic retrieval: notices</p>
+        <p class="intent-label">Retrieval: notices</p>
       </article>
       <article class="transcript-card">
         <div class="chat-top"><img src="./static/images/icons/person.png" alt=""><span>Career</span></div>
         <p class="transcript-query">Which companies are recruiting these days?</p>
         <p class="transcript-answer">Recent recruiting and briefing examples include:<br><br>- Hanwha Aerospace Campus Recruiting: March 24, 2026, 16:00-17:00, Hanwha Square Auditorium, with pre-registration available<br>- Johnson &amp; Johnson Vision Care AI Engineer Recruitment: Technology Leadership Development Program for AI, Data, IT, and Engineering majors<br>- National Intelligence Service Recruitment Briefing: March 17, 2026, 14:00-15:00, Hanwha Square B1 Auditorium, also open to undergraduates interested in AI-related fields</p>
-        <p class="intent-label">Time-based RAG</p>
+        <p class="intent-label">Time-aware RAG</p>
       </article>
       <article class="transcript-card">
         <div class="chat-top"><img src="./static/images/icons/docs_1.png" alt=""><span>Academic Schedule</span></div>
@@ -418,7 +418,7 @@
         <p class="transcript-query">Tell me my required major courses.</p>
         <p class="transcript-answer">This answer is based on the entered profile: Department: Computer Science; Admission year: 2020.<br><br>For Computer Science students admitted in 2020, the 2019-2020 curriculum of the College of Informatics requires at least 130 total credits.<br><br>The credit requirements are as follows:<br>- General education: at least 31 credits<br>- Basic major: 18 credits of required major courses and at least 24 credits of major electives<br>- Six required basic-major courses: Data Structures, Algorithms, Computer Architecture, Operating Systems, Computer Networks, and Databases<br>- Intensive major: at least 30 credits of major electives<br>- General electives: at least 27 credits<br><br>Common graduation requirements must also be satisfied:<br>- Completion of a second major is required, except for transfer students entering through bachelor's admission<br>- Chinese character certificate is not required<br>- Official English score: one of TOEIC 650, TOEFL PBT 530/CBT 197/IBT 74, TOSEL(A) 512, TEPS 571, or IELTS 5.5<br>- Completion of three English-taught courses</p>
         <div class="profile-chips"><span>CS</span><span>2020</span><span>Intensive Major</span></div>
-        <p class="intent-label">Dual asking + profile-aware RAG</p>
+        <p class="intent-label">Adaptive profiling + profile-aware RAG</p>
       </article>
     </div>
 
@@ -457,7 +457,7 @@
         <div class="chat-top"><img src="./static/images/icons/docs_3.png" alt=""><span>Notice</span></div>
         <div class="bubble user">Tell me recent announcements.</div>
         <div class="bubble bot">hoBIT retrieves recent notice documents with time-aware filtering and summarizes them with source links.</div>
-        <p class="intent-label">Dynamic retrieval: notices</p>
+        <p class="intent-label">Retrieval: notices</p>
       </div>
       <div class="chat-card">
         <div class="chat-top"><img src="./static/images/icons/person.png" alt=""><span>Career</span></div>
@@ -477,7 +477,7 @@
         <div class="bubble bot ask">To answer accurately, please tell me your department and admission year.</div>
         <div class="profile-chips"><span>CS</span><span>2020</span><span>Intensive Major</span></div>
         <div class="bubble bot">hoBIT answers required major courses using the curriculum that matches the student's profile.</div>
-        <p class="intent-label">Dual asking + profile-aware RAG</p>
+        <p class="intent-label">Adaptive profiling + profile-aware RAG</p>
       </div>
     </div>
 

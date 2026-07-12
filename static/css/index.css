@@ -1179,6 +1179,89 @@ body {
   color: #0a2c63;
 }
 
+.survey-setup {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+}
+
+.survey-setup article,
+.survey-placeholder {
+  padding: 1rem;
+  border: 1px solid #dfe7f1;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.survey-kicker {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: #8b1030;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.survey-setup strong {
+  display: block;
+  color: #0a2c63;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1rem;
+}
+
+.survey-setup p {
+  margin-top: 0.45rem;
+  margin-bottom: 0;
+  color: #536172;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.survey-screenshots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.survey-placeholder {
+  margin: 0;
+}
+
+.placeholder-frame {
+  display: grid;
+  min-height: 180px;
+  place-items: center;
+  border: 2px dashed #b8c7da;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #6a7789;
+  font-weight: 800;
+  text-align: center;
+}
+
+.survey-placeholder figcaption {
+  margin-top: 0.55rem;
+  color: #6a7789;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.sample-question-placeholder {
+  margin-top: 1rem;
+}
+
+.sample-question-placeholder h3 {
+  margin-bottom: 0.75rem;
+  color: #0a2c63;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
 .eval-chart h3 {
   color: #0a2c63;
   font-family: 'Google Sans', sans-serif;
@@ -1401,6 +1484,8 @@ pre {
   .routing-split,
   .walkthrough-steps,
   .result-list,
+  .survey-setup,
+  .survey-screenshots,
   .eval-layout,
   .data-summary-grid,
   .data-example-grid,

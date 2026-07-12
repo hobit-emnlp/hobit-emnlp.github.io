@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20260713-sticky-brand">
+  <link rel="stylesheet" href="./static/css/index.css?v=20260713-conditional-brand">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -69,7 +69,7 @@
 
 <div class="publication-links-bar">
   <a href="#" class="sticky-brand" aria-label="hoBIT home">
-    <img src="./static/images/icons/chatbot.png" alt="hoBIT icon">
+    <img src="./static/images/icons/profile.png" alt="hoBIT icon">
     <span>hoBIT</span>
   </a>
   <div class="publication-links">
@@ -197,7 +197,7 @@
     <div class="content-tabs" data-tabs>
       <div class="tab-list main-tab-list" role="tablist" aria-label="Project overview tabs">
         <a href="#" class="sticky-brand" aria-label="hoBIT home">
-          <img src="./static/images/icons/chatbot.png" alt="hoBIT icon">
+          <img src="./static/images/icons/profile.png" alt="hoBIT icon">
           <span>hoBIT</span>
         </a>
         <button class="tab-button is-active" type="button" role="tab" aria-selected="true" aria-controls="tab-methodology" id="tab-methodology-button" data-tab-target="tab-methodology">
@@ -1403,6 +1403,28 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
     </div>
   </div>
 </footer>
+
+<script>
+  // Toggle `.is-stuck` on each sticky bar so the hoBIT brand mark on the
+  // left is only shown while the bar is actually pinned to the top.
+  (function () {
+    var bars = document.querySelectorAll('.publication-links-bar, .main-tab-list');
+    if (!('IntersectionObserver' in window) || bars.length === 0) return;
+    bars.forEach(function (bar) {
+      var sentinel = document.createElement('div');
+      sentinel.className = 'sticky-sentinel';
+      sentinel.setAttribute('aria-hidden', 'true');
+      bar.parentNode.insertBefore(sentinel, bar);
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var stuck = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+          bar.classList.toggle('is-stuck', stuck);
+        });
+      }, { threshold: [0] });
+      io.observe(sentinel);
+    });
+  })();
+</script>
 
 </body>
 </html>

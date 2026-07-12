@@ -34,7 +34,7 @@ body {
   top: 0;
   z-index: 90;
   background: #ffffff;
-  padding: 0.6rem 4.5rem; /* room on both sides so the absolute logo does not overlap */
+  padding: 0.6rem 1rem;
 }
 
 .publication-links-bar .publication-links {
@@ -44,55 +44,6 @@ body {
   gap: 0.75rem;
   flex-wrap: wrap;
   margin: 0;
-}
-
-/* Small hoBIT brand mark shown on the left inside every sticky bar
-   (pill bar and 5-tab bar). Absolutely positioned so it does not disturb
-   the centered layout of the main content.
-
-   Hidden by default; revealed only when the parent bar is actually stuck
-   at the top of the viewport (a JS IntersectionObserver adds the
-   `.is-stuck` class — see the inline script at the end of index.html). */
-.sticky-brand {
-  position: absolute;
-  left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  display: none;
-  align-items: center;
-  gap: 0.35rem;
-  color: #0a2c63;
-  font-family: 'Google Sans', sans-serif;
-  font-weight: 800;
-  font-size: 1rem;
-  text-decoration: none;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.18s ease;
-}
-
-.publication-links-bar.is-stuck .sticky-brand,
-.main-tab-list.is-stuck .sticky-brand {
-  display: inline-flex;
-  opacity: 1;
-}
-
-.sticky-brand:hover {
-  color: #072b67;
-}
-
-.sticky-brand img {
-  height: 1.6rem;
-  width: auto;
-}
-
-/* Invisible sentinel injected by JS right above each sticky bar; its
-   IntersectionObserver tells us when the bar has become stuck. */
-.sticky-sentinel {
-  height: 1px;
-  margin: 0;
-  visibility: hidden;
-  pointer-events: none;
 }
 
 .brand-mark {
@@ -312,24 +263,18 @@ body {
 .main-tab-list {
   grid-template-columns: repeat(5, minmax(0, 1fr));
   position: sticky;
-  top: 0; /* navbar is no longer sticky; 5-tab pins straight to viewport top */
+  top: 0;
   z-index: 90;
   background: #ffffff;
-  /* Break out of the .container.is-max-widescreen so the sticky bar spans
-     the full viewport width like .publication-links-bar. Padding keeps the
-     tab buttons within a comfortable centered zone. */
+  /* Break out of .container.is-max-widescreen so the sticky bar spans the
+     full viewport width like .publication-links-bar. Inner padding keeps
+     the 5 tab buttons within a comfortable centered zone on wide screens. */
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  padding: 0.6rem max(4.5rem, calc((100vw - 1200px) / 2));
+  padding: 0.6rem max(1rem, calc((100vw - 1200px) / 2));
   box-sizing: border-box;
   box-shadow: 0 4px 12px -8px rgba(15, 35, 70, 0.18);
-}
-
-/* Skip the .sticky-brand (link) from occupying a grid column so the 5 tab
-   buttons still fill the grid evenly. */
-.main-tab-list > .sticky-brand {
-  grid-column: unset;
 }
 
 .main-tab-list .tab-button {

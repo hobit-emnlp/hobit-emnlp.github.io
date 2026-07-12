@@ -308,19 +308,19 @@
       </div>
     </div>
     <figure class="image paper-figure wide-figure">
-      <img src="./static/images/figures/hobit_overview.png" alt="hoBIT offline profile-aware indexing and online query-driven profiling overview.">
-      <figcaption class="figure-caption">Paper Figure 2: offline profile-aware indexing and online query-driven profiling around a session profile.</figcaption>
+      <img src="./static/images/figures/hobit_overview.png?v=20260712-system-overview" alt="hoBIT system overview showing validated data, dynamic and static vector collections, intent routing, profile-aware retrieval, and query-driven and evidence-driven profiling.">
+      <figcaption class="figure-caption">System overview: validated institutional data is indexed into static and dynamic collections, while online intent routing, hard filtering, query-driven profiling, and evidence-driven profiling update the session profile before generation.</figcaption>
       <div class="figure-note">
         <h4>What this figure adds</h4>
-        <p>This overview shows the main contribution: profile-dependent evidence validity is encoded in the index structure. hoBIT stores a session profile online and retrieves only evidence whose profile annotations are compatible with the student.</p>
+        <p>This overview shows the main contribution: profile-dependent evidence validity is encoded in the index structure, and hoBIT updates the session profile online when either the query or retrieved evidence reveals missing student context.</p>
       </div>
     </figure>
     <figure class="image paper-figure wide-figure">
-      <img src="./static/images/figures/hobit_overview_v7.png" alt="Supplementary overview comparing conventional RAG with profile-indexed documents and adaptive profiling.">
-      <figcaption class="figure-caption">Supplementary website figure: profile-indexed documents and adaptive profiling, including query-driven and evidence-driven profile acquisition.</figcaption>
+      <img src="./static/images/figures/hobit_overview_v7.png?v=20260712-profiling-overview" alt="Detailed online flow for query-driven profiling and evidence-driven profiling in hoBIT.">
+      <figcaption class="figure-caption">Profiling overview: query-driven profiling fills profile values detected as missing from the user query, while evidence-driven profiling re-retrieves after retrieved chunks expose additional profile requirements.</figcaption>
       <div class="figure-note">
         <h4>Why the supplementary view matters</h4>
-        <p>The website version makes the contrast with conventional RAG explicit. A profile-blind retriever can find semantically similar but policy-mismatched evidence; adaptive profiling turns missing student context into a quick follow-up question instead of a dead end.</p>
+        <p>The detailed flow clarifies when hoBIT asks follow-up questions. Some profile fields can be identified before retrieval from the query itself, while others become necessary only after candidate evidence is inspected.</p>
       </div>
     </figure>
   </div>
@@ -480,6 +480,7 @@
         <p class="eyebrow">Captured hoBIT Runs</p>
         <h3>Real Conversations from the Deployed System</h3>
         <p>Each screenshot is captured directly from the deployed hoBIT service, showing how real student queries are handled end-to-end. Since the interface itself is in Korean, we annotate each capture with the query and answer for readers of this paper.</p>
+        <p class="version-note">Note: hoBIT's live service currently runs on its original rule-based backend. proFILL, the profile-aware pipeline this paper presents, is a research extension that has not yet fully replaced it in production.</p>
         <div class="demo-tags">
           <span>Greeting</span><span>School life</span><span>Latest notices</span><span>Dual asking</span>
         </div>

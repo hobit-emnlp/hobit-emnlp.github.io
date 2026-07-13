@@ -11,8 +11,8 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20260713-mobile-v2">
-  <link rel="icon" href="./static/images/favicon.svg">
+  <link rel="stylesheet" href="./static/css/index.css?v=20260713-sticky-v3">
+  <link rel="icon" type="image/png" href="./static/images/favicon_profile.png">
 
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/index.js?v=20260711-service-outputs"></script>
@@ -63,12 +63,6 @@
 </section>
 
 <div class="publication-links-bar">
-  <!-- Mobile-only dropdown trigger; hidden on wider screens via CSS. -->
-  <button class="pills-dropdown-trigger" type="button" aria-expanded="false" aria-label="Open resource links">
-    <span class="icon"><i class="fas fa-external-link-alt"></i></span>
-    <span class="pills-dropdown-label">Links</span>
-    <span class="pills-dropdown-chevron" aria-hidden="true">&#9662;</span>
-  </button>
   <div class="publication-links">
     <span class="link-block">
       <a href="./static/pdf/hobit-paper.pdf" class="external-link button is-normal is-rounded is-dark">
@@ -1435,73 +1429,38 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
 </div>
 
 <script>
-  /* Mobile-only dropdown behavior. Two independent dropdowns:
-       - .main-tab-list  → the 5 project-overview tabs
-       - .publication-links-bar → Paper / Code / Video
-     On mobile only:
-       - The sticky bar shows a compact trigger; the rest of its items
-         collapse into a menu revealed via `.is-open`.
-       - Tapping the trigger toggles the menu; tapping outside closes it. */
+  /* Mobile-only dropdown for the 5-tab overview.
+     On small mobile (<=640px), the tab list collapses so that only the
+     active tab is visible; tapping it opens the rest as a menu.
+     Paper/Code/Video (.publication-links-bar) uses no dropdown — it
+     always renders as 3 icon-only buttons on small mobile. */
   (function () {
     var mobileQuery = window.matchMedia('(max-width: 640px)');
 
-    /* --- Dropdown 1: 5-tab overview --------------------------------- */
     var tabList = document.querySelector('.main-tab-list');
-    if (tabList) {
-      tabList.addEventListener('click', function (e) {
-        if (!mobileQuery.matches) return;
-        var btn = e.target.closest('.tab-button');
-        if (!btn) return;
-        var isOpen = tabList.classList.contains('is-open');
-        var isActive = btn.classList.contains('is-active');
-        if (isActive && !isOpen) {
-          // Active button tapped while closed → open the dropdown.
-          e.preventDefault();
-          e.stopImmediatePropagation();
-          tabList.classList.add('is-open');
-        } else if (isOpen) {
-          // Any tap while open → let the tab-switch handler run, then close.
-          setTimeout(function () { tabList.classList.remove('is-open'); }, 0);
-        }
-      }, true);
-    }
+    if (!tabList) return;
 
-    /* --- Dropdown 2: Paper / Code / Video --------------------------- */
-    var pillBar = document.querySelector('.publication-links-bar');
-    var pillTrigger = pillBar && pillBar.querySelector('.pills-dropdown-trigger');
-    if (pillBar && pillTrigger) {
-      pillTrigger.addEventListener('click', function (e) {
-        e.stopPropagation();
-        var open = pillBar.classList.toggle('is-open');
-        pillTrigger.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
-      // Close after clicking any link inside the dropdown.
-      pillBar.querySelectorAll('.publication-links a').forEach(function (a) {
-        a.addEventListener('click', function () {
-          pillBar.classList.remove('is-open');
-          pillTrigger.setAttribute('aria-expanded', 'false');
-        });
-      });
-    }
+    tabList.addEventListener('click', function (e) {
+      if (!mobileQuery.matches) return;
+      var btn = e.target.closest('.tab-button');
+      if (!btn) return;
+      var isOpen = tabList.classList.contains('is-open');
+      var isActive = btn.classList.contains('is-active');
+      if (isActive && !isOpen) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        tabList.classList.add('is-open');
+      } else if (isOpen) {
+        setTimeout(function () { tabList.classList.remove('is-open'); }, 0);
+      }
+    }, true);
 
-    /* --- Global close-on-outside-click ------------------------------ */
     document.addEventListener('click', function (e) {
-      if (tabList && !tabList.contains(e.target)) {
-        tabList.classList.remove('is-open');
-      }
-      if (pillBar && !pillBar.contains(e.target)) {
-        pillBar.classList.remove('is-open');
-        if (pillTrigger) pillTrigger.setAttribute('aria-expanded', 'false');
-      }
+      if (!tabList.contains(e.target)) tabList.classList.remove('is-open');
     });
 
-    /* --- Auto-close when leaving mobile breakpoint ------------------ */
     function onBreakpointChange() {
-      if (!mobileQuery.matches) {
-        if (tabList) tabList.classList.remove('is-open');
-        if (pillBar) pillBar.classList.remove('is-open');
-        if (pillTrigger) pillTrigger.setAttribute('aria-expanded', 'false');
-      }
+      if (!mobileQuery.matches) tabList.classList.remove('is-open');
     }
     if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', onBreakpointChange);
     else if (mobileQuery.addListener) mobileQuery.addListener(onBreakpointChange);

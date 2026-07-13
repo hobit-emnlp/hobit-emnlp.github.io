@@ -16,22 +16,16 @@ body.is-lightbox-open {
 }
 
 .navbar {
-  /* Always pinned at the top so the hoBIT logo stays visible while the
-     user scrolls. Transparent background so that whichever sticky bar
-     sits below it at top:0 (pill bar or 5-tab menu) shows through, and
-     the navbar icon + that bar together read as a single horizontal row. */
+  /* Solid, sticky row at the top so the hoBIT logo stays visible while
+     the user scrolls. Whichever sticky bar (pill bar or 5-tab) is
+     currently in its own scope will pin BELOW this bar — never overlap. */
   position: sticky;
   top: 0;
   z-index: 100;
-  background: transparent;
+  background: #ffffff;
   border-bottom: none;
-  box-shadow: none;
-  pointer-events: none; /* let clicks fall through to the sticky bar below */
-}
-
-.navbar .navbar-brand,
-.navbar .navbar-brand * {
-  pointer-events: auto; /* re-enable interaction on the logo itself */
+  box-shadow: 0 1px 0 rgba(15, 35, 70, 0.06);
+  min-height: 3.25rem;
 }
 
 /* Sticky region that scopes .publication-links-bar. It ends right before the
@@ -46,18 +40,17 @@ body.is-lightbox-open {
      work relative to the viewport while still being confined to this scope. */
 }
 
-/* Pill bar (Paper / Code / Video) — sticks at top: 0 (same y as the
-   sticky navbar). Its height is matched to the navbar (min 3.25rem) so
-   the icon (in the navbar) and the pills align on a single horizontal
-   row when both are pinned. The left/right padding is symmetric and
-   reserves space that overlaps the navbar icon area. */
+/* Pill bar (Paper / Code / Video) — sticks BELOW the navbar (top:3.25rem)
+   within its own .sticky-scope. When the scope ends (before the tab
+   section), the pill bar releases and the 5-tab takes over below the
+   navbar in its own scope. */
 .publication-links-bar {
   position: sticky;
-  top: 0;
+  top: 3.25rem;
   z-index: 90;
   background: #ffffff;
-  min-height: 3.25rem;
-  padding: 0.35rem 9rem;
+  min-height: 3.75rem;
+  padding: 0.6rem 1.25rem;
   box-sizing: border-box;
 }
 
@@ -68,6 +61,13 @@ body.is-lightbox-open {
   gap: 0.75rem;
   flex-wrap: wrap;
   margin: 0;
+}
+
+/* Bump vertical padding on the Paper/Code/Video buttons for more
+   breathing room. Bulma's is-normal default is tight. */
+.publication-links-bar .button {
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
 }
 
 .brand-mark {
@@ -249,7 +249,7 @@ body.is-lightbox-open {
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
-  padding: 0.75rem 0.85rem;
+  padding: 1rem 0.85rem;
   border: 1px solid #dfe7f1;
   border-radius: 8px;
   background: #fff;
@@ -288,16 +288,15 @@ body.is-lightbox-open {
 
 .main-tab-list {
   /* Equal-width buttons filling the entire tab-list container width
-     (same width as the tab panels below), aligned with them via
-     .container.is-max-widescreen. */
+     (same width as the tab panels below). Sticks BELOW the navbar. */
   grid-template-columns: repeat(5, minmax(0, 1fr));
   position: sticky;
-  top: 0;
+  top: 3.25rem;
   z-index: 90;
   background: #ffffff;
-  min-height: 3.25rem;
-  padding: 0.35rem 1rem;
-  margin-bottom: 0.75rem; /* small breathing space below the sticky bar */
+  min-height: 3.75rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.75rem;
   box-sizing: border-box;
 }
 
@@ -716,9 +715,11 @@ body.is-lightbox-open {
 .tab-label-short { display: none; }
 .tab-label-full  { display: inline; }
 
-/* Medium screens (641–1023px): keep the equal-width 5-column grid, but
-   show the full label ONLY on the active tab; other tabs collapse to
-   just their step-number circle. Button widths stay uniform. */
+/* Medium screens (641–1023px):
+   - 5-tab: equal-width grid; full label ONLY on the active tab, others
+     show just the step-number circle.
+   - Pill bar (Paper/Code/Video): show icons only by default; hovering
+     (or focusing) a pill expands JUST that one to reveal its label. */
 @media screen and (min-width: 641px) and (max-width: 1023px) {
   .main-tab-list .tab-label-full,
   .main-tab-list .tab-label-short {
@@ -728,25 +729,42 @@ body.is-lightbox-open {
     display: inline;
   }
   .main-tab-list .tab-button:not(.is-active) {
-    justify-content: center;      /* center the step-number circle */
+    justify-content: center;
+  }
+
+  /* Pill bar hover-to-expand. */
+  .publication-links-bar .button > span:not(.icon) {
+    display: inline-block;
+    max-width: 0;
+    opacity: 0;
+    margin-left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: max-width 0.25s ease,
+                opacity 0.2s ease,
+                margin-left 0.2s ease;
+  }
+  .publication-links-bar .link-block:hover .button > span:not(.icon),
+  .publication-links-bar .link-block .button:focus-visible > span:not(.icon),
+  .publication-links-bar .link-block .button:active > span:not(.icon) {
+    max-width: 8rem;
+    opacity: 1;
+    margin-left: 0.4rem;
   }
 }
 
 /* Mobile (<=640px): dropdown mode.
    Only the active button is visible; clicking it toggles .is-open on
-   .main-tab-list to reveal the rest (JS at the end of index.html). */
+   .main-tab-list to reveal the rest (JS at the end of index.html).
+   The base rule already sets top: 3.25rem so it sticks below navbar. */
 @media screen and (max-width: 640px) {
   .main-tab-list {
     display: block;                /* not grid */
-    position: sticky;
-    top: 0;
-    z-index: 90;
     width: 100%;
     margin-left: 0;
     margin-right: 0;
     margin-bottom: 0.75rem;
     padding: 0.4rem 0.75rem;
-    background: #ffffff;
     min-height: 3.25rem;
   }
 
@@ -833,38 +851,11 @@ body.is-lightbox-open {
 }
 
 /* ================================================================ */
-/*  Mobile stacking fix — navbar solid on top, sticky bars offset   */
-/*  below it so the hoBIT icon never overlaps any content behind.   */
+/*  Small mobile (<=640px): pill bar shrinks to 3 icon-only buttons; */
+/*  5-tab collapses to a dropdown; navbar stays solid at the top.    */
 /* ================================================================ */
-
-/* Pill dropdown trigger: hidden by default, shown only on mobile. */
-.pills-dropdown-trigger {
-  display: none;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.4rem 0.85rem;
-  border: 1px solid #dfe7f1;
-  border-radius: 999px;
-  background: #ffffff;
-  color: #0a2c63;
-  font-family: 'Google Sans', sans-serif;
-  font-weight: 700;
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-.pills-dropdown-trigger .pills-dropdown-chevron {
-  transition: transform 0.15s ease;
-}
-.publication-links-bar.is-open .pills-dropdown-chevron {
-  transform: rotate(180deg);
-}
-
 @media screen and (max-width: 640px) {
-  /* Navbar: solid white background so nothing bleeds through it. */
   .navbar {
-    background: #ffffff !important;
-    pointer-events: auto;
-    box-shadow: 0 1px 0 rgba(15, 35, 70, 0.06);
     padding: 0.25rem 0.75rem;
   }
   .navbar .navbar-brand {
@@ -875,51 +866,36 @@ body.is-lightbox-open {
     max-height: 1.75rem;
   }
 
-  /* Push sticky bars BELOW the navbar (no more top:0 overlap). */
-  .publication-links-bar,
-  .main-tab-list {
-    top: 3.25rem; /* Bulma navbar min-height ≈ 52px */
-  }
-
-  /* Pill bar dropdown mode:
-     - Hide the pills row by default; show only the trigger.
-     - Toggle .is-open (via JS) to reveal pills as a vertical list. */
+  /* Pill bar: 3 compact icon-only buttons; NO dropdown, no hover expand. */
   .publication-links-bar {
     display: flex;
     justify-content: center;
-    padding: 0.4rem 0.75rem;
-    position: sticky;
-    min-height: 3rem;
-  }
-  .pills-dropdown-trigger {
-    display: inline-flex;
+    padding: 0.5rem 0.75rem;
+    min-height: 3.25rem;
   }
   .publication-links-bar .publication-links {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0.75rem;
-    right: 0.75rem;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.4rem;
-    padding: 0.6rem;
-    background: #ffffff;
-    border: 1px solid #dfe7f1;
-    border-radius: 10px;
-    box-shadow: 0 12px 26px rgba(15, 35, 70, 0.12);
-    margin-top: 0.35rem;
-    z-index: 91;
-  }
-  .publication-links-bar.is-open .publication-links {
-    display: flex;
+    gap: 1rem;
   }
   .publication-links-bar .link-block {
     margin: 0;
   }
-  .publication-links-bar .link-block .button {
-    width: 100%;
-    justify-content: flex-start;
+  .publication-links-bar .link-block a {
+    margin: 0;
+  }
+  .publication-links-bar .button {
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border-radius: 999px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .publication-links-bar .button > span:not(.icon) {
+    display: none;                 /* labels hidden entirely on small mobile */
+  }
+  .publication-links-bar .button .icon {
+    margin: 0;
   }
 }
 

@@ -287,17 +287,17 @@ body.is-lightbox-open {
 }
 
 .main-tab-list {
-  /* Compact, content-sized buttons centered together — the tab list stays
-     inside .container.is-max-widescreen so it aligns horizontally with the
-     tab panels rendered directly below it (Option A). */
-  grid-template-columns: repeat(5, auto);
-  justify-content: center;
+  /* Equal-width buttons filling the entire tab-list container width
+     (same width as the tab panels below), aligned with them via
+     .container.is-max-widescreen. */
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   position: sticky;
   top: 0;
   z-index: 90;
   background: #ffffff;
   min-height: 3.25rem;
   padding: 0.35rem 1rem;
+  margin-bottom: 0.75rem; /* small breathing space below the sticky bar */
   box-sizing: border-box;
 }
 
@@ -543,8 +543,46 @@ body.is-lightbox-open {
   color: #0a2c63;
 }
 
-/* Small subsection header used within Section 2 (intent routing,
-   time-aware retrieval) — sits before the accompanying figures / cards. */
+/* Subsection wrapped in a card — matches the visual style of
+   .method-flow-block (Section 1) and .time-aware-card. Contains
+   heading + bullets + child figure grid or ratio cards. */
+.method-subsection-card {
+  padding: 1.75rem 1.85rem;
+  margin-top: 1.5rem;
+  border: 1px solid #dfe7f1;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(15, 35, 70, 0.05);
+}
+.method-subsection-card:first-of-type {
+  margin-top: 1.75rem;
+}
+.method-subsection-card h3 {
+  color: #0a2c63;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 0.7rem;
+}
+.method-subsection-card p {
+  color: #253244;
+  line-height: 1.6;
+}
+.method-subsection-card code {
+  padding: 0.05rem 0.3rem;
+  border-radius: 4px;
+  background: #f0f4fa;
+  color: #072b67;
+  font-size: 0.9em;
+}
+/* Child grids inherit a top margin so they breathe below the bullets. */
+.method-subsection-card > .routing-figure-grid,
+.method-subsection-card > .time-aware-cards {
+  margin-top: 1.25rem;
+}
+
+/* Legacy .method-subsection (flat, no card) still available if used
+   elsewhere — retained for backward compatibility. */
 .method-subsection {
   margin: 2.5rem 0 1rem;
 }

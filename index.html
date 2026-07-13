@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20260713-intro-move">
+  <link rel="stylesheet" href="./static/css/index.css?v=20260713-subsection-cards">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -314,8 +314,8 @@
       <img src="./static/images/figures/hobit_system.png?v=20260713-system" alt="hoBIT full system diagram">
     </figure>
 
-    <!-- Sub 1: Intent Routing -->
-    <div class="method-subsection">
+    <!-- Sub 1: Intent Routing (card) -->
+    <article class="method-subsection-card">
       <h3>Intent Routing</h3>
       <ul class="method-bullets">
         <li>LLM classifier → 5 intents</li>
@@ -323,70 +323,70 @@
         <li>Others (<code>greeting</code>, <code>ability</code>, <code>faq</code>, <code>smalltalk</code>) → template / FAQ / lightweight reply</li>
         <li><b>96.0%</b> accuracy on 1,600 evaluation queries (retrieval F1 = 0.99)</li>
       </ul>
-    </div>
 
-    <div class="routing-figure-grid">
-      <figure>
-        <img src="./static/images/figures/intent_routing1.png?v=20260713-routing-direct" alt="Intent routing 1 — direct-response intents">
-        <figcaption>Direct-response intents — no retrieval invoked</figcaption>
-      </figure>
-      <figure>
-        <img src="./static/images/figures/intent_routing2.png?v=20260713-routing-retrieval" alt="Intent routing 2 — retrieval path">
-        <figcaption>Retrieval intent enters proFILL's RAG pipeline</figcaption>
-      </figure>
-    </div>
+      <div class="routing-figure-grid">
+        <figure>
+          <img src="./static/images/figures/intent_routing1.png?v=20260713-routing-direct" alt="Intent routing 1 — direct-response intents">
+          <figcaption>Direct-response intents — no retrieval invoked</figcaption>
+        </figure>
+        <figure>
+          <img src="./static/images/figures/intent_routing2.png?v=20260713-routing-retrieval" alt="Intent routing 2 — retrieval path">
+          <figcaption>Retrieval intent enters proFILL's RAG pipeline</figcaption>
+        </figure>
+      </div>
+    </article>
 
-    <!-- Sub 2: Time-aware Retrieval -->
-    <div class="method-subsection">
+    <!-- Sub 2: Time-aware Retrieval (card) -->
+    <article class="method-subsection-card">
       <h3>Time-aware Retrieval</h3>
       <ul class="method-bullets">
         <li>Hybrid retrieval per collection (dense + BM25, RRF <code>k=60</code>)</li>
         <li>Top-10 chunks selected under the ratio below</li>
         <li>Dynamic collection: <b>90-day half-life</b> recency score</li>
       </ul>
-    </div>
 
-    <div class="time-aware-cards">
+      <div class="time-aware-cards">
 
-      <article class="time-aware-card">
-        <div class="card-heading">
-          <h4>Rule &amp; Regulation Queries</h4>
-          <p class="card-subtitle">Time-insensitive — curricula, policies, FAQ</p>
-        </div>
-        <div class="card-ratio">
-          <div class="ratio-part is-static">
-            <span class="ratio-num">7</span>
-            <span class="ratio-label">Static</span>
+        <article class="time-aware-card">
+          <div class="card-heading">
+            <h4>Rule &amp; Regulation Queries</h4>
+            <p class="card-subtitle">Time-insensitive — curricula, policies, FAQ</p>
           </div>
-          <div class="ratio-sep">:</div>
-          <div class="ratio-part is-dynamic">
-            <span class="ratio-num">3</span>
-            <span class="ratio-label">Dynamic</span>
+          <div class="card-ratio">
+            <div class="ratio-part is-static">
+              <span class="ratio-num">7</span>
+              <span class="ratio-label">Static</span>
+            </div>
+            <div class="ratio-sep">:</div>
+            <div class="ratio-part is-dynamic">
+              <span class="ratio-num">3</span>
+              <span class="ratio-label">Dynamic</span>
+            </div>
           </div>
-        </div>
-        <p class="card-note">Weight the static collection — stable answers dominate.</p>
-      </article>
+          <p class="card-note">Weight the static collection — stable answers dominate.</p>
+        </article>
 
-      <article class="time-aware-card">
-        <div class="card-heading">
-          <h4>Notice &amp; Event Queries</h4>
-          <p class="card-subtitle">Time-sensitive — notices, jobs, school events</p>
-        </div>
-        <div class="card-ratio">
-          <div class="ratio-part is-static">
-            <span class="ratio-num">3</span>
-            <span class="ratio-label">Static</span>
+        <article class="time-aware-card">
+          <div class="card-heading">
+            <h4>Notice &amp; Event Queries</h4>
+            <p class="card-subtitle">Time-sensitive — notices, jobs, school events</p>
           </div>
-          <div class="ratio-sep">:</div>
-          <div class="ratio-part is-dynamic">
-            <span class="ratio-num">7</span>
-            <span class="ratio-label">Dynamic</span>
+          <div class="card-ratio">
+            <div class="ratio-part is-static">
+              <span class="ratio-num">3</span>
+              <span class="ratio-label">Static</span>
+            </div>
+            <div class="ratio-sep">:</div>
+            <div class="ratio-part is-dynamic">
+              <span class="ratio-num">7</span>
+              <span class="ratio-label">Dynamic</span>
+            </div>
           </div>
-        </div>
-        <p class="card-note">Weight the dynamic collection — recent notices surface first.</p>
-      </article>
+          <p class="card-note">Weight the dynamic collection — recent notices surface first.</p>
+        </article>
 
-    </div>
+      </div>
+    </article>
   </div>
 </section>
 

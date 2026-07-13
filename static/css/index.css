@@ -148,6 +148,8 @@ body.is-lightbox-open {
 
 .teaser-image {
   display: block;
+  width: 100%;
+  max-width: 960px; /* slightly reduced from the ~1344px widescreen container */
   margin: 0 auto 1.75rem;
 }
 

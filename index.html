@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20260713-5tab-compact">
+  <link rel="stylesheet" href="./static/css/index.css?v=20260713-methodology-refactor">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -216,141 +216,145 @@
 
       <div class="site-tab-panels">
         <div class="tab-panel site-tab-panel is-active" id="tab-methodology" role="tabpanel" aria-labelledby="tab-methodology-button">
-<section class="section" id="method">
+<!-- ============================================================ -->
+<!-- Section 1: hoBIT Overview (proFILL: offline + online) -->
+<!-- ============================================================ -->
+<section class="section" id="method-overview">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Methodology</h2>
-        <p class="subtitle is-5 section-lead">proFILL combines offline profile-aware indexing with online on-demand profiling for profile-dependent academic advising.</p>
+        <h2 class="title is-3">hoBIT Overview</h2>
+        <p class="subtitle is-5 section-lead">proFILL transforms hoBIT into a profile-aware RAG system through two complementary components: offline profile-based indexing and online adaptive profiling.</p>
       </div>
     </div>
+  </div>
 
-    <div class="method-timeline">
-      <article class="method-step">
-        <span class="step-number">1</span>
-        <div>
-          <h3>Intent Routing and Session-Profile Initialization</h3>
-          <p>At query time, hoBIT classifies each incoming query into greeting, ability, FAQ, small talk, or retrieval. Only retrieval queries proceed to retrieval and answer generation; greeting, ability, and FAQ queries are handled by templates or the FAQ store, while small talk receives a lightweight conversational reply.</p>
-          <div class="tag-row">
-            <span>greeting</span><span>ability</span><span>FAQ</span><span>small talk</span><span>retrieval</span>
-          </div>
-          <div class="method-note">For retrieval queries, proFILL identifies required profile attributes and initializes a time-limited session profile.</div>
-        </div>
-      </article>
+  <!-- Full-width overview diagram -->
+  <figure class="image paper-figure wide-figure method-full-figure">
+    <img src="./static/images/figures/hobit_overview.png?v=20260713-overview" alt="proFILL overview: offline profile-based indexing (left) and online on-demand profiling (right).">
+    <figcaption class="figure-caption">proFILL couples <b>offline profile-based indexing</b> — annotating each corpus chunk with the profile fields that determine its applicability — with <b>online adaptive profiling</b> that acquires only the profile attributes needed for the current query.</figcaption>
+  </figure>
 
-      <article class="method-step">
-        <span class="step-number">2</span>
-        <div>
-          <h3>Offline Profile-Aware Indexing</h3>
-          <p>Institutional materials are cleaned, chunked, and annotated with structured profile records before indexing. Non-null profile fields encode which students each chunk applies to.</p>
-          <div class="mini-pipeline">
-            <span>sources</span><i class="fas fa-arrow-right"></i><span>chunks</span><i class="fas fa-arrow-right"></i><span>profile records</span><i class="fas fa-arrow-right"></i><span>Qdrant</span>
-          </div>
-          <div class="method-note">The default schema covers department, major type, grade, admission year, and student status.</div>
-        </div>
-      </article>
+  <div class="container is-max-desktop">
 
-      <article class="method-step">
-        <span class="step-number">3</span>
-        <div>
-          <h3>On-Demand Adaptive Profiling and Profile-Aware RAG</h3>
-          <p>proFILL acquires missing information through query-driven profiling before retrieval and evidence-driven profiling when retrieved evidence reveals unresolved applicability requirements.</p>
-          <div class="profile-injection">
-            <span>Dept: CS</span><span>Cohort: 2020</span><span>Major type: Intensive</span>
-          </div>
-          <div class="method-note">Profile values are incorporated through soft query augmentation and hard filtering over profile annotations.</div>
-        </div>
-      </article>
-    </div>
-    <figure class="image paper-figure wide-figure method-routing-figure" aria-label="Runtime pipeline figures highlighting intent routing">
-      <div class="routing-figure-grid">
-        <figure>
-          <img src="./static/images/figures/intent_routing1.png?v=20260713-routing-direct" alt="Intent routing diagram for direct-response intents including greeting, ability, FAQ, and small talk.">
-          <figcaption>Direct-response routing: greeting, ability, FAQ, and small-talk turns are routed away from retrieval.</figcaption>
-        </figure>
-        <figure>
-          <img src="./static/images/figures/intent_routing2.png?v=20260713-intent-routing" alt="Intent routing diagram showing retrieval-oriented academic and school-life response paths.">
-          <figcaption>Retrieval routing: academic and school-life questions enter the retrieval path after intent classification.</figcaption>
-        </figure>
+    <!-- Block A: Offline — image LEFT, text RIGHT -->
+    <article class="method-flow-block image-left">
+      <figure class="method-flow-figure">
+        <img src="./static/images/figures/hobit_overview_offline.png?v=20260713-offline" alt="Offline profile-based indexing pipeline">
+      </figure>
+      <div class="method-flow-body">
+        <h3>① Offline Profile-based Indexing</h3>
+        <p>hoBIT builds the corpus from five institutional sources — regulation and orientation PDFs, department webpages, board notices, and administrator-curated FAQs. After cleaning and chunking, an LLM annotates each chunk with a structured profile record over five predefined attributes: <b>department, major type, grade, admission year, and student status</b>.</p>
+        <p>For each chunk, the LLM identifies which attributes determine the students to whom the information applies, and fills in their values. Attributes that do not affect the chunk's applicability are left <code>null</code>. The resulting non-null fields encode the chunk's profile-dependent applicability and unveil which user attributes must be known for reliable retrieval.</p>
+        <div class="method-note">Chunks are separated into a <b>static</b> collection for stable materials (regulations, PDFs, FAQs) and a <b>dynamic</b> collection for frequently-updated content (notices, jobs, events). Each collection maintains a sparse (BM25) and a dense (<code>text-embedding-3-small</code>) index for hybrid retrieval.</div>
       </div>
-      <div class="figure-note intent-note">
-        <h4>Intent routing in hoBIT</h4>
-        <p>hoBIT begins each turn by classifying the query into greeting, ability, FAQ, small talk, or retrieval. Greeting, ability, and FAQ queries are handled without an additional generation call, while retrieval queries continue into proFILL.</p>
-        <p>For retrieval queries, the system initializes the session profile by extracting profile values from the query and marking unresolved attributes as missing. These missing values are acquired only when needed through adaptive profiling.</p>
+    </article>
+
+    <!-- Block B: Online — text LEFT, image RIGHT -->
+    <article class="method-flow-block image-right">
+      <div class="method-flow-body">
+        <h3>② Online Adaptive Profiling</h3>
+        <p>Rather than requiring login or a complete profile upfront, proFILL acquires only the profile information needed for the current query through two complementary stages:</p>
+        <p><b>Query-driven profiling</b> — before retrieval, the system infers required profile attributes from the query intent and asks the user only for missing ones. Acquired values are incorporated through <i>soft query augmentation</i> (prepended to the query as retrieval prefix) and <i>hard filtering</i> (over profile annotations).</p>
+        <p><b>Evidence-driven profiling</b> — after inspecting the top-<i>k</i> retrieved evidence, if additional profile information is needed to verify applicability, hoBIT asks a targeted follow-up question and re-retrieves. In our setup, this triggers for <b>24.3%</b> of queries on average.</p>
+        <div class="method-note">Together, the two stages reduce initial user burden (no upfront profile form) while improving answer correctness (extra questions only when retrieved evidence exposes unresolved profile requirements).</div>
       </div>
-    </figure>
-    <figure class="intent-routing-figure" aria-label="Intent routing figure">
-      <figcaption>Intent Routing</figcaption>
-      <div class="routing-query">
-        <span>User query</span>
-        <strong>"Tell me recent announcements."</strong>
-      </div>
-      <div class="routing-arrow"><i class="fas fa-arrow-down"></i></div>
-      <div class="routing-classifier">
-        <span>Intent classifier</span>
-        <div class="routing-intents">
-          <b>greeting</b><b>ability</b><b>FAQ</b><b>small talk</b><b class="is-retrieval">retrieval</b>
-        </div>
-      </div>
-      <div class="routing-split">
-        <article>
-          <h4>Direct response</h4>
-          <p>Greeting, FAQ, ability, and small-talk turns are answered without unnecessary retrieval.</p>
-        </article>
-        <article class="is-rag">
-          <h4>Profile-aware RAG</h4>
-          <p>Retrieval turns enter query-driven profiling, profile-aware retrieval, evidence validation, and answer generation.</p>
-        </article>
-      </div>
-    </figure>
+      <figure class="method-flow-figure">
+        <img src="./static/images/figures/hobit_overview_online.png?v=20260713-online" alt="Online adaptive profiling: query-driven and evidence-driven stages">
+      </figure>
+    </article>
+
   </div>
 </section>
 
-<section class="section" id="system">
-  <div class="container is-max-widescreen">
+<!-- ============================================================ -->
+<!-- Section 2: hoBIT System (intent routing + time-aware retrieval)-->
+<!-- ============================================================ -->
+<section class="section" id="method-system">
+  <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
-      <div class="column is-two-thirds">
-        <h2 class="title is-3">hoBIT System Overview</h2>
-        <p class="subtitle is-5 section-lead">Offline profile-aware indexing meets online query-driven and evidence-driven profiling.</p>
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">hoBIT System</h2>
+        <p class="subtitle is-5 section-lead">End-to-end pipeline covering intent routing, session-profile initialization, profile-aware retrieval over static and dynamic collections, and grounded answer generation.</p>
       </div>
     </div>
-    <figure class="image paper-figure wide-figure">
-      <img src="./static/images/figures/hobit_overview.png?v=20260712-system-overview" alt="hoBIT system overview showing validated data, dynamic and static vector collections, intent routing, profile-aware retrieval, and query-driven and evidence-driven profiling.">
-      <figcaption class="figure-caption">System overview: validated institutional data is indexed into static and dynamic collections, while online intent routing, hard filtering, query-driven profiling, and evidence-driven profiling update the session profile before generation.</figcaption>
-      <div class="figure-note">
-        <h4>What this figure adds</h4>
-        <p>This overview shows the main contribution: profile-dependent evidence validity is encoded in the index structure, and hoBIT updates the session profile online when either the query or retrieved evidence reveals missing student context.</p>
-      </div>
-    </figure>
-    <figure class="image paper-figure wide-figure">
-      <img src="./static/images/figures/hobit_overview_online.png?v=20260713-profiling-overview" alt="Detailed online flow for query-driven profiling and evidence-driven profiling in hoBIT.">
-      <figcaption class="figure-caption">Profiling overview: query-driven profiling fills profile values detected as missing from the user query, while evidence-driven profiling re-retrieves after retrieved chunks expose additional profile requirements.</figcaption>
-      <div class="figure-note">
-        <h4>Why the supplementary view matters</h4>
-        <p>The detailed flow clarifies when hoBIT asks follow-up questions. Some profile fields can be identified before retrieval from the query itself, while others become necessary only after candidate evidence is inspected.</p>
-      </div>
-    </figure>
+  </div>
+
+  <!-- Full-width system diagram -->
+  <figure class="image paper-figure wide-figure method-full-figure">
+    <img src="./static/images/figures/hobit_system.png?v=20260713-system" alt="hoBIT full system diagram">
+    <figcaption class="figure-caption">Validated institutional data is indexed into <b>static</b> and <b>dynamic</b> collections; at runtime, intent routing, query-driven profiling, hard filtering, evidence-driven profiling, and time-aware aggregation compose the full pipeline.</figcaption>
+  </figure>
+
+  <div class="container is-max-desktop">
+
+    <!-- Sub 1: Intent Routing -->
+    <div class="method-subsection">
+      <h3>Intent Routing</h3>
+      <p>Every incoming query is classified by an LLM into one of five intents. Only <b>retrieval</b> queries proceed to the RAG pipeline; the other four are handled by templates, the FAQ store, or a lightweight conversational reply — keeping non-academic turns cheap and predictable. The router achieves <b>96.0%</b> accuracy on 1,600 evaluation queries (retrieval F1 = 0.99).</p>
+    </div>
+
+    <div class="routing-figure-grid">
+      <figure>
+        <img src="./static/images/figures/intent_routing1.png?v=20260713-routing-direct" alt="Intent routing 1 — direct-response intents">
+        <figcaption>Direct-response intents (greeting, ability, FAQ, small talk) are handled without invoking retrieval.</figcaption>
+      </figure>
+      <figure>
+        <img src="./static/images/figures/intent_routing2.png?v=20260713-routing-retrieval" alt="Intent routing 2 — retrieval path">
+        <figcaption>Retrieval intent enters proFILL's profile-aware RAG pipeline for academic advising.</figcaption>
+      </figure>
+    </div>
+
+    <!-- Sub 2: Time-aware Retrieval -->
+    <div class="method-subsection">
+      <h3>Time-aware Retrieval</h3>
+      <p>hoBIT internally decides whether a query is time-sensitive and blends results from the static and dynamic collections accordingly. Both collections use hybrid retrieval (dense + BM25, reciprocal rank fusion with <code>k=60</code>); the final top-10 chunks are selected under the ratio shown below.</p>
+    </div>
+
+    <div class="time-aware-cards">
+
+      <article class="time-aware-card">
+        <div class="card-heading">
+          <h4>Rule &amp; Regulation Queries</h4>
+          <p class="card-subtitle">Time-insensitive — curricula, policies, FAQ</p>
+        </div>
+        <div class="card-ratio">
+          <div class="ratio-part is-static">
+            <span class="ratio-num">7</span>
+            <span class="ratio-label">Static</span>
+          </div>
+          <div class="ratio-sep">:</div>
+          <div class="ratio-part is-dynamic">
+            <span class="ratio-num">3</span>
+            <span class="ratio-label">Dynamic</span>
+          </div>
+        </div>
+        <p class="card-note">Weight the static collection so that stable regulatory answers dominate — the same curriculum or graduation rule is the correct source year after year.</p>
+      </article>
+
+      <article class="time-aware-card">
+        <div class="card-heading">
+          <h4>Notice &amp; Event Queries</h4>
+          <p class="card-subtitle">Time-sensitive — notices, jobs, school events</p>
+        </div>
+        <div class="card-ratio">
+          <div class="ratio-part is-static">
+            <span class="ratio-num">3</span>
+            <span class="ratio-label">Static</span>
+          </div>
+          <div class="ratio-sep">:</div>
+          <div class="ratio-part is-dynamic">
+            <span class="ratio-num">7</span>
+            <span class="ratio-label">Dynamic</span>
+          </div>
+        </div>
+        <p class="card-note">Weight the dynamic collection so recent notices surface. Within similarly relevant chunks, a <b>90-day half-life recency score</b> further prefers newer items.</p>
+      </article>
+
+    </div>
   </div>
 </section>
 
-<!-- <section class="section is-light" id="runtime">
-  <div class="container is-max-widescreen">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-two-thirds">
-        <h2 class="title is-3">Runtime Pipeline: Four Stages</h2>
-        <p class="subtitle is-5 section-lead">Intent routing, query-driven profiling, profile-aware retrieval, and evidence-driven re-retrieval all revolve around a session profile.</p>
-      </div>
-    </div>
-    <figure class="image paper-figure wide-figure">
-      <img src="./static/images/figures/hobit_system.png" alt="hoBIT runtime pipeline with intent classification, filter extraction, profile validation, and answer generation.">
-      <figcaption class="figure-caption">Runtime overview: intent routing, profile-aware retrieval, evidence validation, and answer generation.</figcaption>
-      <div class="figure-note">
-        <h4>How to read the runtime stages</h4>
-        <p>At runtime, proFILL first initializes the session profile from the query. It then retrieves with soft query augmentation and hard filtering, checks whether selected evidence still requires unresolved profile fields, and re-retrieves after targeted follow-up questions when needed.</p>
-      </div>
-    </figure>
-  </div>
-</section> -->
 
         </div>
 

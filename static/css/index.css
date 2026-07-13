@@ -712,15 +712,23 @@ body.is-lightbox-open {
 /*  5-tab responsive: label swap on medium + dropdown on mobile.    */
 /* ================================================================ */
 
-/* Default (>1023px): show full label, hide short. */
+/* Default (>1023px): show full label always. */
 .tab-label-short { display: none; }
 .tab-label-full  { display: inline; }
 
-/* Medium screens (641–1023px): swap full → short abbreviations. */
+/* Medium screens (641–1023px): show the full label ONLY on the active
+   tab; other tabs collapse to just their step-number circle. */
 @media screen and (min-width: 641px) and (max-width: 1023px) {
-  .main-tab-list .tab-label-full  { display: none; }
-  .main-tab-list .tab-label-short { display: inline; }
-  .main-tab-list .tab-button      { font-size: 0.92rem; }
+  .main-tab-list .tab-label-full,
+  .main-tab-list .tab-label-short {
+    display: none;
+  }
+  .main-tab-list .tab-button.is-active .tab-label-full {
+    display: inline;
+  }
+  .main-tab-list .tab-button:not(.is-active) {
+    justify-content: center; /* center just the step-number */
+  }
 }
 
 /* Mobile (<=640px): dropdown mode.
@@ -820,6 +828,97 @@ body.is-lightbox-open {
   .method-flow-block {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+}
+
+/* ================================================================ */
+/*  Mobile stacking fix — navbar solid on top, sticky bars offset   */
+/*  below it so the hoBIT icon never overlaps any content behind.   */
+/* ================================================================ */
+
+/* Pill dropdown trigger: hidden by default, shown only on mobile. */
+.pills-dropdown-trigger {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid #dfe7f1;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #0a2c63;
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.pills-dropdown-trigger .pills-dropdown-chevron {
+  transition: transform 0.15s ease;
+}
+.publication-links-bar.is-open .pills-dropdown-chevron {
+  transform: rotate(180deg);
+}
+
+@media screen and (max-width: 640px) {
+  /* Navbar: solid white background so nothing bleeds through it. */
+  .navbar {
+    background: #ffffff !important;
+    pointer-events: auto;
+    box-shadow: 0 1px 0 rgba(15, 35, 70, 0.06);
+    padding: 0.25rem 0.75rem;
+  }
+  .navbar .navbar-brand {
+    display: flex;
+    align-items: center;
+  }
+  .navbar .brand-mark img {
+    max-height: 1.75rem;
+  }
+
+  /* Push sticky bars BELOW the navbar (no more top:0 overlap). */
+  .publication-links-bar,
+  .main-tab-list {
+    top: 3.25rem; /* Bulma navbar min-height ≈ 52px */
+  }
+
+  /* Pill bar dropdown mode:
+     - Hide the pills row by default; show only the trigger.
+     - Toggle .is-open (via JS) to reveal pills as a vertical list. */
+  .publication-links-bar {
+    display: flex;
+    justify-content: center;
+    padding: 0.4rem 0.75rem;
+    position: sticky;
+    min-height: 3rem;
+  }
+  .pills-dropdown-trigger {
+    display: inline-flex;
+  }
+  .publication-links-bar .publication-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0.75rem;
+    right: 0.75rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.4rem;
+    padding: 0.6rem;
+    background: #ffffff;
+    border: 1px solid #dfe7f1;
+    border-radius: 10px;
+    box-shadow: 0 12px 26px rgba(15, 35, 70, 0.12);
+    margin-top: 0.35rem;
+    z-index: 91;
+  }
+  .publication-links-bar.is-open .publication-links {
+    display: flex;
+  }
+  .publication-links-bar .link-block {
+    margin: 0;
+  }
+  .publication-links-bar .link-block .button {
+    width: 100%;
+    justify-content: flex-start;
   }
 }
 

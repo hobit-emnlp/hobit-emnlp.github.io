@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20260713-mobile-dropdown">
+  <link rel="stylesheet" href="./static/css/index.css?v=20260713-mobile-v2">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -63,6 +63,12 @@
 </section>
 
 <div class="publication-links-bar">
+  <!-- Mobile-only dropdown trigger; hidden on wider screens via CSS. -->
+  <button class="pills-dropdown-trigger" type="button" aria-expanded="false" aria-label="Open resource links">
+    <span class="icon"><i class="fas fa-external-link-alt"></i></span>
+    <span class="pills-dropdown-label">Links</span>
+    <span class="pills-dropdown-chevron" aria-hidden="true">&#9662;</span>
+  </button>
   <div class="publication-links">
     <span class="link-block">
       <a href="./static/pdf/hobit-paper.pdf" class="external-link button is-normal is-rounded is-dark">
@@ -190,27 +196,22 @@
         <button class="tab-button is-active" type="button" role="tab" aria-selected="true" aria-controls="tab-methodology" id="tab-methodology-button" data-tab-target="tab-methodology">
           <span class="step-number">1</span>
           <span class="tab-label-full">Methodology</span>
-          <span class="tab-label-short" aria-hidden="true">Meth</span>
         </button>
         <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="tab-capabilities" id="tab-capabilities-button" data-tab-target="tab-capabilities">
           <span class="step-number">2</span>
           <span class="tab-label-full">Capabilities</span>
-          <span class="tab-label-short" aria-hidden="true">Cap</span>
         </button>
         <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="tab-data" id="tab-data-button" data-tab-target="tab-data">
           <span class="step-number">3</span>
           <span class="tab-label-full">Dataset</span>
-          <span class="tab-label-short" aria-hidden="true">Data</span>
         </button>
         <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="tab-prompts" id="tab-prompts-button" data-tab-target="tab-prompts">
           <span class="step-number">4</span>
           <span class="tab-label-full">Prompts &amp; Judges</span>
-          <span class="tab-label-short" aria-hidden="true">P&amp;J</span>
         </button>
         <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="tab-evaluation" id="tab-evaluation-button" data-tab-target="tab-evaluation">
           <span class="step-number">5</span>
           <span class="tab-label-full">Results</span>
-          <span class="tab-label-short" aria-hidden="true">Res</span>
         </button>
       </div>
 
@@ -1434,48 +1435,76 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
 </div>
 
 <script>
-  /* Mobile-only dropdown behavior for the 5-tab overview menu.
-     - <=640px: only the active tab is visible; clicking it toggles
-       `.is-open` on `.main-tab-list` to reveal the rest.
-     - Clicking any other tab still triggers the existing tab-switch JS
-       via `data-tab-target`; we just close the dropdown right after.
-     - Clicking outside the tab-list also closes it. */
+  /* Mobile-only dropdown behavior. Two independent dropdowns:
+       - .main-tab-list  → the 5 project-overview tabs
+       - .publication-links-bar → Paper / Code / Video
+     On mobile only:
+       - The sticky bar shows a compact trigger; the rest of its items
+         collapse into a menu revealed via `.is-open`.
+       - Tapping the trigger toggles the menu; tapping outside closes it. */
   (function () {
-    var tabList = document.querySelector('.main-tab-list');
-    if (!tabList) return;
-
     var mobileQuery = window.matchMedia('(max-width: 640px)');
 
-    tabList.addEventListener('click', function (e) {
-      if (!mobileQuery.matches) return;
-      var btn = e.target.closest('.tab-button');
-      if (!btn) return;
-      var isOpen = tabList.classList.contains('is-open');
-      var isActive = btn.classList.contains('is-active');
+    /* --- Dropdown 1: 5-tab overview --------------------------------- */
+    var tabList = document.querySelector('.main-tab-list');
+    if (tabList) {
+      tabList.addEventListener('click', function (e) {
+        if (!mobileQuery.matches) return;
+        var btn = e.target.closest('.tab-button');
+        if (!btn) return;
+        var isOpen = tabList.classList.contains('is-open');
+        var isActive = btn.classList.contains('is-active');
+        if (isActive && !isOpen) {
+          // Active button tapped while closed → open the dropdown.
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          tabList.classList.add('is-open');
+        } else if (isOpen) {
+          // Any tap while open → let the tab-switch handler run, then close.
+          setTimeout(function () { tabList.classList.remove('is-open'); }, 0);
+        }
+      }, true);
+    }
 
-      if (isActive && !isOpen) {
-        // Active button tapped while closed → open the dropdown.
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        tabList.classList.add('is-open');
-      } else if (isOpen) {
-        // Any tap while open → let the tab-switch handler run, then close.
-        // (Existing JS listens for click; we close on the next tick.)
-        setTimeout(function () { tabList.classList.remove('is-open'); }, 0);
-      }
-    }, true); // capture phase so we can preempt the tab-switch handler
-
-    document.addEventListener('click', function (e) {
-      if (!mobileQuery.matches) return;
-      if (!tabList.contains(e.target)) tabList.classList.remove('is-open');
-    });
-
-    // Auto-close when leaving mobile breakpoint.
-    if (mobileQuery.addEventListener) {
-      mobileQuery.addEventListener('change', function () {
-        if (!mobileQuery.matches) tabList.classList.remove('is-open');
+    /* --- Dropdown 2: Paper / Code / Video --------------------------- */
+    var pillBar = document.querySelector('.publication-links-bar');
+    var pillTrigger = pillBar && pillBar.querySelector('.pills-dropdown-trigger');
+    if (pillBar && pillTrigger) {
+      pillTrigger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = pillBar.classList.toggle('is-open');
+        pillTrigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      // Close after clicking any link inside the dropdown.
+      pillBar.querySelectorAll('.publication-links a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          pillBar.classList.remove('is-open');
+          pillTrigger.setAttribute('aria-expanded', 'false');
+        });
       });
     }
+
+    /* --- Global close-on-outside-click ------------------------------ */
+    document.addEventListener('click', function (e) {
+      if (tabList && !tabList.contains(e.target)) {
+        tabList.classList.remove('is-open');
+      }
+      if (pillBar && !pillBar.contains(e.target)) {
+        pillBar.classList.remove('is-open');
+        if (pillTrigger) pillTrigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    /* --- Auto-close when leaving mobile breakpoint ------------------ */
+    function onBreakpointChange() {
+      if (!mobileQuery.matches) {
+        if (tabList) tabList.classList.remove('is-open');
+        if (pillBar) pillBar.classList.remove('is-open');
+        if (pillTrigger) pillTrigger.setAttribute('aria-expanded', 'false');
+      }
+    }
+    if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', onBreakpointChange);
+    else if (mobileQuery.addListener) mobileQuery.addListener(onBreakpointChange);
   })();
 </script>
 

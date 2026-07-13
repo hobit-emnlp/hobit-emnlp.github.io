@@ -716,15 +716,10 @@ body.is-lightbox-open {
 .tab-label-short { display: none; }
 .tab-label-full  { display: inline; }
 
-/* Medium screens (641–1023px): show the full label ONLY on the active
-   tab; other tabs collapse to just their step-number circle. Switch the
-   tab-list to flex so that number-only buttons shrink to their content
-   while the active button fills the remaining space. */
+/* Medium screens (641–1023px): keep the equal-width 5-column grid, but
+   show the full label ONLY on the active tab; other tabs collapse to
+   just their step-number circle. Button widths stay uniform. */
 @media screen and (min-width: 641px) and (max-width: 1023px) {
-  .main-tab-list {
-    display: flex;
-    align-items: stretch;
-  }
   .main-tab-list .tab-label-full,
   .main-tab-list .tab-label-short {
     display: none;
@@ -732,14 +727,8 @@ body.is-lightbox-open {
   .main-tab-list .tab-button.is-active .tab-label-full {
     display: inline;
   }
-  .main-tab-list .tab-button.is-active {
-    flex: 1 1 auto;              /* active fills remaining width */
-  }
   .main-tab-list .tab-button:not(.is-active) {
-    flex: 0 0 auto;              /* number-only buttons stay compact */
-    min-width: 3.25rem;
-    padding: 0.5rem 0.75rem;
-    justify-content: center;
+    justify-content: center;      /* center the step-number circle */
   }
 }
 

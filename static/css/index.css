@@ -434,22 +434,45 @@ body.is-lightbox-open {
   padding: 0 0.5rem;
 }
 
-/* Two-column block: text is narrow (bullet-only), image column is wider
-   so figures render at a comfortable size. Alternates left/right via
-   the .image-left / .image-right modifiers. */
+/* Card-style two-column block. Each block sits inside its own bordered,
+   shadowed card. Column ratios differ per block to accommodate the
+   figures' natural aspect ratios (Offline is portrait; Online is landscape). */
 .method-flow-block {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-  gap: 2.5rem;
+  /* Offline (image-left, default): text is wider so the portrait figure
+     does not dominate. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 2.25rem;
   align-items: center;
-  padding: 2rem 0;
-  border-top: 1px solid #edf1f7;
+  padding: 1.75rem 1.85rem;
+  margin-top: 1.5rem;
+  border: 1px solid #dfe7f1;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(15, 35, 70, 0.05);
 }
 .method-flow-block:first-of-type {
-  border-top: none;
+  margin-top: 1.75rem;
 }
+/* Online (image-right): text is narrow, image column is nearly 2x wider
+   so the landscape figure renders large. */
 .method-flow-block.image-right {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.35fr);
+}
+
+/* Offline image: cap its height so the portrait-oriented figure stays
+   compact. width:auto + max-width:100% + max-height together let the
+   image scale down while preserving aspect ratio, without leaving any
+   empty letterbox space inside the border. */
+.method-flow-block.image-left .method-flow-figure {
+  display: flex;
+  justify-content: center;
+}
+.method-flow-block.image-left .method-flow-figure img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 380px;
 }
 .method-flow-figure {
   margin: 0;

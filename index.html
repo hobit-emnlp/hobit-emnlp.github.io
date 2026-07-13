@@ -988,7 +988,7 @@ Card-separation rules:
     <div class="prompt-block is-judge" id="prompt-top3">
       <span class="prompt-meta">LLM judge · gpt-4o-mini</span>
       <h3>Top-3 Retrieval Precision Judge</h3>
-      <p class="prompt-desc">Used for no-GT evaluation. Each of the top-3 retrieved chunks is independently judged for relevance to the query; the metric score is the fraction judged relevant (pass threshold 0.5). This targets the retrieval signal that actually reaches answer generation, avoiding the dilution from scoring all top-10 chunks that <code>ContextualRelevancyMetric</code> would produce.</p>
+      <p class="prompt-desc">Used for open-ended evaluation. Each of the top-3 retrieved chunks is independently judged for relevance to the query; the metric score is the fraction judged relevant (pass threshold 0.5). This targets the retrieval signal that actually reaches answer generation, rather than scoring the wider top-10 pool.</p>
       <div class="prompt-lang">
         <h4 class="prompt-lang-label">Korean (executable, sent per chunk)</h4>
         <pre class="prompt-code">아래 chunk가 사용자 질문에 답하는 데 관련 있는지 판정.

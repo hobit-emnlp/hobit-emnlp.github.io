@@ -1791,6 +1791,7 @@ body.is-lightbox-open {
 
 .data-summary-card,
 .data-example-card {
+  min-width: 0;            /* let grid tracks shrink below intrinsic content size */
   padding: 1rem;
   border: 1px solid #dfe7f1;
   border-radius: 8px;
@@ -1841,6 +1842,7 @@ body.is-lightbox-open {
 }
 
 .data-table-wrap {
+  max-width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   position: relative;
@@ -2417,11 +2419,26 @@ pre {
     gap: 0.75rem;
   }
 
-  /* Tighter card padding + a step down in title size so more content
-     fits without breaking flow. */
+  /* Lock cards inside the viewport so nothing (a wide table, a long
+     unbreakable word) can push the card wider than its grid track. */
   .data-summary-card,
   .data-example-card {
     padding: 0.85rem;
+    overflow: hidden;
+  }
+
+  /* Give every text-heavy child freedom to wrap long tokens instead of
+     forcing horizontal scroll on the whole page. */
+  .corpus-chunk,
+  .corpus-chunk p,
+  .corpus-chunk dl,
+  .corpus-chunk dd,
+  .advising-list li,
+  .intent-samples span,
+  .data-note {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
   .data-summary-card h3,
   .data-example-card h3 {

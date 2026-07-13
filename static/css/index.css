@@ -11,6 +11,10 @@ body {
   background: #ffffff;
 }
 
+body.is-lightbox-open {
+  overflow: hidden;
+}
+
 .navbar {
   /* Always pinned at the top so the hoBIT logo stays visible while the
      user scrolls. Transparent background so that whichever sticky bar
@@ -836,12 +840,103 @@ body {
   background: #fff;
 }
 
+.image-zoom-trigger {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.image-zoom-trigger:focus-visible {
+  outline: 3px solid #0a67ff;
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+.image-zoom-trigger:hover img {
+  border-color: #0a2c63;
+  box-shadow: 0 12px 30px rgba(10, 44, 99, 0.18);
+}
+
 .actual-demo-strip figcaption {
   margin-top: 0.5rem;
   color: #526173;
   font-size: 0.84rem;
   font-weight: 800;
   text-align: center;
+}
+
+.image-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+}
+
+.image-lightbox[hidden] {
+  display: none;
+}
+
+.image-lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(9, 20, 40, 0.78);
+  cursor: zoom-out;
+}
+
+.image-lightbox__dialog {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, 94vw);
+  max-height: 92vh;
+  margin: 0;
+  padding: 1rem;
+  overflow: auto;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+}
+
+.image-lightbox__dialog img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 78vh;
+  object-fit: contain;
+  border: 1px solid #d9e2ef;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.image-lightbox__dialog figcaption {
+  margin-top: 0.75rem;
+  color: #26364a;
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.image-lightbox__close {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.6rem;
+  z-index: 2;
+  display: inline-grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background: #0a2c63;
+  color: #fff;
+  font-size: 1.45rem;
+  line-height: 1;
+  cursor: pointer;
 }
 
 .use-case-grid {

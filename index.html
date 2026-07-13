@@ -520,15 +520,21 @@
 
     <div class="actual-demo-strip">
       <figure>
-        <img src="./static/images/demos/english-latest-notices.png?v=20260712-demo-answers" alt="Actual hoBIT UI screenshot showing a latest-announcements query and answer.">
+        <button class="image-zoom-trigger" type="button" data-lightbox-src="./static/images/demos/english-latest-notices.png?v=20260712-demo-answers" data-lightbox-caption="Latest notices retrieval">
+          <img src="./static/images/demos/english-latest-notices.png?v=20260712-demo-answers" alt="Actual hoBIT UI screenshot showing a latest-announcements query and answer.">
+        </button>
         <figcaption>Latest notices retrieval</figcaption>
       </figure>
       <figure>
-        <img src="./static/images/demos/english-career-recruiting.png?v=20260712-demo-answers" alt="Actual hoBIT UI screenshot showing a recruiting query and answer.">
+        <button class="image-zoom-trigger" type="button" data-lightbox-src="./static/images/demos/english-career-recruiting.png?v=20260712-demo-answers" data-lightbox-caption="Career retrieval">
+          <img src="./static/images/demos/english-career-recruiting.png?v=20260712-demo-answers" alt="Actual hoBIT UI screenshot showing a recruiting query and answer.">
+        </button>
         <figcaption>Career retrieval</figcaption>
       </figure>
       <figure>
-        <img src="./static/images/demos/english-profile-advising.png?v=20260712-demo-answers" alt="Actual hoBIT UI screenshot showing a profile-based graduation query and answer.">
+        <button class="image-zoom-trigger" type="button" data-lightbox-src="./static/images/demos/english-profile-advising.png?v=20260712-demo-answers" data-lightbox-caption="Profile-based advising">
+          <img src="./static/images/demos/english-profile-advising.png?v=20260712-demo-answers" alt="Actual hoBIT UI screenshot showing a profile-based graduation query and answer.">
+        </button>
         <figcaption>Profile-based advising</figcaption>
       </figure>
     </div>
@@ -1395,6 +1401,15 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
     </div>
   </div>
 </footer>
+
+<div class="image-lightbox" id="image-lightbox" hidden>
+  <button class="image-lightbox__backdrop" type="button" aria-label="Close enlarged image"></button>
+  <figure class="image-lightbox__dialog" role="dialog" aria-modal="true" aria-label="Enlarged demo screenshot">
+    <button class="image-lightbox__close" type="button" aria-label="Close enlarged image">&times;</button>
+    <img src="" alt="">
+    <figcaption></figcaption>
+  </figure>
+</div>
 
 </body>
 </html>

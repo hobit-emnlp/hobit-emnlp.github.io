@@ -16,9 +16,9 @@ body.is-lightbox-open {
 }
 
 /* backdrop-filter fallback: browsers that can't blur get solid white
-   sticky bars so the glass tint doesn't leave content unreadable. */
+   sticky bars (navbar is already solid; pill bar / 5-tab are the glass
+   ones that need the fallback). */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .navbar,
   .publication-links-bar,
   .main-tab-list {
     background: #ffffff;
@@ -35,15 +35,13 @@ body.is-lightbox-open {
 }
 
 .navbar {
-  /* Glass, sticky row at the top so the hoBIT logo stays visible while
-     the user scrolls. Whichever sticky bar (pill bar or 5-tab) is
-     currently in its own scope will pin BELOW this bar — never overlap. */
+  /* Always-solid white top row so the hoBIT logo has a fully opaque
+     backdrop. Whichever sticky bar (pill bar or 5-tab) is currently
+     in its own scope will pin BELOW this bar — never overlap. */
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.6);
-  -webkit-backdrop-filter: blur(20px) saturate(200%);
-  backdrop-filter: blur(20px) saturate(200%);
+  background: #ffffff;
   border-bottom: 1px solid rgba(15, 35, 70, 0.08);
   box-shadow: 0 1px 12px rgba(15, 35, 70, 0.04);
   min-height: 3.25rem;
@@ -107,6 +105,39 @@ body.is-lightbox-open {
   color: #172b4d;
   font-size: 25px;
   margin: 0 0.35rem;
+}
+
+.footer-affiliations {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.footer-lab-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid rgba(15, 35, 70, 0.12);
+  border-radius: 999px;
+  background: #ffffff;
+  color: #0a2c63;
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
+}
+.footer-lab-link:hover {
+  border-color: #072b67;
+  color: #072b67;
+  box-shadow: 0 4px 14px rgba(15, 35, 70, 0.08);
+}
+.footer-lab-link .icon {
+  color: #072b67;
+  font-size: 1.05rem;
 }
 
 .link-block a {
@@ -703,6 +734,17 @@ body.is-lightbox-open {
 .time-aware-card .ratio-part.is-dynamic .ratio-num { color: #2f7d32; }
 .time-aware-card .ratio-part.is-static .ratio-label  { color: #072b67; }
 .time-aware-card .ratio-part.is-dynamic .ratio-label { color: #2f7d32; }
+
+/* When static is the dominant side (Rule & Regulation), highlight it in
+   green and demote the dynamic side to navy — green marks the majority. */
+.time-aware-card.is-static-major .ratio-part.is-static .ratio-num,
+.time-aware-card.is-static-major .ratio-part.is-static .ratio-label {
+  color: #2f7d32;
+}
+.time-aware-card.is-static-major .ratio-part.is-dynamic .ratio-num,
+.time-aware-card.is-static-major .ratio-part.is-dynamic .ratio-label {
+  color: #072b67;
+}
 .time-aware-card .ratio-sep {
   font-size: 2rem;
   font-weight: 800;

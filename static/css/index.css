@@ -285,25 +285,18 @@ body.is-lightbox-open {
 }
 
 .main-tab-list {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  /* Compact, content-sized buttons centered together — the tab list stays
+     inside .container.is-max-widescreen so it aligns horizontally with the
+     tab panels rendered directly below it (Option A). */
+  grid-template-columns: repeat(5, auto);
+  justify-content: center;
   position: sticky;
   top: 0;
   z-index: 90;
   background: #ffffff;
   min-height: 3.25rem;
-  /* Break out of .container.is-max-widescreen so the sticky bar spans the
-     FULL viewport width; inner padding then constrains the actual tab
-     buttons to the same width as .container.is-max-widescreen (1344px)
-     so there is no visible seam between the sticky bar and the tab panels
-     directly below it. Left/right padding also reserves room for the navbar
-     icon overlay so it never overlaps the leftmost tab button. */
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  padding: 0.35rem max(9rem, calc((100vw - 1344px) / 2));
+  padding: 0.35rem 1rem;
   box-sizing: border-box;
-  /* No border/shadow — keep the sticky bar visually seamless with the
-     tab panels rendered below it. */
 }
 
 .main-tab-list .tab-button {

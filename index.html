@@ -854,6 +854,14 @@
       <img src="./static/images/figures/benchmark_distribution.png" alt="Benchmark category distribution compared against real user-log demand.">
       <figcaption class="figure-caption">The open-ended benchmark's category distribution tracks real user-log demand (Pearson r = 0.65; category coverage 14/15; semantic coverage 82.4% at &theta;=0.5).</figcaption>
     </figure>
+    <figure class="image paper-figure wide-figure">
+      <img src="./static/images/figures/tsne_overlap.png" alt="t-SNE visualization showing test set overlap with real user anchor regions.">
+      <figcaption class="figure-caption">Supplementary visualization: the synthetic/open-ended evaluation space overlaps with real user-log anchor regions.</figcaption>
+      <div class="figure-note">
+        <h4>Evaluation coverage</h4>
+        <p>The t-SNE view checks whether evaluation queries live near realistic student questions. The overlap with real-user anchor regions suggests the benchmark is not only a synthetic stress test, but also probes areas students actually ask about.</p>
+      </div>
+    </figure>
   </div>
 </section>
 
@@ -1244,14 +1252,6 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
         <p>Deployment MRR is highest for well-defined categories like GenEd-required and lowest for cross-cutting cases like double-major credits; open-ended advising completeness stays high across categories while precision varies more; intent classification is strong across all five intents (overall accuracy 0.960).</p>
       </div>
     </figure>
-    <figure class="image paper-figure wide-figure">
-      <img src="./static/images/figures/tsne_overlap.png" alt="t-SNE visualization showing test set overlap with real user anchor regions.">
-      <figcaption class="figure-caption">Supplementary visualization: the synthetic/open-ended evaluation space overlaps with real user-log anchor regions.</figcaption>
-      <div class="figure-note">
-        <h4>Evaluation coverage</h4>
-        <p>The t-SNE view checks whether evaluation queries live near realistic student questions. The overlap with real-user anchor regions suggests the benchmark is not only a synthetic stress test, but also probes areas students actually ask about.</p>
-      </div>
-    </figure>
   </div>
 </section>
 
@@ -1298,21 +1298,6 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
         <img src="./static/images/eval/survey-question-context.png?v=survey-flow-en-20260712" alt="Reference context and ground-truth answer shown before an evaluation item.">
         <figcaption>Item context: each question provides the target student profile and reference information for the advising case.</figcaption>
       </figure>
-      <figure class="survey-shot-card">
-        <span class="flow-step">3</span>
-        <img src="./static/images/eval/survey-option-a.png?v=survey-flow-en-20260712" alt="Blind survey answer screenshot for Option A.">
-        <figcaption>Option A: the first anonymized answer is shown as a captured hoBIT response screenshot.</figcaption>
-      </figure>
-      <figure class="survey-shot-card">
-        <span class="flow-step">4</span>
-        <img src="./static/images/eval/survey-option-b.png?v=survey-flow-en-20260712" alt="Blind survey answer screenshot for Option B.">
-        <figcaption>Option B: the second anonymized answer is presented separately so evaluators can compare both outputs side by side.</figcaption>
-      </figure>
-      <figure class="survey-shot-card">
-        <span class="flow-step">5</span>
-        <img src="./static/images/eval/survey-preference-choice.png?v=survey-flow-en-20260712" alt="Radio-button preference choices for Answer A, Answer B, or Similar.">
-        <figcaption>Preference choice: the final response records whether Answer A, Answer B, or both answers are similar.</figcaption>
-      </figure>
     </div>
 
     <div class="eval-table-wrap sample-question-placeholder">
@@ -1329,19 +1314,19 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
         <tbody>
           <tr>
             <td>Graduation</td>
-            <td>CS, 2020 cohort</td>
+            <td>Dept: CS, Year: 2020, Type: Intensive</td>
             <td>Can you tell me my graduation requirements?</td>
             <td>proFILL answer vs. profile-blind RAG answer</td>
           </tr>
           <tr>
             <td>Major courses</td>
-            <td>Major type: intensive</td>
+            <td>Dept: DS, Year: 2023, Type: Intensive</td>
             <td>What are my required major courses?</td>
             <td>Correct profile-specific course list vs. generic retrieval answer</td>
           </tr>
           <tr>
             <td>Course recommendation</td>
-            <td>Department / cohort signal</td>
+            <td>Dept: AI, Year: 2025, Type: null</td>
             <td>What is the recommended course for me this year?</td>
             <td>Profile-aware recommendation vs. baseline recommendation</td>
           </tr>
@@ -1364,25 +1349,25 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
             <tr>
               <td>Graduation</td>
               <td>Can you tell me my graduation requirements?</td>
-              <td>CS, 2020 cohort</td>
+              <td>Dept: CS, Year: 2020, Type: Intensive</td>
               <td>hoBIT preferred</td>
             </tr>
             <tr>
               <td>Major courses</td>
               <td>What are my required major courses?</td>
-              <td>Major type: intensive</td>
+              <td>Dept: CS, Year: 2020, Type: Intensive</td>
               <td>hoBIT preferred</td>
             </tr>
             <tr>
               <td>Course recommendation</td>
               <td>What is the recommended course for me this year?</td>
-              <td>CS cohort</td>
+              <td>Dept: CS, Year: 2020, Type: Intensive</td>
               <td>hoBIT preferred (98%)</td>
             </tr>
             <tr>
               <td>Available major courses</td>
               <td>What major courses are available to me?</td>
-              <td>DS cohort</td>
+              <td>Dept: DS, Year: 2023, Type: Intensive</td>
               <td>Closest race (58%)</td>
             </tr>
           </tbody>

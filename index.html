@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20260713-sticky-v5">
+  <link rel="stylesheet" href="./static/css/index.css?v=20260713-sticky-v6">
   <link rel="icon" type="image/png" href="./static/images/favicon_profile.png">
 
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -142,7 +142,7 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Why hoBIT?</h2>
+        <h2 class="title is-3">Why - hoBIT?</h2>
         <p class="subtitle is-5 section-lead">Academic advising is profile-dependent: semantic similarity alone can surface plausible but inapplicable evidence.</p>
       </div>
     </div>
@@ -1428,6 +1428,43 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
   </figure>
 </div>
 
+<script>
+  /* Small-mobile-only dropdown behavior for the 5-tab overview.
+     Closed: only the active tab is visible ("1 Methodology ▾").
+     Open  : the rest expand below it as a menu.
+     Tap active → open. Tap any item while open → switch & close.
+     Tap outside → close. Leaving the breakpoint → close. */
+  (function () {
+    var mobileQuery = window.matchMedia('(max-width: 640px)');
+    var tabList = document.querySelector('.main-tab-list');
+    if (!tabList) return;
+
+    tabList.addEventListener('click', function (e) {
+      if (!mobileQuery.matches) return;
+      var btn = e.target.closest('.tab-button');
+      if (!btn) return;
+      var isOpen = tabList.classList.contains('is-open');
+      var isActive = btn.classList.contains('is-active');
+      if (isActive && !isOpen) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        tabList.classList.add('is-open');
+      } else if (isOpen) {
+        setTimeout(function () { tabList.classList.remove('is-open'); }, 0);
+      }
+    }, true);
+
+    document.addEventListener('click', function (e) {
+      if (!tabList.contains(e.target)) tabList.classList.remove('is-open');
+    });
+
+    function onBreakpointChange() {
+      if (!mobileQuery.matches) tabList.classList.remove('is-open');
+    }
+    if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', onBreakpointChange);
+    else if (mobileQuery.addListener) mobileQuery.addListener(onBreakpointChange);
+  })();
+</script>
 
 </body>
 </html>

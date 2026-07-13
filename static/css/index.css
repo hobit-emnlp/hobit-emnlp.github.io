@@ -289,6 +289,7 @@ body.is-lightbox-open {
   /* Equal-width buttons filling the entire tab-list container width
      (same width as the tab panels below). Sticks BELOW the navbar. */
   grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.5rem;
   position: sticky;
   top: 3.25rem;
   z-index: 90;
@@ -299,9 +300,14 @@ body.is-lightbox-open {
 }
 
 .main-tab-list .tab-button {
-  gap: 0.45rem;
-  padding-inline: 0.65rem;
+  gap: 0.4rem;
+  padding-inline: 0.5rem;
+  font-size: 0.95rem;
   white-space: nowrap;
+  overflow: hidden;
+}
+.main-tab-list .tab-label-full {
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -744,9 +750,32 @@ body.is-lightbox-open {
     justify-content: center;
   }
 
-  /* Pill bar hover-to-expand. */
+  /* Pill bar: match small-mobile circles by default; hover on a pill
+     expands JUST that one horizontally to reveal its label. */
+  .publication-links-bar .publication-links {
+    gap: 1rem;
+  }
+  .publication-links-bar .button {
+    min-width: 2.75rem;
+    height: 2.75rem;
+    padding: 0 !important;
+    border-radius: 999px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: min-width 0.25s ease, padding 0.25s ease;
+    overflow: hidden;
+  }
+  /* Reset Bulma's icon side-margins so it sits centered in the circle. */
+  .publication-links-bar .button .icon,
+  .publication-links-bar .button .icon:first-child:not(:last-child),
+  .publication-links-bar .button .icon:first-child:last-child {
+    margin: 0 !important;
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+  }
+  /* Label collapsed by default. */
   .publication-links-bar .button > span:not(.icon) {
-    display: inline-block;
     max-width: 0;
     opacity: 0;
     margin-left: 0;
@@ -756,23 +785,25 @@ body.is-lightbox-open {
                 opacity 0.2s ease,
                 margin-left 0.2s ease;
   }
+  /* Hover: expand pill to reveal label. */
+  .publication-links-bar .link-block:hover .button,
+  .publication-links-bar .link-block .button:focus-visible {
+    padding: 0 1.1rem !important;
+  }
   .publication-links-bar .link-block:hover .button > span:not(.icon),
-  .publication-links-bar .link-block .button:focus-visible > span:not(.icon),
-  .publication-links-bar .link-block .button:active > span:not(.icon) {
+  .publication-links-bar .link-block .button:focus-visible > span:not(.icon) {
     max-width: 8rem;
     opacity: 1;
-    margin-left: 0.4rem;
+    margin-left: 0.5rem;
   }
 }
 
-/* Mobile (<=640px): 5 step-number buttons in a single horizontal row.
-   No dropdown, no vertical stack. Active is highlighted. Labels are
-   hidden — the step-number circle carries the identity. */
+/* Mobile (<=640px): dropdown mode.
+   Only the active button ("1 Methodology ▾") is visible; tapping it
+   toggles .is-open on .main-tab-list to reveal the rest as a menu. */
 @media screen and (max-width: 640px) {
   .main-tab-list {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 0.5rem;
+    display: block;                /* not grid */
     width: 100%;
     margin-left: 0;
     margin-right: 0;
@@ -780,29 +811,58 @@ body.is-lightbox-open {
     padding: 0.9rem 0.75rem;
   }
 
+  /* Full label always shown inside the dropdown. */
+  .main-tab-list .tab-label-full  { display: inline; }
+  .main-tab-list .tab-label-short { display: none; }
+
+  /* Hide all buttons by default. */
   .main-tab-list .tab-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem 0.25rem;
+    display: none;
+    width: 100%;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 0.85rem 1rem;
     border-radius: 8px;
     background: #ffffff;
-    min-width: 0;
   }
 
-  /* Labels are hidden — only the step-number circle is shown. */
-  .main-tab-list .tab-label-full,
-  .main-tab-list .tab-label-short {
-    display: none;
-  }
-
-  /* Slightly enlarge and emphasize the active tab's step-number so the
-     user can locate the current view at a glance. */
+  /* Active is always visible — acts as the dropdown trigger. */
   .main-tab-list .tab-button.is-active {
+    display: flex;
     border: 1px solid #072b67;
     background: #f0f5ff;
     color: #072b67;
     box-shadow: inset 0 -3px 0 #072b67;
+    position: relative;
+    padding-right: 2.5rem;         /* room for the chevron */
+  }
+
+  /* Down-chevron on the trigger. */
+  .main-tab-list .tab-button.is-active::after {
+    content: '\25BE';
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: #526173;
+    transition: transform 0.15s ease;
+  }
+
+  /* When open: reveal every button, flip chevron. */
+  .main-tab-list.is-open .tab-button {
+    display: flex;
+    margin-top: 0.3rem;
+  }
+  .main-tab-list.is-open .tab-button.is-active::after {
+    transform: translateY(-50%) rotate(180deg);
+  }
+  .main-tab-list.is-open .tab-button:first-child { margin-top: 0; }
+
+  /* Non-active items get a subtle border so they read as menu options. */
+  .main-tab-list.is-open .tab-button:not(.is-active) {
+    border: 1px solid #dfe7f1;
+    box-shadow: 0 2px 6px rgba(15, 35, 70, 0.04);
   }
 }
 

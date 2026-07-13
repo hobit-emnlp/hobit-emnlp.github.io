@@ -2020,6 +2020,7 @@ body.is-lightbox-open {
 
 .eval-table-wrap,
 .eval-chart {
+  min-width: 0;               /* let grid track shrink below content's intrinsic size */
   padding: 1rem;
   border: 1px solid #dfe7f1;
   border-radius: 8px;
@@ -2496,5 +2497,68 @@ pre {
     border-radius: 999px;
     background: #eaf1ff;
     font-size: 0.72rem;
+  }
+}
+
+/* ================================================================ */
+/*  Human Evaluation tables & chart — small-screen tuning           */
+/* ================================================================ */
+@media screen and (max-width: 640px) {
+  /* Chart card stays a fixed layout — clip. */
+  .eval-chart {
+    padding: 0.85rem;
+    overflow: hidden;
+  }
+
+  /* Table card: allow horizontal scroll inside the card so long profile
+     strings never push the card past the viewport width. */
+  .eval-table-wrap {
+    padding: 0.85rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+  }
+
+  /* Compact table typography + hard word-break on long profile strings. */
+  .eval-table {
+    font-size: 0.78rem;
+  }
+  .eval-table th,
+  .eval-table td {
+    padding: 0.4rem 0.5rem;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  /* Blind pairwise chart — shrink bars and callout to fit tight width. */
+  .eval-chart h3 {
+    font-size: 1.05rem;
+  }
+  .chart-note {
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+  .bar-row {
+    margin-bottom: 0.75rem;
+  }
+  .bar-row > span {
+    font-size: 0.9rem;
+  }
+  .bar-track {
+    height: 26px;
+  }
+  .bar-fill {
+    font-size: 0.85rem;
+    line-height: 26px;
+    padding-right: 0.55rem;
+  }
+  .eval-callout {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  /* Sample-question block: same padding + tighter title. */
+  .sample-question-placeholder h3 {
+    font-size: 1rem;
   }
 }

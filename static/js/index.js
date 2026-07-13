@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
   tabGroups.forEach(function (group) {
     var buttons = Array.prototype.slice.call(group.querySelectorAll('[data-tab-target]'));
     var panels = Array.prototype.slice.call(group.querySelectorAll('.tab-panel'));
+    var tabList = group.querySelector('.main-tab-list');
 
     buttons.forEach(function (button) {
       button.addEventListener('click', function () {
@@ -34,6 +35,28 @@ document.addEventListener('DOMContentLoaded', function () {
           panel.classList.toggle('is-active', isActive);
           panel.hidden = !isActive;
         });
+
+        // Scroll so the tab list sits just below the sticky navbar,
+        // exposing the top of the newly activated panel.
+        if (tabList) {
+          var navbar = document.querySelector('.navbar');
+          var navbarHeight = navbar ? navbar.offsetHeight : 52;
+
+          // Walk the offsetParent chain to compute the tab list's
+          // natural document-top (unaffected by its sticky offset).
+          var top = 0;
+          var el = tabList;
+          while (el) {
+            top += el.offsetTop;
+            el = el.offsetParent;
+          }
+
+          var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          window.scrollTo({
+            top: Math.max(0, top - navbarHeight),
+            behavior: reduce ? 'auto' : 'smooth'
+          });
+        }
       });
     });
   });

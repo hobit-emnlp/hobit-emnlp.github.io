@@ -15,16 +15,37 @@ body.is-lightbox-open {
   overflow: hidden;
 }
 
+/* backdrop-filter fallback: browsers that can't blur get solid white
+   sticky bars so the glass tint doesn't leave content unreadable. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .navbar,
+  .publication-links-bar,
+  .main-tab-list {
+    background: #ffffff;
+  }
+  .tab-button {
+    background: #ffffff;
+  }
+  .tab-button.is-active {
+    background: #f0f5ff;
+  }
+  .main-tab-list.is-open .tab-button:not(.is-active) {
+    background: #ffffff;
+  }
+}
+
 .navbar {
-  /* Solid, sticky row at the top so the hoBIT logo stays visible while
+  /* Glass, sticky row at the top so the hoBIT logo stays visible while
      the user scrolls. Whichever sticky bar (pill bar or 5-tab) is
      currently in its own scope will pin BELOW this bar — never overlap. */
   position: sticky;
   top: 0;
   z-index: 100;
-  background: #ffffff;
-  border-bottom: none;
-  box-shadow: 0 1px 0 rgba(15, 35, 70, 0.06);
+  background: rgba(255, 255, 255, 0.6);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  backdrop-filter: blur(20px) saturate(200%);
+  border-bottom: 1px solid rgba(15, 35, 70, 0.08);
+  box-shadow: 0 1px 12px rgba(15, 35, 70, 0.04);
   min-height: 3.25rem;
 }
 
@@ -48,7 +69,10 @@ body.is-lightbox-open {
   position: sticky;
   top: 3.25rem;
   z-index: 90;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.6);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  backdrop-filter: blur(20px) saturate(200%);
+  border-bottom: 1px solid rgba(15, 35, 70, 0.06);
   padding: 1rem 1.25rem 0.9rem;
   box-sizing: border-box;
 }
@@ -249,24 +273,26 @@ body.is-lightbox-open {
   justify-content: center;
   gap: 0.55rem;
   padding: 1rem 0.85rem;
-  border: 1px solid #dfe7f1;
+  border: 1px solid rgba(15, 35, 70, 0.08);
   border-radius: 8px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.45);
   color: #526173;
   cursor: pointer;
   font-family: 'Google Sans', sans-serif;
   font-size: 1rem;
   font-weight: 800;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .tab-button:hover {
-  border-color: #9eb7d8;
+  border-color: rgba(15, 35, 70, 0.2);
+  background: rgba(255, 255, 255, 0.65);
   color: #0a2c63;
 }
 
 .tab-button.is-active {
-  border-color: #072b67;
-  background: #f0f5ff;
+  border-color: rgba(7, 43, 103, 0.55);
+  background: rgba(220, 232, 255, 0.55);
   color: #072b67;
   box-shadow: inset 0 -3px 0 #072b67;
 }
@@ -293,7 +319,10 @@ body.is-lightbox-open {
   position: sticky;
   top: 3.25rem;
   z-index: 90;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.6);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  backdrop-filter: blur(20px) saturate(200%);
+  border-bottom: 1px solid rgba(15, 35, 70, 0.06);
   padding: 0.9rem 1rem;
   margin-bottom: 0.75rem;
   box-sizing: border-box;
@@ -823,14 +852,14 @@ body.is-lightbox-open {
     text-align: left;
     padding: 0.85rem 1rem;
     border-radius: 8px;
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.45);
   }
 
   /* Active is always visible — acts as the dropdown trigger. */
   .main-tab-list .tab-button.is-active {
     display: flex;
-    border: 1px solid #072b67;
-    background: #f0f5ff;
+    border: 1px solid rgba(7, 43, 103, 0.55);
+    background: rgba(220, 232, 255, 0.55);
     color: #072b67;
     box-shadow: inset 0 -3px 0 #072b67;
     position: relative;
@@ -859,9 +888,11 @@ body.is-lightbox-open {
   }
   .main-tab-list.is-open .tab-button:first-child { margin-top: 0; }
 
-  /* Non-active items get a subtle border so they read as menu options. */
+  /* Non-active items get a subtle border so they read as menu options.
+     Semi-transparent white so the glass strip's blur shows through. */
   .main-tab-list.is-open .tab-button:not(.is-active) {
-    border: 1px solid #dfe7f1;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(15, 35, 70, 0.08);
     box-shadow: 0 2px 6px rgba(15, 35, 70, 0.04);
   }
 }

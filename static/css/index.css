@@ -49,8 +49,7 @@ body.is-lightbox-open {
   top: 3.25rem;
   z-index: 90;
   background: #ffffff;
-  min-height: 3.75rem;
-  padding: 0.6rem 1.25rem;
+  padding: 1rem 1.25rem 0.9rem;
   box-sizing: border-box;
 }
 
@@ -294,8 +293,7 @@ body.is-lightbox-open {
   top: 3.25rem;
   z-index: 90;
   background: #ffffff;
-  min-height: 3.75rem;
-  padding: 0.5rem 1rem;
+  padding: 0.9rem 1rem;
   margin-bottom: 0.75rem;
   box-sizing: border-box;
 }
@@ -716,11 +714,17 @@ body.is-lightbox-open {
 .tab-label-full  { display: inline; }
 
 /* Medium screens (641–1023px):
-   - 5-tab: equal-width grid; full label ONLY on the active tab, others
-     show just the step-number circle.
+   - 5-tab: switch to FLEX so that the active tab (with its label)
+     stretches to fill the remaining width while the non-active tabs
+     shrink down to just their step-number circle.
    - Pill bar (Paper/Code/Video): show icons only by default; hovering
      (or focusing) a pill expands JUST that one to reveal its label. */
 @media screen and (min-width: 641px) and (max-width: 1023px) {
+  .main-tab-list {
+    display: flex;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
   .main-tab-list .tab-label-full,
   .main-tab-list .tab-label-short {
     display: none;
@@ -728,7 +732,15 @@ body.is-lightbox-open {
   .main-tab-list .tab-button.is-active .tab-label-full {
     display: inline;
   }
+  .main-tab-list .tab-button.is-active {
+    flex: 1 1 auto;             /* active fills the remaining width */
+    justify-content: flex-start;
+    padding-left: 1.25rem;
+  }
   .main-tab-list .tab-button:not(.is-active) {
+    flex: 0 0 auto;             /* number-only stays compact */
+    min-width: 3.5rem;
+    padding: 1rem 0.6rem;
     justify-content: center;
   }
 
@@ -753,75 +765,45 @@ body.is-lightbox-open {
   }
 }
 
-/* Mobile (<=640px): dropdown mode.
-   Only the active button is visible; clicking it toggles .is-open on
-   .main-tab-list to reveal the rest (JS at the end of index.html).
-   The base rule already sets top: 3.25rem so it sticks below navbar. */
+/* Mobile (<=640px): 5 step-number buttons in a single horizontal row.
+   No dropdown, no vertical stack. Active is highlighted. Labels are
+   hidden — the step-number circle carries the identity. */
 @media screen and (max-width: 640px) {
   .main-tab-list {
-    display: block;                /* not grid */
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.5rem;
     width: 100%;
     margin-left: 0;
     margin-right: 0;
     margin-bottom: 0.75rem;
-    padding: 0.4rem 0.75rem;
-    min-height: 3.25rem;
+    padding: 0.9rem 0.75rem;
   }
 
-  /* Hide all buttons by default. */
   .main-tab-list .tab-button {
-    display: none;
-    width: 100%;
-    justify-content: flex-start;
-    text-align: left;
-    padding: 0.7rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 0.25rem;
     border-radius: 8px;
     background: #ffffff;
+    min-width: 0;
   }
 
-  /* Active button is always visible — acts as the dropdown trigger. */
+  /* Labels are hidden — only the step-number circle is shown. */
+  .main-tab-list .tab-label-full,
+  .main-tab-list .tab-label-short {
+    display: none;
+  }
+
+  /* Slightly enlarge and emphasize the active tab's step-number so the
+     user can locate the current view at a glance. */
   .main-tab-list .tab-button.is-active {
-    display: flex;
     border: 1px solid #072b67;
     background: #f0f5ff;
     color: #072b67;
     box-shadow: inset 0 -3px 0 #072b67;
-    position: relative;
   }
-
-  /* Down-chevron on the active trigger. */
-  .main-tab-list .tab-button.is-active::after {
-    content: '\25BE';                 /* ▾ */
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1rem;
-    color: #526173;
-    transition: transform 0.15s ease;
-  }
-
-  /* When dropdown is open: show every button, flip chevron. */
-  .main-tab-list.is-open .tab-button {
-    display: flex;
-    margin-top: 0.3rem;
-  }
-  .main-tab-list.is-open .tab-button.is-active::after {
-    transform: translateY(-50%) rotate(180deg);
-  }
-  /* First-child inside the open dropdown is the trigger; keep it flush. */
-  .main-tab-list.is-open .tab-button:first-child { margin-top: 0; }
-
-  /* Inactive dropdown items — subtle border to look like options. */
-  .main-tab-list.is-open .tab-button:not(.is-active) {
-    border: 1px solid #dfe7f1;
-    box-shadow: 0 2px 6px rgba(15, 35, 70, 0.04);
-  }
-
-  /* Always show the FULL label in the dropdown (short abbr only for the
-     medium breakpoint range). */
-  .main-tab-list .tab-label-full  { display: inline; }
-  .main-tab-list .tab-label-short { display: none; }
 }
 
 /* ================================================================ */
@@ -870,8 +852,7 @@ body.is-lightbox-open {
   .publication-links-bar {
     display: flex;
     justify-content: center;
-    padding: 0.5rem 0.75rem;
-    min-height: 3.25rem;
+    padding: 1rem 0.75rem 0.9rem;
   }
   .publication-links-bar .publication-links {
     display: flex;
@@ -894,40 +875,40 @@ body.is-lightbox-open {
     height: 2.75rem !important;
     padding: 0 !important;
     border-radius: 999px !important;
+    display: grid !important;         /* grid + place-items = dead-center */
+    place-items: center !important;
+    line-height: 1;
+    position: relative;
+  }
+  /* Overlap every direct child on the same 1/1 grid cell — icon stays
+     centered no matter what Bulma's default margins do. */
+  .publication-links-bar .button > * {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  /* Hide the label span; use display:none because grid overlap already
+     removes any horizontal shift concern from Bulma's sibling rules. */
+  .publication-links-bar .button > span:not(.icon) {
+    display: none;
+  }
+  /* Force any Bulma-applied margin off the icon. */
+  .publication-links-bar .button .icon,
+  .publication-links-bar .button .icon:first-child,
+  .publication-links-bar .button .icon:last-child,
+  .publication-links-bar .button .icon:first-child:last-child,
+  .publication-links-bar .button .icon:first-child:not(:last-child) {
+    margin: 0 !important;
+    width: 1.5rem !important;
+    height: 1.5rem !important;
     display: inline-flex !important;
     justify-content: center !important;
     align-items: center !important;
-    line-height: 1;
-  }
-  /* Label span exists in the DOM so hide via visibility+size instead of
-     display:none — this way Bulma's ":first-child:not(:last-child)"
-     stops matching the icon and its negative left margin goes away. */
-  .publication-links-bar .button > span:not(.icon) {
-    position: absolute;
-    width: 0;
-    height: 0;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    white-space: nowrap;
-    border: 0;
-  }
-  /* Force the icon dead-center regardless of Bulma's default margins. */
-  .publication-links-bar .button .icon,
-  .publication-links-bar .button .icon:first-child:not(:last-child),
-  .publication-links-bar .button .icon:first-child:last-child {
-    margin: 0 !important;
-    width: 1.5rem;
-    height: 1.5rem;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
   }
   .publication-links-bar .button .icon i {
     font-size: 1.1rem;
     line-height: 1;
     display: block;
+    text-align: center;
   }
 }
 

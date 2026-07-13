@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20260713-sticky-v3">
+  <link rel="stylesheet" href="./static/css/index.css?v=20260713-sticky-v5">
   <link rel="icon" type="image/png" href="./static/images/favicon_profile.png">
 
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -1428,44 +1428,6 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
   </figure>
 </div>
 
-<script>
-  /* Mobile-only dropdown for the 5-tab overview.
-     On small mobile (<=640px), the tab list collapses so that only the
-     active tab is visible; tapping it opens the rest as a menu.
-     Paper/Code/Video (.publication-links-bar) uses no dropdown — it
-     always renders as 3 icon-only buttons on small mobile. */
-  (function () {
-    var mobileQuery = window.matchMedia('(max-width: 640px)');
-
-    var tabList = document.querySelector('.main-tab-list');
-    if (!tabList) return;
-
-    tabList.addEventListener('click', function (e) {
-      if (!mobileQuery.matches) return;
-      var btn = e.target.closest('.tab-button');
-      if (!btn) return;
-      var isOpen = tabList.classList.contains('is-open');
-      var isActive = btn.classList.contains('is-active');
-      if (isActive && !isOpen) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        tabList.classList.add('is-open');
-      } else if (isOpen) {
-        setTimeout(function () { tabList.classList.remove('is-open'); }, 0);
-      }
-    }, true);
-
-    document.addEventListener('click', function (e) {
-      if (!tabList.contains(e.target)) tabList.classList.remove('is-open');
-    });
-
-    function onBreakpointChange() {
-      if (!mobileQuery.matches) tabList.classList.remove('is-open');
-    }
-    if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', onBreakpointChange);
-    else if (mobileQuery.addListener) mobileQuery.addListener(onBreakpointChange);
-  })();
-</script>
 
 </body>
 </html>

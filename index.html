@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20260713-glass-v2">
+  <link rel="stylesheet" href="./static/css/index.css?v=20260713-capabilities-v1">
   <link rel="icon" type="image/png" href="./static/images/favicon_profile.png">
 
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -414,9 +414,16 @@
       <article class="transcript-card">
         <div class="chat-top"><img src="./static/images/icons/profile.png" alt=""><span>FAQ</span></div>
         <p class="transcript-query">Show me the frequently asked questions.</p>
-        <figure class="transcript-shot">
-          <img src="./static/images/demos/faq-list.png?v=20260712-faq-list" alt="hoBIT FAQ list screen showing frequently asked questions in the College of Informatics service.">
-        </figure>
+        <div class="transcript-answer transcript-answer-structured">
+          <p class="answer-lead">Here are some frequently asked questions for the past month. Feel free to ask more if you have any other questions.</p>
+          <ul>
+            <li>I didn't register during the course registration period.</li>
+            <li>I am an international student &mdash; I need counseling, what should I do?</li>
+            <li>What are the graduation requirements for a double major in Artificial Intelligence?</li>
+            <li>How can I reserve a space in the College of Informatics (Woojung Hall, Aegineung Student Center, Science &amp; Engineering Library, JungWoonOh IT Liberal Arts Center)?</li>
+            <li>What are the graduation requirements for a double major in Data Science?</li>
+          </ul>
+        </div>
         <p class="intent-label">Intent: faq</p>
       </article>
       <article class="transcript-card">
@@ -524,7 +531,7 @@
       </div>
     </div>
 
-    <div class="demo-showcase">
+    <!-- <div class="demo-showcase">
       <div class="demo-copy">
         <p class="eyebrow">Captured hoBIT Runs</p>
         <h3>Real Conversations from the Deployed System</h3>
@@ -538,7 +545,7 @@
         <img src="./static/images/demos/actual-school-life.png" alt="Actual hoBIT interface capture showing a school-life club recommendation answer.">
         <figcaption>hoBIT UI screenshot: a school-life club recommendation, shown in the original Korean interface.</figcaption>
       </figure>
-    </div>
+    </div> -->
   </div>
 </section>
 
@@ -548,6 +555,7 @@
       <div class="column is-two-thirds">
         <h2 class="title is-3">Example Use Cases and Adaptive Profiling</h2>
         <p class="subtitle is-5 section-lead">The demo cases highlight the difference between profile-blind retrieval and profile-dependent advising, where hoBIT asks for missing student context before answering.</p>
+        <p class="zoom-hint"><span class="icon"><i class="fas fa-search-plus"></i></span> Click any screenshot below to view a larger version.</p>
       </div>
     </div>
 

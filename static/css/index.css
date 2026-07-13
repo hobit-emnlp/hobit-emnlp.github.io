@@ -1479,6 +1479,7 @@ body.is-lightbox-open {
   border: 0;
   background: transparent;
   cursor: zoom-in;
+  position: relative;
 }
 
 .image-zoom-trigger:focus-visible {
@@ -1490,6 +1491,54 @@ body.is-lightbox-open {
 .image-zoom-trigger:hover img {
   border-color: #0a2c63;
   box-shadow: 0 12px 30px rgba(10, 44, 99, 0.18);
+}
+
+/* Hover overlay: shows a "🔍 Zoom" pill in the top-right of the image
+   so users know it's clickable to enlarge. */
+.image-zoom-trigger::after {
+  content: '\f00e  Zoom';                 /* Font Awesome search-plus icon */
+  font-family: 'Font Awesome 5 Free', 'FontAwesome', sans-serif;
+  font-weight: 900;
+  font-size: 0.8rem;
+  color: #ffffff;
+  background: rgba(7, 43, 103, 0.85);
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: none;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.image-zoom-trigger:hover::after,
+.image-zoom-trigger:focus-visible::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Small hint sitting between the section-lead and the strip. */
+.zoom-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: -0.25rem;
+  margin-bottom: 1.25rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(15, 35, 70, 0.05);
+  color: #526173;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.zoom-hint .icon {
+  color: #072b67;
+  font-size: 0.9rem;
 }
 
 .actual-demo-strip figcaption {

@@ -703,6 +703,124 @@ body.is-lightbox-open {
   .method-full-figure {
     width: 100%;
   }
+  .routing-figure-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ================================================================ */
+/*  5-tab responsive: label swap on medium + dropdown on mobile.    */
+/* ================================================================ */
+
+/* Default (>1023px): show full label, hide short. */
+.tab-label-short { display: none; }
+.tab-label-full  { display: inline; }
+
+/* Medium screens (641–1023px): swap full → short abbreviations. */
+@media screen and (min-width: 641px) and (max-width: 1023px) {
+  .main-tab-list .tab-label-full  { display: none; }
+  .main-tab-list .tab-label-short { display: inline; }
+  .main-tab-list .tab-button      { font-size: 0.92rem; }
+}
+
+/* Mobile (<=640px): dropdown mode.
+   Only the active button is visible; clicking it toggles .is-open on
+   .main-tab-list to reveal the rest (JS at the end of index.html). */
+@media screen and (max-width: 640px) {
+  .main-tab-list {
+    display: block;                /* not grid */
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0.75rem;
+    padding: 0.4rem 0.75rem;
+    background: #ffffff;
+    min-height: 3.25rem;
+  }
+
+  /* Hide all buttons by default. */
+  .main-tab-list .tab-button {
+    display: none;
+    width: 100%;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    background: #ffffff;
+  }
+
+  /* Active button is always visible — acts as the dropdown trigger. */
+  .main-tab-list .tab-button.is-active {
+    display: flex;
+    border: 1px solid #072b67;
+    background: #f0f5ff;
+    color: #072b67;
+    box-shadow: inset 0 -3px 0 #072b67;
+    position: relative;
+  }
+
+  /* Down-chevron on the active trigger. */
+  .main-tab-list .tab-button.is-active::after {
+    content: '\25BE';                 /* ▾ */
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: #526173;
+    transition: transform 0.15s ease;
+  }
+
+  /* When dropdown is open: show every button, flip chevron. */
+  .main-tab-list.is-open .tab-button {
+    display: flex;
+    margin-top: 0.3rem;
+  }
+  .main-tab-list.is-open .tab-button.is-active::after {
+    transform: translateY(-50%) rotate(180deg);
+  }
+  /* First-child inside the open dropdown is the trigger; keep it flush. */
+  .main-tab-list.is-open .tab-button:first-child { margin-top: 0; }
+
+  /* Inactive dropdown items — subtle border to look like options. */
+  .main-tab-list.is-open .tab-button:not(.is-active) {
+    border: 1px solid #dfe7f1;
+    box-shadow: 0 2px 6px rgba(15, 35, 70, 0.04);
+  }
+
+  /* Always show the FULL label in the dropdown (short abbr only for the
+     medium breakpoint range). */
+  .main-tab-list .tab-label-full  { display: inline; }
+  .main-tab-list .tab-label-short { display: none; }
+}
+
+/* ================================================================ */
+/*  Mobile image + figure overflow safety                            */
+/* ================================================================ */
+@media screen and (max-width: 1023px) {
+  .paper-figure img,
+  .method-full-figure img,
+  .method-flow-figure img,
+  .wide-figure img,
+  .teaser-image,
+  .routing-figure-grid img {
+    max-width: 100%;
+    height: auto;
+  }
+  .method-full-figure,
+  .wide-figure {
+    width: 100%;
+    max-width: 100%;
+  }
+  /* Prevent horizontal scrolling from any wide grid on narrow viewports. */
+  .method-subsection-card,
+  .method-flow-block {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 .intent-routing-figure {

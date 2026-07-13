@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20260713-subsection-cards">
+  <link rel="stylesheet" href="./static/css/index.css?v=20260713-mobile-dropdown">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -24,11 +24,6 @@
     <a class="navbar-item brand-mark" href="#">
       <img src="./static/images/icons/profile.png" alt="hoBIT icon">
       <span>hoBIT</span>
-    </a>
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
     </a>
   </div>
   <div class="navbar-menu">
@@ -90,41 +85,6 @@
   </div>
 </div>
 
-<section class="section" id="why">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Why hoBIT?</h2>
-        <p class="subtitle is-5 section-lead">Academic advising is profile-dependent: semantic similarity alone can surface plausible but inapplicable evidence.</p>
-      </div>
-    </div>
-
-    <div class="columns feature-grid">
-      <div class="column">
-        <div class="feature-card">
-          <img src="./static/images/icons/intro_insufficient.png" alt="">
-          <h3>Profile-blind RAG misses context</h3>
-          <p>Graduation, course, and major rules vary by department, admission cohort, and major type, so the same query can require different documents.</p>
-        </div>
-      </div>
-      <div class="column">
-        <div class="feature-card">
-          <img src="./static/images/icons/data_mining.png" alt="">
-          <h3>Profile-aware indexing structures evidence</h3>
-          <p>Each chunk is annotated with applicable profile values and the fields required to interpret it reliably.</p>
-        </div>
-      </div>
-      <div class="column">
-        <div class="feature-card">
-          <img src="./static/images/icons/chatbot.png" alt="">
-          <h3>Adaptive profiling keeps interaction light</h3>
-          <p>proFILL acquires only the attributes needed for the current query, then updates the session profile on demand.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="hero teaser">
   <div class="container is-max-widescreen">
     <div class="hero-body">
@@ -138,7 +98,6 @@
     </div>
   </div>
 </section>
-
 
 <section class="section is-light" id="scenario">
   <div class="container is-max-desktop">
@@ -179,6 +138,41 @@
   </div>
 </section>
 
+<section class="section" id="why">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Why hoBIT?</h2>
+        <p class="subtitle is-5 section-lead">Academic advising is profile-dependent: semantic similarity alone can surface plausible but inapplicable evidence.</p>
+      </div>
+    </div>
+
+    <div class="columns feature-grid">
+      <div class="column">
+        <div class="feature-card">
+          <img src="./static/images/icons/intro_insufficient.png" alt="">
+          <h3>Profile-blind RAG misses context</h3>
+          <p>Graduation, course, and major rules vary by department, admission cohort, and major type, so the same query can require different documents.</p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="feature-card">
+          <img src="./static/images/icons/data_mining.png" alt="">
+          <h3>Profile-aware indexing structures evidence</h3>
+          <p>Each chunk is annotated with applicable profile values and the fields required to interpret it reliably.</p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="feature-card">
+          <img src="./static/images/icons/chatbot.png" alt="">
+          <h3>Adaptive profiling keeps interaction light</h3>
+          <p>proFILL acquires only the attributes needed for the current query, then updates the session profile on demand.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 </div>
 <!-- /sticky-scope: publication-links-bar releases here; 5-tab takes over below -->
 
@@ -195,23 +189,28 @@
       <div class="tab-list main-tab-list" role="tablist" aria-label="Project overview tabs">
         <button class="tab-button is-active" type="button" role="tab" aria-selected="true" aria-controls="tab-methodology" id="tab-methodology-button" data-tab-target="tab-methodology">
           <span class="step-number">1</span>
-          Methodology
+          <span class="tab-label-full">Methodology</span>
+          <span class="tab-label-short" aria-hidden="true">Meth</span>
         </button>
         <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="tab-capabilities" id="tab-capabilities-button" data-tab-target="tab-capabilities">
           <span class="step-number">2</span>
-          Capabilities
+          <span class="tab-label-full">Capabilities</span>
+          <span class="tab-label-short" aria-hidden="true">Cap</span>
         </button>
         <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="tab-data" id="tab-data-button" data-tab-target="tab-data">
           <span class="step-number">3</span>
-          Dataset
+          <span class="tab-label-full">Dataset</span>
+          <span class="tab-label-short" aria-hidden="true">Data</span>
         </button>
         <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="tab-prompts" id="tab-prompts-button" data-tab-target="tab-prompts">
           <span class="step-number">4</span>
-          Prompts &amp; Judges
+          <span class="tab-label-full">Prompts &amp; Judges</span>
+          <span class="tab-label-short" aria-hidden="true">P&amp;J</span>
         </button>
         <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="tab-evaluation" id="tab-evaluation-button" data-tab-target="tab-evaluation">
           <span class="step-number">5</span>
-          Results
+          <span class="tab-label-full">Results</span>
+          <span class="tab-label-short" aria-hidden="true">Res</span>
         </button>
       </div>
 
@@ -406,19 +405,19 @@
 
     <div class="capability-transcripts">
       <article class="transcript-card">
-        <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>Greeting</span></div>
+        <div class="chat-top"><img src="./static/images/icons/profile.png" alt=""><span>Greeting</span></div>
         <p class="transcript-query">Hi! What kind of chatbot are you?</p>
         <p class="transcript-answer">Hello. I am hoBIT, an academic information chatbot for students in the College of Informatics at Korea University. I can help with campus life, announcements, careers, advising, and academic questions.</p>
         <p class="intent-label">Intent: greeting</p>
       </article>
       <article class="transcript-card">
-        <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>Ability</span></div>
+        <div class="chat-top"><img src="./static/images/icons/profile.png" alt=""><span>Ability</span></div>
         <p class="transcript-query">What kinds of questions can you answer?</p>
         <p class="transcript-answer">hoBIT can handle FAQ, campus life, academic policies, career and advising information, announcements, and profile-based academic questions.</p>
         <p class="intent-label">Intent: ability</p>
       </article>
       <article class="transcript-card">
-        <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>FAQ</span></div>
+        <div class="chat-top"><img src="./static/images/icons/profile.png" alt=""><span>FAQ</span></div>
         <p class="transcript-query">Show me the frequently asked questions.</p>
         <figure class="transcript-shot">
           <img src="./static/images/demos/faq-list.png?v=20260712-faq-list" alt="hoBIT FAQ list screen showing frequently asked questions in the College of Informatics service.">
@@ -426,7 +425,7 @@
         <p class="intent-label">Intent: faq</p>
       </article>
       <article class="transcript-card">
-        <div class="chat-top"><img src="./static/images/icons/chatbot.png" alt=""><span>Small Talk</span></div>
+        <div class="chat-top"><img src="./static/images/icons/profile.png" alt=""><span>Small Talk</span></div>
         <p class="transcript-query">Studying feels really hard today.</p>
         <p class="transcript-answer">When studying or schedules feel overwhelming, it is okay to take a short break. If you need help with academic or campus-life information from the College of Informatics, I can help right away.</p>
         <p class="intent-label">Intent: small talk</p>
@@ -537,9 +536,9 @@
         <p>Each screenshot is captured directly from the deployed hoBIT service, showing how real student queries are handled end-to-end. Since the interface itself is in Korean, we annotate each capture with the query and answer for readers of this paper.</p>
         <p class="version-note">Note: hoBIT's live service currently runs on its original rule-based backend. proFILL, the profile-aware pipeline this paper presents, is a research extension that has not yet fully replaced it in production.</p>
         <div class="demo-tags">
-          <span>Greeting</span><span>School life</span><span>Latest notices</span><span>Dual asking</span>
+          <span>Greeting</span><span>School life</span><span>Latest notices</span><span>Adaptive profiling</span>
         </div>
-      </div>
+      </div> 
       <figure class="demo-screenshot">
         <img src="./static/images/demos/actual-school-life.png" alt="Actual hoBIT interface capture showing a school-life club recommendation answer.">
         <figcaption>hoBIT UI screenshot: a school-life club recommendation, shown in the original Korean interface.</figcaption>
@@ -599,7 +598,7 @@
         <article>
           <span class="step-number">3</span>
           <h4>Profile-aware RAG answers</h4>
-          <div class="profile-chips"><span>CS</span><span>Cohort: 2020</span><span>Major type: Intensive</span></div>
+          <div class="profile-chips"><span>CS</span><span>2020</span><span>Intensive</span></div>
           <div class="bubble bot">Based on the curriculum for Computer Science students admitted in 2020, you must complete at least 130 credits, including general education, basic major, advanced major, and other graduation requirements.</div>
           <p>Retrieval uses both soft query augmentation and hard filtering over profile annotations.</p>
         </article>
@@ -1153,22 +1152,6 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
         <tbody>
           <tr>
             <td>1</td>
-            <td>Contextual Precision</td>
-            <td>deepeval built-in (LLM)</td>
-            <td>gpt-4o-mini</td>
-            <td>0.5</td>
-            <td>Retrieval precision (built-in)</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Contextual Recall</td>
-            <td>deepeval built-in (LLM)</td>
-            <td>gpt-4o-mini</td>
-            <td>0.5</td>
-            <td>Retrieval recall (built-in)</td>
-          </tr>
-          <tr>
-            <td>3</td>
             <td>Top-3 Retrieval Precision</td>
             <td>Custom, per-chunk LLM</td>
             <td>gpt-4o-mini</td>
@@ -1176,7 +1159,7 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
             <td>Retrieval precision, tail-dilution avoided</td>
           </tr>
           <tr>
-            <td>4</td>
+            <td>2</td>
             <td>Source Match</td>
             <td>Deterministic</td>
             <td>&mdash;</td>
@@ -1184,7 +1167,7 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
             <td>Retrieval hit (3-tier: cited/retrieved/missed)</td>
           </tr>
           <tr>
-            <td>5</td>
+            <td>3</td>
             <td>Answer Keyword Match</td>
             <td>Deterministic</td>
             <td>&mdash;</td>
@@ -1192,7 +1175,7 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
             <td>Answer keyword recall (substring)</td>
           </tr>
           <tr>
-            <td>6</td>
+            <td>4</td>
             <td>Answer Completeness [GEval]</td>
             <td>GEval (LLM)</td>
             <td>gpt-4o-mini</td>
@@ -1202,7 +1185,7 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
         </tbody>
       </table>
     </div>
-    <p class="prompt-note">Deterministic metrics (4, 5) provide reproducible baselines; LLM judges (1, 2, 3, 6) capture semantic quality that lexical matching misses. Together they triangulate retrieval and generation performance.</p>
+    <p class="prompt-note">Deterministic metrics (2, 3) provide reproducible baselines; LLM judges (1, 4) capture semantic quality that lexical matching misses. Together they triangulate retrieval and generation performance.</p>
   </div>
 </section>
 
@@ -1449,6 +1432,52 @@ _NEGATIVE_VERIFY = r"(아니지|아니야|없는\s*거|아닌가요)"</pre>
     <figcaption></figcaption>
   </figure>
 </div>
+
+<script>
+  /* Mobile-only dropdown behavior for the 5-tab overview menu.
+     - <=640px: only the active tab is visible; clicking it toggles
+       `.is-open` on `.main-tab-list` to reveal the rest.
+     - Clicking any other tab still triggers the existing tab-switch JS
+       via `data-tab-target`; we just close the dropdown right after.
+     - Clicking outside the tab-list also closes it. */
+  (function () {
+    var tabList = document.querySelector('.main-tab-list');
+    if (!tabList) return;
+
+    var mobileQuery = window.matchMedia('(max-width: 640px)');
+
+    tabList.addEventListener('click', function (e) {
+      if (!mobileQuery.matches) return;
+      var btn = e.target.closest('.tab-button');
+      if (!btn) return;
+      var isOpen = tabList.classList.contains('is-open');
+      var isActive = btn.classList.contains('is-active');
+
+      if (isActive && !isOpen) {
+        // Active button tapped while closed → open the dropdown.
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        tabList.classList.add('is-open');
+      } else if (isOpen) {
+        // Any tap while open → let the tab-switch handler run, then close.
+        // (Existing JS listens for click; we close on the next tick.)
+        setTimeout(function () { tabList.classList.remove('is-open'); }, 0);
+      }
+    }, true); // capture phase so we can preempt the tab-switch handler
+
+    document.addEventListener('click', function (e) {
+      if (!mobileQuery.matches) return;
+      if (!tabList.contains(e.target)) tabList.classList.remove('is-open');
+    });
+
+    // Auto-close when leaving mobile breakpoint.
+    if (mobileQuery.addEventListener) {
+      mobileQuery.addEventListener('change', function () {
+        if (!mobileQuery.matches) tabList.classList.remove('is-open');
+      });
+    }
+  })();
+</script>
 
 </body>
 </html>

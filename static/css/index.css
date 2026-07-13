@@ -1842,6 +1842,21 @@ body.is-lightbox-open {
 
 .data-table-wrap {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+
+/* Subtle right-edge fade so users know the table scrolls horizontally
+   on narrow screens. */
+.data-table-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 32px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9));
+  pointer-events: none;
 }
 
 .data-table {
@@ -2368,5 +2383,101 @@ pre {
 
   .teaser .hero-body {
     padding-bottom: 2rem;
+  }
+}
+
+/* ================================================================ */
+/*  Dataset tab responsiveness — medium & small screen tuning       */
+/* ================================================================ */
+@media screen and (max-width: 1023px) {
+  /* Summary cards: 4 wide → 2×2 grid on medium screens. */
+  .data-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Example cards: collapse to single column so wide cards and normal
+     cards all get comfortable reading width. */
+  .data-example-grid {
+    grid-template-columns: 1fr;
+  }
+  .data-example-card.is-wide {
+    grid-column: auto;
+  }
+
+  /* Corpus chunk: description over dl (stacked) instead of side-by-side. */
+  .corpus-chunk {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  /* Summary cards: 2×2 → single column on small mobile. */
+  .data-summary-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  /* Tighter card padding + a step down in title size so more content
+     fits without breaking flow. */
+  .data-summary-card,
+  .data-example-card {
+    padding: 0.85rem;
+  }
+  .data-summary-card h3,
+  .data-example-card h3 {
+    font-size: 0.95rem;
+  }
+  .data-summary-card p,
+  .data-note {
+    font-size: 0.88rem;
+  }
+
+  /* QA table: allow a smaller forced min-width and shrink typography so
+     horizontal scroll is shorter. */
+  .data-table {
+    min-width: 680px;
+    font-size: 0.78rem;
+  }
+  .data-table th,
+  .data-table td {
+    padding: 0.4rem 0.5rem;
+  }
+
+  /* Corpus chunk: reduce inner padding and shrink the dl label column
+     so long attributes ("admission year") no longer squeeze the value. */
+  .corpus-chunk {
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+  .corpus-chunk dl div {
+    grid-template-columns: 100px minmax(0, 1fr);
+    gap: 0.4rem;
+    font-size: 0.85rem;
+  }
+
+  /* Advising list: readable text at mobile size. */
+  .advising-list li {
+    font-size: 0.9rem;
+  }
+  .cat-tag {
+    font-size: 0.7rem;
+  }
+
+  /* Intent samples: wrap the intent tag onto its own line if the query
+     is long, so nothing gets cut off. */
+  .intent-samples span {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0.35rem;
+    padding: 0.5rem 0.6rem;
+    font-size: 0.85rem;
+  }
+  .intent-samples b {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.05rem 0.5rem;
+    border-radius: 999px;
+    background: #eaf1ff;
+    font-size: 0.72rem;
   }
 }

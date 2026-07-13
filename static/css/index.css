@@ -107,37 +107,24 @@ body.is-lightbox-open {
   margin: 0 0.35rem;
 }
 
-.footer-affiliations {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-
-.footer-lab-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.55rem 1.1rem;
-  border: 1px solid rgba(15, 35, 70, 0.12);
-  border-radius: 999px;
-  background: #ffffff;
-  color: #0a2c63;
+.footer-credit {
+  margin: 0;
+  color: #526173;
   font-family: 'Google Sans', sans-serif;
-  font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.footer-credit a {
+  color: #526173;
   text-decoration: none;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
 }
-.footer-lab-link:hover {
-  border-color: #072b67;
+.footer-credit a:hover,
+.footer-credit a:focus-visible {
   color: #072b67;
-  box-shadow: 0 4px 14px rgba(15, 35, 70, 0.08);
-}
-.footer-lab-link .icon {
-  color: #072b67;
-  font-size: 1.05rem;
+  border-bottom-color: rgba(7, 43, 103, 0.35);
 }
 
 .link-block a {

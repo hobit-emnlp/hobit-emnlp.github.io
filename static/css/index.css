@@ -410,13 +410,11 @@ body.is-lightbox-open {
 /*  Methodology section: horizontal image + text blocks & cards     */
 /* ================================================================ */
 
-/* Full-width overview / system figure that sits between sections.
-   Uses viewport breakout so the figure spans wider than the
-   container.is-max-desktop it sits under. Falls back to container
-   width on narrow screens. */
+/* Full-width overview / system figure. Constrained to the parent
+   container so it aligns with the surrounding sections (no overflow). */
 .method-full-figure {
-  width: min(1344px, calc(100vw - 3rem));
-  margin: 2rem auto 2.5rem;
+  width: 100%;
+  margin: 1.75rem auto 2.25rem;
 }
 .method-full-figure img {
   width: 100%;
@@ -436,12 +434,13 @@ body.is-lightbox-open {
   padding: 0 0.5rem;
 }
 
-/* Two-column block: image on one side, text on the other, alternating
-   left/right via the .image-left / .image-right modifier classes. */
+/* Two-column block: text is narrow (bullet-only), image column is wider
+   so figures render at a comfortable size. Alternates left/right via
+   the .image-left / .image-right modifiers. */
 .method-flow-block {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
-  gap: 2.25rem;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 2.5rem;
   align-items: center;
   padding: 2rem 0;
   border-top: 1px solid #edf1f7;
@@ -450,7 +449,7 @@ body.is-lightbox-open {
   border-top: none;
 }
 .method-flow-block.image-right {
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
 }
 .method-flow-figure {
   margin: 0;
@@ -473,18 +472,50 @@ body.is-lightbox-open {
 }
 .method-flow-body p {
   color: #253244;
-  line-height: 1.65;
-  margin-bottom: 0.85rem;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
 }
-.method-flow-body p:last-of-type {
-  margin-bottom: 1rem;
+.method-flow-body p.method-lead {
+  color: #526173;
+  font-size: 0.98rem;
+  margin-bottom: 0.9rem;
 }
-.method-flow-body code {
+.method-flow-body code,
+.method-subsection code {
   padding: 0.05rem 0.3rem;
   border-radius: 4px;
   background: #f0f4fa;
   color: #072b67;
   font-size: 0.9em;
+  font-family: 'Google Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Bullet lists shared across method flow blocks and subsections. */
+.method-bullets {
+  margin: 0.35rem 0 0;
+  padding-left: 1.2rem;
+  color: #253244;
+  line-height: 1.55;
+  font-size: 0.98rem;
+}
+.method-bullets > li {
+  margin-bottom: 0.55rem;
+}
+.method-bullets > li:last-child {
+  margin-bottom: 0;
+}
+.method-bullets ul {
+  margin: 0.35rem 0 0.15rem;
+  padding-left: 1.15rem;
+  list-style: circle;
+  color: #4a5566;
+  font-size: 0.95rem;
+}
+.method-bullets ul > li {
+  margin-bottom: 0.25rem;
+}
+.method-bullets b {
+  color: #0a2c63;
 }
 
 /* Small subsection header used within Section 2 (intent routing,
